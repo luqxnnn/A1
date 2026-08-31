@@ -1,0 +1,2803 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A1 Revision · Goethe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* ===== Reset & Base ===== */
+        :root {
+            --bg: #08090c;
+            --panel: rgba(24, 24, 28, 0.62);
+            --panel-strong: rgba(28, 28, 32, 0.74);
+            --panel-soft: rgba(255, 255, 255, 0.055);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-border-soft: rgba(255, 255, 255, 0.08);
+            --text: #f5f5f7;
+            --text-soft: rgba(245, 245, 247, 0.88);
+            --muted: rgba(245, 245, 247, 0.68);
+            --dim: rgba(245, 245, 247, 0.48);
+            --shadow: 0 24px 70px rgba(0, 0, 0, 0.26);
+            --shadow-soft: 0 10px 35px rgba(0, 0, 0, 0.18);
+            --radius-xl: 28px;
+            --radius-lg: 22px;
+            --radius-md: 17px;
+            --radius-sm: 13px;
+            --accent: #fff;
+            --hover-bg: rgba(255, 255, 255, 0.11);
+            --hover-fg: #fff;
+            --hover-border: rgba(255, 255, 255, 0.2);
+            --line: rgba(255, 255, 255, 0.11);
+        }
+        * {
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: radial-gradient(1000px 600px at 50% -10%, rgba(255, 255, 255, 0.085), transparent 60%),
+                radial-gradient(800px 500px at 100% 30%, rgba(125, 125, 255, 0.055), transparent 65%),
+                radial-gradient(700px 500px at 0% 60%, rgba(0, 180, 255, 0.035), transparent 65%),
+                linear-gradient(180deg, #070709 0%, #050507 48%, #040406 100%);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+            letter-spacing: -0.012em;
+            min-height: 100vh;
+            transition: background 0.25s, color 0.25s;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background: linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), transparent 65%);
+            opacity: 0.18;
+        }
+        button {
+            font: inherit;
+            cursor: pointer;
+        }
+        .container {
+            width: min(1180px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ===== Navigation ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 28px;
+            min-height: 68px;
+            background: rgba(20, 20, 23, 0.50) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.085) !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14) !important;
+            backdrop-filter: saturate(180%) blur(26px) !important;
+            -webkit-backdrop-filter: saturate(180%) blur(26px) !important;
+            transition: background .28s ease, border-color .28s ease, color .28s ease, box-shadow .28s ease;
+        }
+        .logo {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.045em;
+            color: #fff;
+            text-decoration: none;
+            line-height: 1.15;
+        }
+        .logo span {
+            display: block;
+            font-size: 10.5px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.45);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+        .nav-links {
+            display: flex;
+            gap: 26px;
+            align-items: center;
+        }
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.55);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.22s;
+            cursor: pointer;
+            position: relative;
+            letter-spacing: -0.01em;
+        }
+        .nav-links a:hover {
+            color: #fff;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 1.5px;
+            background: #fff !important;
+            border-radius: 999px;
+            opacity: 0;
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform .85s cubic-bezier(.16, 1, .3, 1), opacity .16s ease;
+            will-change: transform;
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            opacity: 1;
+            transform: scaleX(1);
+        }
+        .nav-links a.active {
+            color: #fff;
+        }
+        @media (max-width: 768px) {
+            nav {
+                padding: 14px 18px;
+            }
+            .nav-links {
+                gap: 16px;
+            }
+            .logo {
+                font-size: 18px;
+            }
+            .logo span {
+                font-size: 9px;
+            }
+        }
+
+        /* ===== Theme Toggle ===== */
+        .theme-toggle {
+            position: fixed;
+            right: 24px;
+            top: 82px;
+            z-index: 100;
+            padding: 9px 13px;
+            border-radius: 999px;
+            background: rgba(25, 25, 29, 0.62) !important;
+            border: 1px solid rgba(255, 255, 255, 0.13) !important;
+            box-shadow: 0 12px 34px rgba(0, 0, 0, 0.22) !important;
+            backdrop-filter: saturate(180%) blur(22px) !important;
+            -webkit-backdrop-filter: saturate(180%) blur(22px) !important;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .theme-toggle:hover {
+            opacity: 0.85;
+        }
+
+        /* ===== Hero ===== */
+        #hero {
+            padding: 132px 20px 44px;
+            text-align: center;
+        }
+        .eyebrow {
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--dim);
+            font-weight: 600;
+            margin-bottom: 16px;
+            opacity: 0.74;
+        }
+        #hero h1 {
+            font-size: clamp(44px, 6vw, 68px);
+            line-height: 0.98;
+            letter-spacing: -0.065em;
+            margin: 0 0 14px;
+            font-weight: 700;
+            text-shadow: 0 4px 28px rgba(255, 255, 255, 0.06);
+        }
+        #hero h1 span {
+            color: #f5f5f7 !important;
+        }
+        .subtitle {
+            margin: 0 auto;
+            color: rgba(245, 245, 247, 0.8);
+            font-size: 17px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+        .hero-philosophy {
+            max-width: 840px;
+            margin: 12px auto 0;
+            color: rgba(245, 245, 247, 0.58);
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        /* ===== Top Level Pills ===== */
+        .top-area {
+            position: sticky;
+            top: 0;
+            z-index: 49;
+            padding: 10px 0;
+            background: rgba(15, 15, 18, 0.48) !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.04) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.075) !important;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12) !important;
+            backdrop-filter: saturate(180%) blur(26px) !important;
+            -webkit-backdrop-filter: saturate(180%) blur(26px) !important;
+        }
+        .level-pills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 7px;
+        }
+        .pill {
+            padding: 9px 16px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.055);
+            border: 1px solid rgba(255, 255, 255, 0.105);
+            color: rgba(245, 245, 247, 0.7) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            font-size: 13px;
+            font-weight: 650;
+            transition: transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease;
+        }
+        .pill:hover:not(.active) {
+            transform: translateY(-1px);
+            background: rgba(255, 255, 255, 0.10) !important;
+            border-color: rgba(255, 255, 255, 0.18) !important;
+        }
+        .pill.active {
+            background: rgba(255, 255, 255, 0.93);
+            border-color: rgba(255, 255, 255, 0.96);
+            color: #111;
+            box-shadow: 0 8px 26px rgba(255, 255, 255, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        /* ===== Main Layout ===== */
+        .main {
+            padding: 24px 0 64px;
+            flex: 1;
+        }
+        .topic-shell {
+            display: grid;
+            grid-template-columns: 300px minmax(0, 1fr);
+            gap: 18px;
+            align-items: start;
+        }
+        .topic-list,
+        .detail {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.072), rgba(255, 255, 255, 0.045)) !important;
+            border: 1px solid var(--glass-border) !important;
+            border-radius: var(--radius-xl) !important;
+            box-shadow: var(--shadow) !important;
+            backdrop-filter: saturate(160%) blur(26px) !important;
+            -webkit-backdrop-filter: saturate(160%) blur(26px) !important;
+        }
+        .topic-list {
+            padding: 12px;
+            position: sticky;
+            top: 20px;
+            box-shadow: var(--shadow-soft) !important;
+        }
+        .topic-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--dim);
+            padding: 8px 10px 12px;
+        }
+        .topic-btn {
+            width: 100%;
+            text-align: left;
+            padding: 10px 12px;
+            margin: 2px 0;
+            border-radius: 12px;
+            border: 1px solid transparent;
+            background: transparent;
+            color: rgba(245, 245, 247, 0.68) !important;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.38;
+            transition: transform .18s ease, background .18s ease, border-color .18s ease, color .18s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .topic-btn:hover:not(.active) {
+            transform: translateX(2px);
+            background: rgba(255, 255, 255, 0.085) !important;
+            border-color: rgba(255, 255, 255, 0.12) !important;
+        }
+        .topic-btn.active {
+            background: rgba(255, 255, 255, 0.10) !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+            color: #fff !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+        .detail {
+            padding: 30px 32px;
+            min-height: 400px;
+        }
+        .detail h2 {
+            font-size: 32px;
+            line-height: 1.08;
+            margin: 0 0 18px;
+            letter-spacing: -0.045em;
+            font-weight: 700;
+            color: var(--text);
+            cursor: pointer;
+        }
+        .detail h2:hover {
+            opacity: 0.8;
+        }
+        .empty {
+            padding: 48px 20px;
+            color: var(--dim);
+            text-align: center;
+            font-size: 13px;
+        }
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.035);
+            color: var(--muted);
+            font-size: 12px;
+            padding: 7px 10px;
+            margin: 0 0 15px -10px;
+            border-radius: 999px;
+            transition: .2s;
+        }
+        .back:hover {
+            background: rgba(255, 255, 255, 0.09) !important;
+            border-color: rgba(255, 255, 255, 0.13) !important;
+            color: #fff !important;
+        }
+
+        /* ===== Content Sections ===== */
+        .section {
+            margin-top: 24px;
+            padding: 18px;
+            border: 1px solid var(--glass-border-soft) !important;
+            border-radius: var(--radius-lg) !important;
+            background: rgba(255, 255, 255, 0.035) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 10px 28px rgba(0, 0, 0, 0.08);
+        }
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+            color: var(--text);
+        }
+        .section-note {
+            color: var(--muted);
+            font-size: 12px;
+            margin: -2px 0 10px;
+            line-height: 1.5;
+        }
+
+        /* ===== Tables ===== */
+        .table-wrap {
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.09) !important;
+            border-radius: var(--radius-md) !important;
+            background: rgba(255, 255, 255, 0.025) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 560px;
+        }
+        .data-table th,
+        .data-table td {
+            padding: 13px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            vertical-align: top;
+            text-align: left;
+            line-height: 1.5;
+            font-size: 13px;
+        }
+        .data-table th {
+            color: rgba(245, 245, 247, 0.62);
+            font-size: 11px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.055) !important;
+            font-weight: 650;
+        }
+        .data-table td:first-child {
+            font-weight: 600;
+            color: var(--text);
+        }
+        .data-table td:last-child {
+            color: var(--muted);
+        }
+        .data-table tr:last-child td {
+            border-bottom: 0;
+        }
+
+        /* ===== Unified Content Tables ===== */
+        .vocab-grid{display:block}
+        .content-table{width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid rgba(255,255,255,.09);border-radius:18px;background:rgba(255,255,255,.025);box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
+        .content-table th,.content-table td{padding:12px 14px;overflow-wrap:anywhere;word-break:normal;border-bottom:1px solid rgba(255,255,255,.07);vertical-align:top;text-align:left;line-height:1.5;font-size:13px}
+        .content-table th{color:rgba(245,245,247,.62);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;background:rgba(255,255,255,.055);font-weight:700}
+        .content-table tbody tr:last-child td{border-bottom:0}
+        .content-table tbody tr{transition:background .16s ease}
+        .content-table tbody tr:hover{background:rgba(255,255,255,.045)}
+        .content-table .col-primary{color:var(--text);font-weight:650}
+        .content-table .col-secondary{color:var(--muted)}
+        .content-table .col-tertiary{color:var(--text-soft)}
+        .content-table .click-sentence{cursor:pointer;transition:opacity .16s ease}
+        .content-table .click-sentence:hover{opacity:.76}
+        .content-caption{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 10px}
+        .content-caption-title{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.01em}
+        .content-caption-note{font-size:11px;color:var(--dim)}
+        .grammar-intro{margin:0 0 14px;color:var(--text-soft);font-size:13px;line-height:1.7}
+        .grammar-block{margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.075)}
+        .grammar-block:first-child{margin-top:0;padding-top:0;border-top:0}
+        .grammar-block h4{margin:0 0 10px;font-size:15px;font-weight:700;letter-spacing:-.02em;color:var(--text)}
+        .grammar-block p{margin:0 0 12px;color:var(--muted);font-size:12.5px;line-height:1.65}
+        .speaking-table th:first-child,.speaking-table td:first-child{width:50%}
+        .speaking-table td,.speaking-table th{font-size:13px}
+        .speaking-table .de-line{color:var(--text);font-weight:550;cursor:pointer}
+        .speaking-table .en-line{color:var(--muted)}
+        .speaking-table tbody tr:hover .de-line{opacity:.78}
+        body.light .content-table{border-color:rgba(60,60,67,.10);background:rgba(255,255,255,.40);box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 8px 22px rgba(25,25,35,.035)}
+        body.light .content-table th{background:rgba(60,60,67,.045);color:rgba(29,29,31,.56)}
+        body.light .content-table td{border-bottom-color:rgba(60,60,67,.075)}
+        body.light .content-table tbody tr:hover{background:rgba(60,60,67,.035)}
+        body.light .grammar-block{border-top-color:rgba(60,60,67,.09)}
+        body.light .grammar-intro{color:rgba(29,29,31,.75)}
+        @media(max-width:620px){
+            .content-table{border-radius:15px}
+            .content-table th,.content-table td{font-size:11px;padding:9px 8px}
+            .content-table th{font-size:9.5px}
+            .speaking-table td,.speaking-table th{font-size:11px}
+            .content-caption{align-items:flex-start;flex-direction:column;gap:2px}
+        }
+
+        .grammar-category{display:inline-flex;align-items:center;margin:0 0 9px;padding:6px 10px;border:1px solid var(--glass-border-soft);border-radius:999px;background:rgba(255,255,255,.035);color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+        .grammar-intro{max-width:760px;margin:0 0 16px;color:var(--text-soft);font-size:13px;line-height:1.72}
+        .topic-group-label{padding:12px 10px 5px;color:var(--dim);font-size:9.5px;font-weight:750;letter-spacing:.13em;text-transform:uppercase}
+        .topic-group-label:first-child{padding-top:5px}
+        body.light .grammar-category{background:rgba(255,255,255,.52);border-color:rgba(60,60,67,.10);color:rgba(29,29,31,.55)}
+        body.light .topic-group-label{color:rgba(29,29,31,.43)}
+
+        .vocab-table th:nth-child(1){width:25%}.vocab-table th:nth-child(2){width:21%}.vocab-table th:nth-child(3){width:54%}
+        .vocab-table td.col-primary{font-weight:650}.vocab-table td.col-tertiary{color:var(--text-soft)}
+        .vocab-table .vocab-emoji{display:inline-block;width:1.45em;margin-right:2px}
+        @media(max-width:620px){.vocab-table th:nth-child(1){width:30%}.vocab-table th:nth-child(2){width:22%}.vocab-table th:nth-child(3){width:48%}}
+        /* ===== Polished grammar layout ===== */
+        .grammar-category{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:700;margin-bottom:7px}
+        .grammar-explanation{margin:0 0 20px;padding:15px 16px;border:1px solid var(--glass-border-soft);border-radius:var(--radius-md);background:rgba(255,255,255,.035);box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
+        .grammar-explanation-label{font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:var(--dim);margin-bottom:7px}
+        .grammar-explanation p{margin:0;color:var(--text-soft);font-size:13.5px;line-height:1.72}
+        .grammar-why-label{margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.07);font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:var(--dim)}
+        .grammar-explanation .grammar-why{margin-top:4px;color:var(--muted);font-size:12.5px}
+        body.light .grammar-why-label{border-top-color:rgba(60,60,67,.08);color:rgba(29,29,31,.44)}
+        body.light .grammar-explanation .grammar-why{color:rgba(29,29,31,.60)}
+        .grammar-table-section{margin:0 0 20px}
+        .grammar-table-title{font-size:14px;font-weight:750;color:var(--text);margin:0 0 9px;letter-spacing:-.015em}
+        .grammar-table-wrap{border-radius:14px}
+        .grammar-table{min-width:0}
+        .grammar-table th,.grammar-table td{font-size:12.5px}
+        .grammar-table td:first-child{font-weight:650}
+        .grammar-example-cell{cursor:pointer}
+        .grammar-tip{margin-top:4px;padding:13px 15px;border:1px solid var(--glass-border-soft);border-radius:13px;background:rgba(255,255,255,.045);color:var(--text-soft);font-size:12.5px;line-height:1.65}
+        .vocab-inline-emoji{display:inline-block;margin-right:5px;font-size:1.05em;vertical-align:-.06em}
+        body.light .grammar-explanation,body.light .grammar-tip{background:rgba(255,255,255,.48);border-color:rgba(60,60,67,.09);box-shadow:inset 0 1px 0 rgba(255,255,255,.72)}
+        body.light .grammar-explanation-label,body.light .grammar-category{color:rgba(29,29,31,.46)}
+        body.light .grammar-explanation p,body.light .grammar-tip{color:rgba(29,29,31,.74)}
+        @media(max-width:620px){.grammar-table th,.grammar-table td{font-size:11px;padding:9px 7px}.grammar-explanation{padding:13px 14px}.grammar-table-title{font-size:13px}}
+
+        /* ===== Footer ===== */
+        footer {
+            padding: 28px 0 48px;
+            margin-top: auto;
+            flex-shrink: 0;
+            text-align: center;
+            color: rgba(245, 245, 247, 0.43);
+            font-size: 11px;
+        }
+
+        /* ===== Light Mode ===== */
+        body.light {
+            --bg: #f5f5f7;
+            --text: #1d1d1f;
+            --text-soft: rgba(29, 29, 31, 0.88);
+            --muted: rgba(29, 29, 31, 0.62);
+            --dim: rgba(29, 29, 31, 0.43);
+            --glass-border: rgba(60, 60, 67, 0.13);
+            --glass-border-soft: rgba(60, 60, 67, 0.08);
+            --shadow: 0 24px 70px rgba(25, 25, 35, 0.10);
+            --shadow-soft: 0 12px 35px rgba(25, 25, 35, 0.07);
+            --line: rgba(60, 60, 67, 0.10);
+            --hover-bg: rgba(0, 0, 0, 0.045);
+            --hover-fg: #1d1d1f;
+            --hover-border: rgba(0, 0, 0, 0.12);
+            background: radial-gradient(1000px 580px at 50% -10%, rgba(255, 255, 255, 0.92), transparent 62%),
+                radial-gradient(700px 450px at 100% 30%, rgba(180, 190, 255, 0.18), transparent 70%),
+                radial-gradient(650px 480px at 0% 55%, rgba(160, 220, 255, 0.12), transparent 72%),
+                linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 52%, #eef0f3 100%);
+            color: var(--text);
+        }
+        body.light::before {
+            background: linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+            opacity: 0.12;
+        }
+        body.light nav {
+            background: rgba(255, 255, 255, 0.54) !important;
+            border-bottom-color: rgba(60, 60, 67, 0.10) !important;
+            box-shadow: 0 8px 32px rgba(25, 25, 35, 0.06) !important;
+        }
+        body.light nav .logo {
+            color: #1d1d1f;
+        }
+        body.light nav .logo span {
+            color: rgba(29, 29, 31, 0.46);
+        }
+        body.light nav .nav-links a {
+            color: rgba(29, 29, 31, 0.56);
+        }
+        body.light nav .nav-links a:hover,
+        body.light nav .nav-links a.active {
+            color: #1d1d1f;
+        }
+        body.light nav .nav-links a::after {
+            background: #1d1d1f !important;
+        }
+        body.light .theme-toggle {
+            background: rgba(255, 255, 255, 0.60) !important;
+            color: #1d1d1f !important;
+            border-color: rgba(60, 60, 67, 0.12) !important;
+            box-shadow: 0 12px 34px rgba(25, 25, 35, 0.09) !important;
+        }
+        body.light #hero h1 span {
+            color: #1d1d1f !important;
+        }
+        body.light .subtitle {
+            color: rgba(29, 29, 31, 0.70);
+        }
+        body.light .hero-philosophy {
+            color: rgba(29, 29, 31, 0.54);
+        }
+        body.light .top-area {
+            background: transparent !important;
+            border-top-color: transparent !important;
+            border-bottom-color: transparent !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+        body.light .pill {
+            background: transparent !important;
+            border-color: transparent !important;
+            color: rgba(29, 29, 31, 0.62) !important;
+            box-shadow: none !important;
+        }
+        body.light .pill:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.84) !important;
+            border-color: rgba(60, 60, 67, 0.16) !important;
+        }
+        body.light .pill.active {
+            background: rgba(29, 29, 31, 0.94) !important;
+            border-color: rgba(29, 29, 31, 0.94) !important;
+            color: #fff !important;
+            box-shadow: 0 8px 24px rgba(25, 25, 35, 0.13);
+        }
+        body.light .topic-list,
+        body.light .detail {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(250, 250, 252, 0.60)) !important;
+            border-color: rgba(60, 60, 67, 0.12) !important;
+            box-shadow: var(--shadow) !important;
+            backdrop-filter: saturate(170%) blur(26px) !important;
+            -webkit-backdrop-filter: saturate(170%) blur(26px) !important;
+        }
+        body.light .topic-btn {
+            color: rgba(29, 29, 31, 0.63) !important;
+        }
+        body.light .topic-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.78) !important;
+            border-color: rgba(60, 60, 67, 0.12) !important;
+        }
+        body.light .topic-btn.active {
+            background: rgba(29, 29, 31, 0.92) !important;
+            border-color: rgba(29, 29, 31, 0.92) !important;
+            color: #fff !important;
+        }
+        body.light .detail h2 {
+            color: #1d1d1f;
+        }
+        body.light .section {
+            background: rgba(255, 255, 255, 0.50) !important;
+            border-color: rgba(60, 60, 67, 0.10) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74), 0 10px 28px rgba(25, 25, 35, 0.04);
+        }
+        body.light .section-title {
+            border-bottom-color: rgba(60, 60, 67, 0.09);
+        }
+        body.light .table-wrap {
+            border-color: rgba(60, 60, 67, 0.10) !important;
+            background: rgba(255, 255, 255, 0.40) !important;
+        }
+        body.light .data-table th {
+            background: rgba(60, 60, 67, 0.045) !important;
+            color: rgba(29, 29, 31, 0.56);
+        }
+        body.light .data-table td {
+            border-bottom-color: rgba(60, 60, 67, 0.075);
+        }
+        body.light .data-table td:first-child {
+            color: #1d1d1f;
+        }
+        body.light .data-table td:last-child {
+            color: rgba(29, 29, 31, 0.62);
+        }
+        body.light .vocab-item {
+            background: rgba(255, 255, 255, 0.46) !important;
+            border-color: rgba(60, 60, 67, 0.10) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72), 0 8px 22px rgba(25, 25, 35, 0.045) !important;
+        }
+        body.light .vocab-item:hover {
+            background: rgba(255, 255, 255, 0.80) !important;
+            border-color: rgba(60, 60, 67, 0.15) !important;
+            box-shadow: 0 12px 28px rgba(25, 25, 35, 0.08) !important;
+        }
+        body.light .qa-answer {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0.54)) !important;
+        }
+        body.light .back {
+            background: rgba(255, 255, 255, 0.48) !important;
+            border-color: rgba(60, 60, 67, 0.08) !important;
+            color: rgba(29, 29, 31, 0.62) !important;
+        }
+        body.light .back:hover {
+            background: rgba(255, 255, 255, 0.82) !important;
+            border-color: rgba(60, 60, 67, 0.13) !important;
+            color: #1d1d1f !important;
+        }
+        body.light footer {
+            color: rgba(29, 29, 31, 0.40);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 900px) {
+            .topic-shell {
+                grid-template-columns: 1fr;
+            }
+            .topic-list {
+                position: static;
+            }
+            .detail {
+                padding: 22px;
+            }
+            .vocab-grid {
+                grid-template-columns: 1fr;
+            }
+            .data-table {
+                min-width: 500px;
+            }
+        }
+        @media (max-width: 700px) {
+            .qa-row {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                width: calc(100% - 18px);
+            }
+            #hero {
+                padding-top: 112px;
+            }
+            #hero h1 {
+                font-size: 42px;
+            }
+            .detail h2 {
+                font-size: 26px;
+            }
+            .detail {
+                padding: 18px;
+                border-radius: 22px !important;
+            }
+            .topic-list {
+                border-radius: 22px !important;
+            }
+            .section {
+                padding: 15px;
+                border-radius: 18px !important;
+            }
+            .pill {
+                font-size: 11px;
+                padding: 8px 13px;
+            }
+            .theme-toggle {
+                right: 14px;
+                top: 72px;
+                padding: 8px 11px;
+                font-size: 11px;
+            }
+            .topic-btn {
+                font-size: 12px;
+                padding: 8px 10px;
+            }
+            .vocab-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 620px) {
+            .data-table {
+                min-width: 0;
+                width: 100%;
+                table-layout: fixed;
+            }
+            .data-table th,
+            .data-table td {
+                font-size: 11px;
+                padding: 9px 7px;
+                word-break: break-word;
+            }
+        }
+
+        /* ===== Reduced Motion ===== */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: .001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* ===== Utilities ===== */
+        .clickable-heading {
+            cursor: pointer;
+        }
+        .clickable-heading:hover {
+            opacity: 0.8;
+        }
+        .term-link {
+            position: relative;
+            display: inline;
+            color: inherit;
+            font-weight: 400;
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.58);
+            cursor: pointer;
+            text-decoration: none;
+            background: transparent;
+        }
+        .term-link:hover {
+            color: inherit;
+            background: transparent;
+        }
+        .term-tip {
+            position: absolute;
+            left: 0;
+            bottom: calc(100% + 8px);
+            z-index: 30;
+            min-width: 150px;
+            max-width: 320px;
+            padding: 7px 9px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 8px;
+            background: rgba(27, 27, 31, 0.84) !important;
+            color: #fff;
+            font-size: 11px;
+            line-height: 1.4;
+            font-weight: 500;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            opacity: 0;
+            transform: translateY(4px);
+            pointer-events: none;
+            transition: opacity .16s ease, transform .16s ease;
+        }
+        .term-link:hover .term-tip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        body.light .term-link {
+            border-bottom-color: rgba(20, 24, 35, 0.38);
+        }
+        body.light .term-tip {
+            background: rgba(255, 255, 255, 0.82) !important;
+            color: #1d1d1f !important;
+            border-color: rgba(60, 60, 67, 0.12) !important;
+            box-shadow: 0 18px 45px rgba(25, 25, 35, 0.14) !important;
+        }
+    
+        /* ===== Final A1 content polish ===== */
+        .topic-group-label{
+            padding:14px 10px 6px;
+            font-size:10px;
+            font-weight:750;
+            letter-spacing:.12em;
+            text-transform:uppercase;
+            color:var(--dim);
+        }
+        .topic-group-label:first-child{padding-top:4px}
+        .grammar-intro{
+            margin:0 0 16px;
+            color:var(--text-soft);
+            font-size:13.5px;
+            line-height:1.75;
+            max-width:820px;
+        }
+        .vocab-table th:nth-child(1){width:24%}
+        .vocab-table th:nth-child(2){width:20%}
+        .vocab-table th:nth-child(3){width:56%}
+        .vocab-table td{font-size:13px}
+        .vocab-table td.col-primary{font-weight:650}
+        .vocab-table td.col-tertiary{color:var(--muted)}
+        .content-table tr:hover td{background:rgba(255,255,255,.025)}
+        body.light .content-table tr:hover td{background:rgba(0,0,0,.018)}
+        @media(max-width:700px){
+            .vocab-table th:nth-child(1){width:29%}
+            .vocab-table th:nth-child(2){width:24%}
+            .vocab-table th:nth-child(3){width:47%}
+            .vocab-table th,.vocab-table td{font-size:11px;padding:9px 7px}
+            .topic-group-label{padding-top:10px}
+        }
+        /* ===== Vocabulary category tables ===== */
+        .vocab-category{margin-top:22px}
+        .vocab-category:first-of-type{margin-top:8px}
+        .vocab-category-title{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:750;letter-spacing:-.015em;margin:0 0 9px;color:var(--text)}
+        .vocab-category-count{display:none}
+        .vocab-term{white-space:normal}
+        .vocab-sentence strong{font-weight:750;color:var(--text)}
+        .vocab-category .table-wrap{margin-bottom:4px}
+        @media(max-width:620px){.vocab-category-title{font-size:13px}.vocab-category-count{font-size:9px}.vocab-sentence{line-height:1.55}}
+</style>
+    <style id="light-mode-pill-final-fix">
+        /* Bright mode: remove only the strip behind the pills; keep the pill surfaces intact. */
+        body.light .top-area {
+            background: transparent !important;
+            border-top: 0 !important;
+            border-bottom: 0 !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+        body.light .top-area .pill {
+            background: rgba(255,255,255,.58) !important;
+            border: 1px solid rgba(60,60,67,.11) !important;
+            color: rgba(29,29,31,.62) !important;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.82), 0 2px 10px rgba(25,25,35,.035) !important;
+        }
+        body.light .top-area .pill:hover:not(.active) {
+            background: rgba(255,255,255,.84) !important;
+            border-color: rgba(60,60,67,.16) !important;
+        }
+        body.light .top-area .pill.active {
+            background: rgba(29,29,31,.94) !important;
+            border-color: rgba(29,29,31,.94) !important;
+            color: #fff !important;
+            box-shadow: 0 8px 24px rgba(25,25,35,.13), inset 0 1px 0 rgba(255,255,255,.08) !important;
+            font-weight: 700 !important;
+        }
+        /* Keep dark-mode active pill explicit and readable. */
+        body:not(.light) .top-area .pill.active {
+            background: rgba(255,255,255,.93) !important;
+            border-color: rgba(255,255,255,.96) !important;
+            color: #111 !important;
+            box-shadow: 0 8px 26px rgba(255,255,255,.10), inset 0 1px 0 rgba(255,255,255,.5) !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== Theme Toggle ===== -->
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Seitenmodus wechseln">☀︎ Hell</button>
+
+    <!-- ===== Hero ===== -->
+    <header id="hero">
+        <h1><span>A1 Revision</span></h1>
+        <p class="subtitle">Goethe-Zertifikat A1 · Wortschatz, Grammatik &amp; Sprechen</p>
+        <p class="hero-philosophy">Alles, was du für die A1-Prüfung brauchst – übersichtlich, klar und strukturiert.</p>
+    </header>
+
+    <!-- ===== Top Level Pills ===== -->
+    <div class="top-area">
+        <div class="container">
+            <div class="level-pills">
+                <button class="pill active" data-section="vokabular">Vokabular</button>
+                <button class="pill" data-section="grammatik">Grammatik</button>
+                <button class="pill" data-section="sprechen">Sprechen</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Main Content ===== -->
+    <main class="main container" id="main-content">
+        <div class="topic-shell">
+            <aside class="topic-list" aria-label="Topic navigation">
+                <div class="topic-label" id="topicLabel">Vokabular · Kategorien</div>
+                <div id="topicButtons"></div>
+            </aside>
+            <section class="detail" id="detail" tabindex="-1" aria-live="polite" aria-label="Learning content">
+                <div class="empty">Lade Inhalt …</div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer>Developed with ♥ for A1 Learners</footer>
+
+    <script>
+        // ====================================================================
+        // DATA
+        // ====================================================================
+
+        // ----- Vocabulary Data -----
+        const VOCAB_DATA = [{
+            id: 'greetings',
+            label: '👋 Greetings & Introductions',
+            words: [
+                ['Hallo', 'Hello'],
+                ['Guten Morgen', 'Good morning'],
+                ['Guten Tag', 'Good day'],
+                ['Guten Abend', 'Good evening'],
+                ['Gute Nacht', 'Good night'],
+                ['Tschüss', 'Bye'],
+                ['Auf Wiedersehen', 'Goodbye'],
+                ['Bis bald', 'See you soon'],
+                ['Bis später', 'See you later'],
+                ['Bis morgen', 'See you tomorrow'],
+                ['ich', 'I'],
+                ['du', 'you (informal)'],
+                ['Sie', 'you (formal)'],
+                ['er', 'he'],
+                ['sie', 'she'],
+                ['wir', 'we'],
+                ['ihr', 'you (plural)'],
+                ['heißen', 'to be called'],
+                ['wie', 'how'],
+                ['Name, der', 'name'],
+                ['Vorname, der', 'first name'],
+                ['Nachname, der', 'last name'],
+                ['wer', 'who'],
+                ['was', 'what'],
+                ['wo', 'where'],
+                ['woher', 'from where'],
+                ['wie alt', 'how old'],
+                ['wohin', 'where to'],
+                ['Freut mich!', 'Nice to meet you!'],
+                ['Ich komme aus...', 'I come from...'],
+                ['Ich wohne in...', 'I live in...'],
+            ]
+        }, {
+            id: 'personal',
+            label: '👤 Personal Information',
+            words: [
+                ['das Geburtsdatum', 'date of birth'],
+                ['das Alter', 'age'],
+                ['die Adresse', 'address'],
+                ['der Wohnort', 'place of residence'],
+                ['die Stadt', 'city'],
+                ['das Land', 'country'],
+                ['die Nationalität', 'nationality'],
+                ['die Muttersprache', 'native language'],
+                ['die Straße', 'street'],
+                ['die Hausnummer', 'house number'],
+                ['die Postleitzahl', 'postal code'],
+                ['der Ort', 'place'],
+                ['geboren', 'born'],
+                ['der Geburtstag', 'birthday'],
+                ['alt', 'old'],
+                ['jung', 'young'],
+                ['der Monat', 'month'],
+                ['das Jahr', 'year'],
+                ['verheiratet', 'married'],
+                ['ledig', 'single'],
+                ['geschieden', 'divorced'],
+                ['die Ehe', 'marriage'],
+                ['der Partner', 'partner (m)'],
+                ['die Partnerin', 'partner (f)'],
+                ['die Familie', 'family'],
+                ['das Kind', 'child'],
+            ]
+        }, {
+            id: 'family',
+            label: '👨‍👩‍👧 Family',
+            words: [
+                ['der Vater', 'father'],
+                ['die Mutter', 'mother'],
+                ['der Sohn', 'son'],
+                ['die Tochter', 'daughter'],
+                ['der Bruder', 'brother'],
+                ['die Schwester', 'sister'],
+                ['das Kind', 'child'],
+                ['das Baby', 'baby'],
+                ['der Großvater', 'grandfather'],
+                ['die Großmutter', 'grandmother'],
+                ['der Opa', 'grandpa'],
+                ['die Oma', 'grandma'],
+                ['der Onkel', 'uncle'],
+                ['die Tante', 'aunt'],
+                ['der Neffe', 'nephew'],
+                ['die Nichte', 'niece'],
+                ['der Cousin', 'cousin (m)'],
+                ['die Cousine', 'cousin (f)'],
+                ['der Mann', 'man / husband'],
+                ['die Frau', 'woman / wife'],
+                ['der Freund', 'friend (m) / boyfriend'],
+                ['die Freundin', 'friend (f) / girlfriend'],
+            ]
+        }, {
+            id: 'home',
+            label: '🏠 Home',
+            words: [
+                ['das Haus', 'house'],
+                ['die Wohnung', 'apartment'],
+                ['das Zimmer', 'room'],
+                ['das Schlafzimmer', 'bedroom'],
+                ['das Badezimmer', 'bathroom'],
+                ['die Küche', 'kitchen'],
+                ['das Wohnzimmer', 'living room'],
+                ['der Flur', 'hallway'],
+                ['der Eingang', 'entrance'],
+                ['die Tür', 'door'],
+                ['das Fenster', 'window'],
+                ['das Dach', 'roof'],
+                ['der Garten', 'garden'],
+                ['der Balkon', 'balcony'],
+                ['der Keller', 'basement'],
+                ['der Dachboden', 'attic'],
+                ['das Esszimmer', 'dining room'],
+                ['das Arbeitszimmer', 'study/office'],
+                ['die Toilette', 'toilet'],
+                ['das Bett', 'bed'],
+                ['die Matratze', 'mattress'],
+                ['das Kopfkissen', 'pillow'],
+                ['die Decke', 'blanket'],
+                ['der Kleiderschrank', 'wardrobe'],
+                ['der Stuhl', 'chair'],
+                ['der Sessel', 'armchair'],
+                ['der Spiegel', 'mirror'],
+                ['die Lampe', 'lamp'],
+                ['das Licht', 'light'],
+                ['der Wecker', 'alarm clock'],
+                ['das Handy', 'mobile phone'],
+                ['das Buch', 'book'],
+                ['der Vorhang', 'curtain'],
+                ['schlafen', 'to sleep'],
+                ['aufstehen', 'to get up'],
+                ['sich anziehen', 'to get dressed'],
+                ['ausziehen', 'to take off'],
+                ['liegen', 'to lie'],
+                ['stehen', 'to stand'],
+                ['hängen', 'to hang'],
+            ]
+        }, {
+            id: 'bathroom',
+            label: '🛁 Bathroom',
+            words: [
+                ['die Badewanne', 'bathtub'],
+                ['die Dusche', 'shower'],
+                ['die Zahnbürste', 'toothbrush'],
+                ['die Zahnpasta', 'toothpaste'],
+                ['das Shampoo', 'shampoo'],
+                ['die Seife', 'soap'],
+                ['das Toilettenpapier', 'toilet paper'],
+                ['das Waschbecken', 'sink'],
+                ['der Duschvorhang', 'shower curtain'],
+                ['der Waschkorb', 'laundry basket'],
+                ['der Rasierer', 'razor'],
+                ['das Deodorant', 'deodorant'],
+                ['die Creme', 'cream'],
+                ['duschen', 'to shower'],
+                ['baden', 'to bathe'],
+                ['sich waschen', 'to wash oneself'],
+                ['die Zähne putzen', 'to brush teeth'],
+                ['sich rasieren', 'to shave'],
+                ['sich abtrocknen', 'to dry oneself'],
+                ['sich kämmen', 'to comb hair'],
+            ]
+        }, {
+            id: 'kitchen',
+            label: '🍳 Kitchen',
+            words: [
+                ['der Kühlschrank', 'refrigerator'],
+                ['das Gefrierfach', 'freezer'],
+                ['der Geschirrspüler', 'dishwasher'],
+                ['der Herd', 'stove'],
+                ['der Backofen', 'oven'],
+                ['die Mikrowelle', 'microwave'],
+                ['die Kaffeemaschine', 'coffee machine'],
+                ['der Toaster', 'toaster'],
+                ['der Tisch', 'table'],
+                ['der Teller', 'plate'],
+                ['der Löffel', 'spoon'],
+                ['das Messer', 'knife'],
+                ['die Gabel', 'fork'],
+                ['das Glas', 'glass'],
+                ['die Tasse', 'cup'],
+                ['der Becher', 'mug'],
+                ['die Schüssel', 'bowl'],
+                ['die Pfanne', 'pan'],
+                ['der Topf', 'pot'],
+                ['das Öl', 'oil'],
+                ['das Salz', 'salt'],
+                ['der Pfeffer', 'pepper'],
+                ['die Serviette', 'napkin'],
+                ['kochen', 'to cook'],
+                ['braten', 'to fry'],
+                ['backen', 'to bake'],
+                ['schneiden', 'to cut'],
+                ['waschen', 'to wash'],
+                ['spülen', 'to wash up'],
+                ['abtrocknen', 'to dry'],
+                ['aufräumen', 'to tidy up'],
+                ['decken', 'to set (table)'],
+                ['abdecken', 'to clear (table)'],
+            ]
+        }, {
+            id: 'food',
+            label: '🍔 Food & Drinks',
+            words: [
+                ['die Kartoffel', 'potato'],
+                ['die Karotte / die Möhre', 'carrot'],
+                ['die Tomate', 'tomato'],
+                ['die Gurke', 'cucumber'],
+                ['der Salat', 'lettuce / salad'],
+                ['die Zwiebel', 'onion'],
+                ['der Knoblauch', 'garlic'],
+                ['der Paprika', 'bell pepper'],
+                ['der Brokkoli', 'broccoli'],
+                ['der Mais', 'corn'],
+                ['der Pilz', 'mushroom'],
+                ['der Blumenkohl', 'cauliflower'],
+                ['die Erbse', 'pea'],
+                ['der Spinat', 'spinach'],
+                ['der Apfel', 'apple'],
+                ['die Banane', 'banana'],
+                ['die Orange', 'orange'],
+                ['die Zitrone', 'lemon'],
+                ['die Traube', 'grape'],
+                ['die Erdbeere', 'strawberry'],
+                ['der Pfirsich', 'peach'],
+                ['die Birne', 'pear'],
+                ['die Kirsche', 'cherry'],
+                ['die Wassermelone', 'watermelon'],
+                ['die Kiwi', 'kiwi'],
+                ['die Ananas', 'pineapple'],
+                ['die Mango', 'mango'],
+                ['die Milch', 'milk'],
+                ['der Käse', 'cheese'],
+                ['die Butter', 'butter'],
+                ['das Ei', 'egg'],
+                ['der Joghurt', 'yogurt'],
+                ['die Sahne', 'cream'],
+                ['das Fleisch', 'meat'],
+                ['das Rindfleisch', 'beef'],
+                ['das Schweinefleisch', 'pork'],
+                ['das Hühnchen', 'chicken'],
+                ['der Fisch', 'fish'],
+                ['der Lachs', 'salmon'],
+                ['das Brot', 'bread'],
+                ['das Brötchen', 'bread roll'],
+                ['die Brezel', 'pretzel'],
+                ['der Kuchen', 'cake'],
+                ['die Schokolade', 'chocolate'],
+                ['das Eis', 'ice cream'],
+                ['der Keks', 'cookie'],
+                ['der Honig', 'honey'],
+                ['das Wasser', 'water'],
+                ['das Mineralwasser', 'mineral water'],
+                ['der Saft', 'juice'],
+                ['der Orangensaft', 'orange juice'],
+                ['der Apfelsaft', 'apple juice'],
+                ['der Kaffee', 'coffee'],
+                ['der Tee', 'tea'],
+                ['die Limonade', 'lemonade'],
+                ['das Bier', 'beer'],
+                ['der Wein', 'wine'],
+                ['das Frühstück', 'breakfast'],
+                ['das Mittagessen', 'lunch'],
+                ['das Abendessen', 'dinner'],
+                ['das Gericht', 'dish'],
+                ['lecker', 'delicious'],
+                ['süß', 'sweet'],
+                ['salzig', 'salty'],
+                ['sauer', 'sour'],
+                ['scharf', 'spicy'],
+                ['kalt', 'cold'],
+                ['heiß', 'hot'],
+                ['frisch', 'fresh'],
+                ['gesund', 'healthy'],
+                ['essen', 'to eat'],
+                ['trinken', 'to drink'],
+                ['schmecken', 'to taste'],
+                ['mögen', 'to like'],
+                ['lieben', 'to love'],
+                ['hassen', 'to hate'],
+                ['brauchen', 'to need'],
+                ['kaufen', 'to buy'],
+                ['bezahlen', 'to pay'],
+            ]
+        }, {
+            id: 'clothes',
+            label: '👕 Clothes',
+            words: [
+                ['die Kleidung', 'clothing'],
+                ['das Hemd', 'shirt'],
+                ['die Bluse', 'blouse'],
+                ['das T-Shirt', 't-shirt'],
+                ['die Krawatte', 'tie'],
+                ['die Hose', 'pants/trousers'],
+                ['das Kleid', 'dress'],
+                ['der Rock', 'skirt'],
+                ['die Jacke', 'jacket'],
+                ['der Mantel', 'coat'],
+                ['der Pullover', 'sweater'],
+                ['die Socke', 'sock'],
+                ['der Schuh', 'shoe'],
+                ['die Schuhe', 'shoes'],
+                ['die Turnschuhe', 'sneakers'],
+                ['der Stiefel', 'boot'],
+                ['der Hut', 'hat'],
+                ['die Mütze', 'cap/beanie'],
+                ['der Schal', 'scarf'],
+                ['der Handschuh', 'glove'],
+                ['der Badeanzug', 'swimsuit'],
+                ['die Badehose', 'swimming trunks'],
+                ['der Bikini', 'bikini'],
+                ['der Bademantel', 'bathrobe'],
+                ['die Sandale', 'sandal'],
+                ['anziehen', 'to put on'],
+                ['ausziehen', 'to take off'],
+                ['tragen', 'to wear'],
+                ['anprobieren', 'to try on'],
+                ['passen', 'to fit'],
+                ['waschen', 'to wash'],
+                ['bügeln', 'to iron'],
+                ['trocknen', 'to dry'],
+                ['neu', 'new'],
+                ['alt', 'old'],
+                ['schön', 'beautiful'],
+                ['teuer', 'expensive'],
+                ['billig', 'cheap'],
+                ['groß', 'big/large'],
+                ['klein', 'small'],
+                ['lang', 'long'],
+                ['kurz', 'short'],
+                ['bequem', 'comfortable'],
+                ['warm', 'warm'],
+            ]
+        }, {
+            id: 'colors',
+            label: '🎨 Colors',
+            words: [
+                ['schwarz', 'black'],
+                ['weiß', 'white'],
+                ['rot', 'red'],
+                ['blau', 'blue'],
+                ['grün', 'green'],
+                ['gelb', 'yellow'],
+                ['braun', 'brown'],
+                ['grau', 'gray'],
+                ['orange', 'orange'],
+                ['lila', 'purple'],
+                ['violett', 'violet'],
+                ['rosa', 'pink'],
+                ['beige', 'beige'],
+                ['golden', 'golden'],
+                ['silber', 'silver'],
+            ]
+        }, {
+            id: 'school',
+            label: '🏫 School & Education',
+            words: [
+                ['die Schule', 'school'],
+                ['die Grundschule', 'elementary school'],
+                ['die Hauptschule', 'secondary school'],
+                ['die Realschule', 'middle school'],
+                ['das Gymnasium', 'high school'],
+                ['die Universität', 'university'],
+                ['die Hochschule', 'college'],
+                ['der Kindergarten', 'kindergarten'],
+                ['der Lehrer', 'teacher (m)'],
+                ['die Lehrerin', 'teacher (f)'],
+                ['der Schüler', 'student (m)'],
+                ['die Schülerin', 'student (f)'],
+                ['der Student', 'university student (m)'],
+                ['die Studentin', 'university student (f)'],
+                ['der Kurs', 'course'],
+                ['der Deutschkurs', 'German course'],
+                ['der Sprachkurs', 'language course'],
+                ['Deutsch', 'German'],
+                ['Englisch', 'English'],
+                ['Französisch', 'French'],
+                ['Spanisch', 'Spanish'],
+                ['Mathematik / Mathe', 'Math'],
+                ['Biologie', 'Biology'],
+                ['Chemie', 'Chemistry'],
+                ['Physik', 'Physics'],
+                ['Geschichte', 'History'],
+                ['Erdkunde', 'Geography'],
+                ['Kunst', 'Art'],
+                ['Musik', 'Music'],
+                ['Sport', 'Sports'],
+                ['lernen', 'to learn'],
+                ['studieren', 'to study (university)'],
+                ['lesen', 'to read'],
+                ['schreiben', 'to write'],
+                ['rechnen', 'to calculate'],
+                ['hören', 'to listen'],
+                ['sprechen', 'to speak'],
+                ['antworten', 'to answer'],
+                ['fragen', 'to ask'],
+                ['verstehen', 'to understand'],
+                ['wiederholen', 'to repeat'],
+                ['üben', 'to practice'],
+                ['aufpassen', 'to pay attention'],
+                ['das Lehrbuch', 'textbook'],
+                ['das Wörterbuch', 'dictionary'],
+                ['die Vokabel', 'vocabulary'],
+                ['die Grammatik', 'grammar'],
+                ['die Aufgabe', 'exercise/task'],
+                ['die Hausaufgabe', 'homework'],
+                ['der Test', 'test'],
+                ['die Prüfung', 'exam'],
+                ['die Note', 'grade'],
+                ['die Lektion', 'lesson'],
+                ['der Unterricht', 'class/instruction'],
+                ['die Pause', 'break'],
+                ['die Klasse', 'class'],
+                ['der Stift', 'pen'],
+                ['der Kugelschreiber', 'ballpoint pen'],
+                ['der Bleistift', 'pencil'],
+                ['das Papier', 'paper'],
+                ['das Heft', 'notebook'],
+                ['die Tafel', 'board'],
+                ['der Radiergummi', 'eraser'],
+                ['der Spitzer', 'sharpener'],
+                ['das Lineal', 'ruler'],
+                ['der Füller', 'fountain pen'],
+                ['die Schere', 'scissors'],
+                ['der Ordner', 'folder'],
+                ['der Computer', 'computer'],
+                ['die Tastatur', 'keyboard'],
+                ['die Maus', 'mouse'],
+                ['der Drucker', 'printer'],
+            ]
+        }, {
+            id: 'transport',
+            label: '🚌 Transportation',
+            words: [
+                ['das Auto', 'car'],
+                ['der PKW', 'car (passenger car)'],
+                ['der Bus', 'bus'],
+                ['die Straßenbahn', 'tram'],
+                ['der Zug', 'train'],
+                ['der ICE', 'high-speed train'],
+                ['die U-Bahn', 'subway/metro'],
+                ['die S-Bahn', 'suburban train'],
+                ['das Fahrrad', 'bicycle'],
+                ['der Roller', 'scooter'],
+                ['das Motorrad', 'motorcycle'],
+                ['das Flugzeug', 'airplane'],
+                ['das Schiff', 'ship'],
+                ['das Boot', 'boat'],
+                ['das Taxi', 'taxi'],
+                ['fahren', 'to drive/ride'],
+                ['gehen', 'to walk'],
+                ['laufen', 'to walk/run'],
+                ['fliegen', 'to fly'],
+                ['schwimmen', 'to swim'],
+                ['reisen', 'to travel'],
+                ['ankommen', 'to arrive'],
+                ['abfahren', 'to depart'],
+                ['umsteigen', 'to change (transport)'],
+                ['einsteigen', 'to get on/into'],
+                ['aussteigen', 'to get off/out'],
+                ['warten', 'to wait'],
+                ['halten', 'to stop'],
+                ['die Haltestelle', 'stop (bus/tram)'],
+                ['der Bahnhof', 'train station'],
+                ['der Hauptbahnhof', 'main station'],
+                ['der Flughafen', 'airport'],
+                ['der Busbahnhof', 'bus station'],
+                ['der Hafen', 'harbor'],
+                ['der Parkplatz', 'parking lot'],
+                ['die Garage', 'garage'],
+                ['das Ticket', 'ticket'],
+                ['die Fahrkarte', 'ticket (travel)'],
+                ['das Flugticket', 'flight ticket'],
+                ['das Zugticket', 'train ticket'],
+                ['die Monatskarte', 'monthly pass'],
+                ['die Tageskarte', 'day pass'],
+                ['der Fahrplan', 'schedule'],
+            ]
+        }, {
+            id: 'city',
+            label: '🏙️ City',
+            words: [
+                ['die Stadt', 'city'],
+                ['das Dorf', 'village'],
+                ['das Zentrum', 'center'],
+                ['die Innenstadt', 'city center'],
+                ['der Stadtteil', 'district'],
+                ['die Straße', 'street'],
+                ['der Platz', 'square'],
+                ['die Ecke', 'corner'],
+                ['die Ampel', 'traffic light'],
+                ['die Kreuzung', 'intersection'],
+                ['der Bürgersteig', 'sidewalk'],
+                ['die Fußgängerzone', 'pedestrian zone'],
+                ['der Park', 'park'],
+                ['der Garten', 'garden'],
+                ['die Bank', 'bank'],
+                ['das Krankenhaus', 'hospital'],
+                ['der Supermarkt', 'supermarket'],
+                ['das Geschäft', 'shop/store'],
+                ['das Büro', 'office'],
+                ['die Firma', 'company'],
+                ['die Bibliothek', 'library'],
+                ['das Museum', 'museum'],
+                ['das Theater', 'theater'],
+                ['das Kino', 'cinema'],
+                ['das Konzert', 'concert'],
+                ['die Kirche', 'church'],
+                ['das Rathaus', 'town hall'],
+                ['die Post', 'post office'],
+                ['der Briefkasten', 'mailbox'],
+                ['die Apotheke', 'pharmacy'],
+                ['die Drogerie', 'drugstore'],
+                ['die Bäckerei', 'bakery'],
+                ['die Metzgerei', 'butcher shop'],
+                ['links', 'left'],
+                ['rechts', 'right'],
+                ['geradeaus', 'straight ahead'],
+                ['hinter', 'behind'],
+                ['neben', 'next to'],
+                ['gegenüber', 'opposite'],
+                ['zwischen', 'between'],
+                ['am Ende', 'at the end'],
+                ['an der Ecke', 'on the corner'],
+                ['um die Ecke', 'around the corner'],
+                ['bis zur Ampel', 'until the traffic light'],
+                ['dann', 'then'],
+                ['danach', 'after that'],
+            ]
+        }, {
+            id: 'health',
+            label: '🏥 Health',
+            words: [
+                ['der Körper', 'body'],
+                ['der Kopf', 'head'],
+                ['die Haare', 'hair'],
+                ['das Auge', 'eye'],
+                ['das Ohr', 'ear'],
+                ['die Nase', 'nose'],
+                ['der Mund', 'mouth'],
+                ['der Zahn', 'tooth'],
+                ['die Hand', 'hand'],
+                ['der Fuß', 'foot'],
+                ['das Bein', 'leg'],
+                ['der Arm', 'arm'],
+                ['das Herz', 'heart'],
+                ['die Lunge', 'lung'],
+                ['krank', 'sick'],
+                ['gesund', 'healthy'],
+                ['die Erkältung', 'cold'],
+                ['das Fieber', 'fever'],
+                ['der Husten', 'cough'],
+                ['der Schnupfen', 'runny nose'],
+                ['die Grippe', 'flu'],
+                ['der Durchfall', 'diarrhea'],
+                ['die Übelkeit', 'nausea'],
+                ['der Schmerz', 'pain'],
+                ['die Kopfschmerzen', 'headache'],
+                ['die Zahnschmerzen', 'toothache'],
+                ['die Bauchschmerzen', 'stomachache'],
+                ['die Halsschmerzen', 'sore throat'],
+                ['die Rückenschmerzen', 'back pain'],
+                ['schwindelig', 'dizzy'],
+                ['müde', 'tired'],
+                ['erschöpft', 'exhausted'],
+                ['der Arzt', 'doctor (m)'],
+                ['die Ärztin', 'doctor (f)'],
+                ['die Praxis', 'practice (doctor)'],
+                ['die Sprechstunde', 'consultation hours'],
+                ['der Termin', 'appointment'],
+                ['das Rezept', 'prescription'],
+                ['die Medizin', 'medicine'],
+                ['das Medikament', 'medication'],
+                ['die Tablette', 'pill/tablet'],
+                ['die Apotheke', 'pharmacy'],
+                ['das Pflaster', 'bandage'],
+                ['die Spritze', 'injection'],
+                ['die Impfung', 'vaccination'],
+                ['schmerzen', 'to hurt'],
+                ['weh tun', 'to hurt'],
+                ['krank sein', 'to be sick'],
+                ['sich erholen', 'to recover'],
+                ['heilen', 'to heal'],
+                ['verschreiben', 'to prescribe'],
+                ['nehmen', 'to take (medicine)'],
+                ['fühlen', 'to feel'],
+                ['rufen', 'to call'],
+            ]
+        }, {
+            id: 'jobs',
+            label: '💼 Jobs',
+            words: [
+                ['der Arzt / die Ärztin', 'doctor'],
+                ['der Lehrer / die Lehrerin', 'teacher'],
+                ['der Student / die Studentin', 'university student'],
+                ['der Schüler / die Schülerin', 'school student'],
+                ['der Angestellte / die Angestellte', 'employee'],
+                ['der Beamte / die Beamtin', 'civil servant'],
+                ['der Programmierer / die Programmiererin', 'programmer'],
+                ['der Koch / die Köchin', 'cook/chef'],
+                ['der Bäcker / die Bäckerin', 'baker'],
+                ['der Mechaniker / die Mechanikerin', 'mechanic'],
+                ['der Handwerker / die Handwerkerin', 'craftsman'],
+                ['der Anwalt / die Anwältin', 'lawyer'],
+                ['der Pilot / die Pilotin', 'pilot'],
+                ['die Stewardess', 'flight attendant'],
+                ['der Manager / die Managerin', 'manager'],
+                ['der Wissenschaftler / die Wissenschaftlerin', 'scientist'],
+                ['der Künstler / die Künstlerin', 'artist'],
+                ['der Richter / die Richterin', 'judge'],
+                ['der Sekretär / die Sekretärin', 'secretary'],
+                ['der Buchhalter / die Buchhalterin', 'accountant'],
+                ['der Feuerwehrmann', 'firefighter'],
+                ['der Polizist / die Polizistin', 'police officer'],
+                ['der Fahrer / die Fahrerin', 'driver'],
+                ['arbeiten', 'to work'],
+                ['studieren', 'to study (university)'],
+                ['verdienen', 'to earn'],
+                ['anfangen', 'to start'],
+                ['aufhören', 'to stop/finish'],
+                ['pausieren', 'to take a break'],
+                ['telefonieren', 'to phone'],
+                ['das Büro', 'office'],
+                ['die Firma', 'company'],
+                ['die Fabrik', 'factory'],
+                ['das Unternehmen', 'company'],
+            ]
+        }, {
+            id: 'animals',
+            label: '🐶 Animals',
+            words: [
+                ['der Hund', 'dog'],
+                ['die Katze', 'cat'],
+                ['das Kaninchen', 'rabbit'],
+                ['das Meerschweinchen', 'guinea pig'],
+                ['die Maus', 'mouse'],
+                ['der Hamster', 'hamster'],
+                ['der Vogel', 'bird'],
+                ['der Fisch', 'fish'],
+                ['das Pferd', 'horse'],
+                ['die Kuh', 'cow'],
+                ['das Schaf', 'sheep'],
+                ['das Schwein', 'pig'],
+                ['das Huhn', 'chicken'],
+                ['die Ente', 'duck'],
+                ['der Schwan', 'swan'],
+                ['die Ziege', 'goat'],
+                ['der Wolf', 'wolf'],
+                ['der Fuchs', 'fox'],
+                ['der Bär', 'bear'],
+                ['der Löwe', 'lion'],
+                ['der Elefant', 'elephant'],
+                ['die Giraffe', 'giraffe'],
+                ['der Affe', 'monkey'],
+                ['haben', 'to have'],
+                ['besitzen', 'to own'],
+                ['fressen', 'to eat (animals)'],
+                ['essen', 'to eat (people)'],
+                ['trinken', 'to drink'],
+                ['schlafen', 'to sleep'],
+                ['laufen', 'to walk/run'],
+                ['schwimmen', 'to swim'],
+                ['fliegen', 'to fly'],
+                ['springen', 'to jump'],
+                ['bellen', 'to bark'],
+                ['miauen', 'to meow'],
+                ['singen', 'to sing (bird)'],
+            ]
+        }, {
+            id: 'nature',
+            label: '🌳 Nature',
+            words: [
+                ['der Baum', 'tree'],
+                ['der Wald', 'forest'],
+                ['die Blume', 'flower'],
+                ['das Gras', 'grass'],
+                ['die Pflanze', 'plant'],
+                ['der Berg', 'mountain'],
+                ['das Gebirge', 'mountain range'],
+                ['das Tal', 'valley'],
+                ['der Fluss', 'river'],
+                ['der See', 'lake'],
+                ['das Meer', 'sea'],
+                ['der Ozean', 'ocean'],
+                ['die Insel', 'island'],
+                ['die Küste', 'coast'],
+                ['der Vulkan', 'volcano'],
+                ['der Sand', 'sand'],
+                ['der Stein', 'stone'],
+                ['der Fels', 'rock'],
+                ['der Busch', 'bush'],
+                ['wachsen', 'to grow'],
+                ['blühen', 'to bloom'],
+                ['fließen', 'to flow'],
+                ['scheinen', 'to shine'],
+                ['regnen', 'to rain'],
+                ['schneien', 'to snow'],
+                ['stürmen', 'to storm'],
+                ['gewittern', 'to thunderstorm'],
+            ]
+        }, {
+            id: 'weather',
+            label: '🌦️ Weather',
+            words: [
+                ['sonnig', 'sunny'],
+                ['bewölkt', 'cloudy'],
+                ['wolkig', 'cloudy'],
+                ['regnerisch', 'rainy'],
+                ['schneit', 'snowing'],
+                ['warm', 'warm'],
+                ['heiß', 'hot'],
+                ['kalt', 'cold'],
+                ['windig', 'windy'],
+                ['neblig', 'foggy'],
+                ['stürmisch', 'stormy'],
+                ['wechselhaft', 'changeable'],
+                ['klar', 'clear'],
+                ['grau', 'gray'],
+                ['die Temperatur', 'temperature'],
+                ['der Grad', 'degree'],
+                ['minus', 'minus'],
+                ['plus', 'plus'],
+                ['über Null', 'above zero'],
+                ['unter Null', 'below zero'],
+                ['scheinen', 'to shine'],
+                ['regnen', 'to rain'],
+                ['schneien', 'to snow'],
+                ['stürmen', 'to storm'],
+                ['gewittern', 'to thunderstorm'],
+                ['frieren', 'to freeze'],
+                ['schwitzen', 'to sweat'],
+            ]
+        }, {
+            id: 'time',
+            label: '⏰ Time',
+            words: [
+                ['Wie spät ist es?', 'What time is it?'],
+                ['die Uhr', 'clock/watch'],
+                ['die Stunde', 'hour'],
+                ['die Minute', 'minute'],
+                ['die Sekunde', 'second'],
+                ['die Uhrzeit', 'time'],
+                ['um', 'at (time)'],
+                ['am', 'on (day)'],
+                ['im', 'in (month/season)'],
+                ['morgens', 'in the morning'],
+                ['mittags', 'at noon'],
+                ['abends', 'in the evening'],
+                ['nachts', 'at night'],
+                ['der Morgen', 'morning'],
+                ['der Vormittag', 'late morning'],
+                ['der Mittag', 'midday/noon'],
+                ['der Nachmittag', 'afternoon'],
+                ['der Abend', 'evening'],
+                ['die Nacht', 'night'],
+                ['die Mitternacht', 'midnight'],
+            ]
+        }, {
+            id: 'calendar',
+            label: '📅 Calendar',
+            words: [
+                ['der Montag', 'Monday'],
+                ['der Dienstag', 'Tuesday'],
+                ['der Mittwoch', 'Wednesday'],
+                ['der Donnerstag', 'Thursday'],
+                ['der Freitag', 'Friday'],
+                ['der Samstag', 'Saturday'],
+                ['der Sonntag', 'Sunday'],
+                ['das Wochenende', 'weekend'],
+                ['der Werktag', 'weekday'],
+                ['der Januar', 'January'],
+                ['der Februar', 'February'],
+                ['der März', 'March'],
+                ['der April', 'April'],
+                ['der Mai', 'May'],
+                ['der Juni', 'June'],
+                ['der Juli', 'July'],
+                ['der August', 'August'],
+                ['der September', 'September'],
+                ['der Oktober', 'October'],
+                ['der November', 'November'],
+                ['der Dezember', 'December'],
+                ['der Frühling', 'spring'],
+                ['der Sommer', 'summer'],
+                ['der Herbst', 'autumn/fall'],
+                ['der Winter', 'winter'],
+                ['heute', 'today'],
+                ['morgen', 'tomorrow'],
+                ['übermorgen', 'day after tomorrow'],
+                ['gestern', 'yesterday'],
+                ['vorgestern', 'day before yesterday'],
+                ['jetzt', 'now'],
+                ['bald', 'soon'],
+                ['später', 'later'],
+                ['früh', 'early'],
+                ['spät', 'late'],
+                ['immer', 'always'],
+                ['oft', 'often'],
+                ['manchmal', 'sometimes'],
+                ['nie', 'never'],
+                ['jeden Tag', 'every day'],
+                ['jede Woche', 'every week'],
+                ['jeden Monat', 'every month'],
+                ['jedes Jahr', 'every year'],
+            ]
+        }, {
+            id: 'hobbies',
+            label: '🎮 Hobbies',
+            words: [
+                ['das Hobby', 'hobby'],
+                ['die Freizeit', 'free time'],
+                ['die Zeit', 'time'],
+                ['lesen', 'to read'],
+                ['malen', 'to paint'],
+                ['Musik hören', 'to listen to music'],
+                ['fotografieren', 'to take photos'],
+                ['spielen', 'to play'],
+                ['Computerspiele spielen', 'to play computer games'],
+                ['fernsehen', 'to watch TV'],
+                ['am Handy spielen', 'to play on phone'],
+                ['Klavier spielen', 'to play piano'],
+                ['Gitarre spielen', 'to play guitar'],
+                ['singen', 'to sing'],
+                ['basteln', 'to do crafts'],
+                ['nähen', 'to sew'],
+                ['stricken', 'to knit'],
+                ['gärtnern', 'to garden'],
+                ['tanzen', 'to dance'],
+                ['ins Kino gehen', 'to go to the cinema'],
+                ['ins Museum gehen', 'to go to the museum'],
+            ]
+        }, {
+            id: 'sports',
+            label: '⚽ Sports',
+            words: [
+                ['der Sport', 'sports'],
+                ['Fußball', 'soccer/football'],
+                ['Basketball', 'basketball'],
+                ['Volleyball', 'volleyball'],
+                ['Tennis', 'tennis'],
+                ['Badminton', 'badminton'],
+                ['Tischtennis', 'table tennis'],
+                ['Golf', 'golf'],
+                ['Gymnastik', 'gymnastics'],
+                ['Yoga', 'yoga'],
+                ['Laufen', 'running'],
+                ['Schwimmen', 'swimming'],
+                ['Radfahren', 'cycling'],
+                ['Skifahren', 'skiing'],
+                ['Snowboarden', 'snowboarding'],
+                ['Fechten', 'fencing'],
+                ['Schießen', 'shooting'],
+                ['Motorradfahren', 'motorcycling'],
+                ['spielen', 'to play'],
+                ['machen', 'to do'],
+                ['laufen', 'to run'],
+                ['schwimmen', 'to swim'],
+                ['fahren', 'to ride/drive'],
+                ['gewinnen', 'to win'],
+                ['verlieren', 'to lose'],
+                ['trainieren', 'to train'],
+            ]
+        }, {
+            id: 'technology',
+            label: '💻 Technology',
+            words: [
+                ['der Computer', 'computer'],
+                ['der Laptop', 'laptop'],
+                ['das Handy', 'mobile phone'],
+                ['das Smartphone', 'smartphone'],
+                ['die Tastatur', 'keyboard'],
+                ['die Maus', 'mouse'],
+                ['der Bildschirm', 'screen'],
+                ['der Drucker', 'printer'],
+                ['die Kamera', 'camera'],
+                ['der Fotoapparat', 'camera'],
+                ['der Camcorder', 'camcorder'],
+                ['die Kopfhörer', 'headphones'],
+                ['der Lautsprecher', 'speaker'],
+                ['das Ladekabel', 'charging cable'],
+                ['der Akku', 'battery'],
+                ['die CD', 'CD'],
+                ['die DVD', 'DVD'],
+                ['die Festplatte', 'hard drive'],
+                ['surfen', 'to surf (internet)'],
+                ['chatten', 'to chat'],
+                ['mailen', 'to email'],
+                ['telefonieren', 'to phone'],
+                ['skypen', 'to Skype'],
+                ['kaufen', 'to buy'],
+                ['verkaufen', 'to sell'],
+                ['laden', 'to charge'],
+                ['herunterladen', 'to download'],
+            ]
+        }, {
+            id: 'feelings',
+            label: '😊 Feelings',
+            words: [
+                ['glücklich', 'happy'],
+                ['traurig', 'sad'],
+                ['fröhlich', 'cheerful'],
+                ['wütend', 'angry'],
+                ['ängstlich', 'afraid'],
+                ['nervös', 'nervous'],
+                ['ruhig', 'calm'],
+                ['müde', 'tired'],
+                ['erschöpft', 'exhausted'],
+                ['zufrieden', 'satisfied'],
+                ['optimistisch', 'optimistic'],
+                ['pessimistisch', 'pessimistic'],
+                ['stolz', 'proud'],
+                ['einsam', 'lonely'],
+                ['lieb', 'nice/lovely'],
+                ['hässlich', 'ugly'],
+                ['fühlen', 'to feel'],
+                ['sich fühlen', 'to feel (oneself)'],
+                ['mögen', 'to like'],
+                ['lieben', 'to love'],
+                ['hassen', 'to hate'],
+                ['fürchten', 'to fear'],
+                ['sich freuen', 'to be happy/pleased'],
+                ['sich ärgern', 'to be annoyed'],
+            ]
+        }, {
+            id: 'personality',
+            label: '❤️ Personality',
+            words: [
+                ['freundlich', 'friendly'],
+                ['unfreundlich', 'unfriendly'],
+                ['nett', 'nice'],
+                ['gemein', 'mean'],
+                ['hilfsbereit', 'helpful'],
+                ['egoistisch', 'selfish'],
+                ['großzügig', 'generous'],
+                ['geizig', 'stingy'],
+                ['pünktlich', 'punctual'],
+                ['unpünktlich', 'unpunctual'],
+                ['ordentlich', 'tidy'],
+                ['unordentlich', 'untidy'],
+                ['sauber', 'clean'],
+                ['schmutzig', 'dirty'],
+                ['klug', 'smart'],
+                ['dumm', 'stupid'],
+                ['lustig', 'funny'],
+                ['ernst', 'serious'],
+                ['interessant', 'interesting'],
+                ['langweilig', 'boring'],
+                ['schön', 'beautiful'],
+                ['jung', 'young'],
+                ['alt', 'old'],
+                ['groß', 'tall/big'],
+                ['klein', 'small'],
+                ['dick', 'fat'],
+                ['dünn', 'thin'],
+                ['stark', 'strong'],
+                ['schwach', 'weak'],
+            ]
+        }, {
+            id: 'shopping',
+            label: '🛍️ Shopping',
+            words: [
+                ['der Einkauf', 'shopping'],
+                ['der Supermarkt', 'supermarket'],
+                ['der Markt', 'market'],
+                ['das Geschäft', 'shop/store'],
+                ['das Kaufhaus', 'department store'],
+                ['die Boutique', 'boutique'],
+                ['der Preis', 'price'],
+                ['die Kasse', 'checkout'],
+                ['der Korb', 'basket'],
+                ['der Einkaufswagen', 'shopping cart'],
+                ['die Tüte', 'bag'],
+                ['die Tasche', 'bag'],
+                ['kaufen', 'to buy'],
+                ['einkaufen', 'to shop'],
+                ['bezahlen', 'to pay'],
+                ['kosten', 'to cost'],
+                ['brauchen', 'to need'],
+                ['suchen', 'to look for'],
+                ['finden', 'to find'],
+                ['nehmen', 'to take'],
+                ['Was kostet das?', 'How much does that cost?'],
+                ['Das ist teuer.', 'That\'s expensive.'],
+                ['Das ist günstig.', 'That\'s cheap.'],
+                ['Haben Sie ...?', 'Do you have ...?'],
+                ['Ich hätte gern ...', 'I would like ... (formal)'],
+                ['Ich möchte ...', 'I would like ...'],
+                ['Ein Kilo, bitte.', 'One kilo, please.'],
+                ['Eine Flasche, bitte.', 'One bottle, please.'],
+                ['Ich möchte bezahlen.', 'I\'d like to pay.'],
+            ]
+        }, {
+            id: 'public_places',
+            label: '🏦 Public Places',
+            words: [
+                ['die Bank', 'bank'],
+                ['das Rathaus', 'town hall'],
+                ['die Bibliothek', 'library'],
+                ['das Museum', 'museum'],
+                ['das Theater', 'theater'],
+                ['das Kino', 'cinema'],
+                ['die Kirche', 'church'],
+                ['die Post', 'post office'],
+                ['das Postamt', 'post office'],
+                ['der Briefkasten', 'mailbox'],
+                ['die Apotheke', 'pharmacy'],
+                ['die Drogerie', 'drugstore'],
+                ['die Bäckerei', 'bakery'],
+                ['die Metzgerei', 'butcher shop'],
+                ['das Café', 'café'],
+                ['das Restaurant', 'restaurant'],
+            ]
+        }, {
+            id: 'communication',
+            label: '📞 Communication',
+            words: [
+                ['telefonieren', 'to phone'],
+                ['anrufen', 'to call'],
+                ['mailen', 'to email'],
+                ['chatten', 'to chat'],
+                ['schreiben', 'to write'],
+                ['lesen', 'to read'],
+                ['antworten', 'to answer'],
+                ['fragen', 'to ask'],
+                ['sagen', 'to say'],
+                ['sprechen', 'to speak'],
+                ['sich unterhalten', 'to talk to each other'],
+                ['das Handy', 'mobile phone'],
+                ['die E-Mail', 'email'],
+                ['der Brief', 'letter'],
+                ['die Nachricht', 'message'],
+                ['der Anruf', 'phone call'],
+                ['der Anrufbeantworter', 'answering machine'],
+            ]
+        }, {
+            id: 'money',
+            label: '💰 Money',
+            words: [
+                ['das Geld', 'money'],
+                ['der Euro', 'euro'],
+                ['der Cent', 'cent'],
+                ['die Banknote', 'banknote'],
+                ['die Münze', 'coin'],
+                ['die Kreditkarte', 'credit card'],
+                ['die EC-Karte', 'debit card'],
+                ['das Bargeld', 'cash'],
+                ['das Portmonee', 'wallet/purse'],
+                ['der Geldschein', 'bill'],
+                ['das Wechselgeld', 'change'],
+                ['das Trinkgeld', 'tip'],
+                ['die Rechnung', 'bill'],
+                ['die Quittung', 'receipt'],
+                ['das Konto', 'account'],
+                ['die Bank', 'bank'],
+                ['das Sparbuch', 'savings book'],
+                ['bezahlen', 'to pay'],
+                ['kosten', 'to cost'],
+                ['sparen', 'to save'],
+                ['verdienen', 'to earn'],
+                ['ausgeben', 'to spend'],
+                ['leihen', 'to lend/borrow'],
+                ['wechseln', 'to change (money)'],
+            ]
+        }, {
+            id: 'expressions',
+            label: '🗣️ Common Expressions',
+            words: [
+                ['Danke!', 'Thanks!'],
+                ['Vielen Dank!', 'Many thanks!'],
+                ['Danke schön!', 'Thank you very much!'],
+                ['Bitte!', 'Please / You\'re welcome!'],
+                ['Bitte schön!', 'Here you go / You\'re welcome!'],
+                ['Entschuldigung!', 'Excuse me / Sorry!'],
+                ['Es tut mir leid.', 'I\'m sorry.'],
+                ['Kein Problem.', 'No problem.'],
+                ['Gern geschehen!', 'My pleasure!'],
+                ['Alles klar.', 'All right.'],
+                ['Keine Ahnung.', 'No idea.'],
+                ['Ich weiß nicht.', 'I don\'t know.'],
+                ['Das ist in Ordnung.', 'That\'s okay.'],
+                ['Na ja.', 'Well...'],
+                ['Ach so!', 'Oh, I see!'],
+                ['Echt?', 'Really?'],
+                ['Okay.', 'Okay.'],
+                ['Wie geht es Ihnen?', 'How are you? (formal)'],
+                ['Wie geht es dir?', 'How are you? (informal)'],
+                ['Danke, gut.', 'Thanks, fine.'],
+                ['Es geht.', 'It\'s okay.'],
+                ['Nicht so gut.', 'Not so good.'],
+                ['Super!', 'Great!'],
+                ['So lala.', 'So-so.'],
+                ['Können Sie das wiederholen?', 'Can you repeat that?'],
+                ['Wie schreibt man das?', 'How do you spell that?'],
+            ]
+        }];
+
+        // ----- Grammar Data -----
+        // Source-backed vocabulary presentation data: emoji + example sentence.
+        const VOCAB_PRESENTATION = {"Hallo": {"emoji": "👋 ", "sentence": "Hallo, ich heiße Anna."}, "Guten Morgen": {"emoji": "☀️ ", "sentence": "Guten Morgen, wie geht es Ihnen?"}, "Guten Tag": {"emoji": "👋 ", "sentence": "Guten Tag, ich bin neu hier."}, "Guten Abend": {"emoji": "🌙 ", "sentence": "Guten Abend, schön Sie zu sehen."}, "Gute Nacht": {"emoji": "😴 ", "sentence": "Gute Nacht, schlafen Sie gut."}, "Tschüss": {"emoji": "👋 ", "sentence": "Tschüss, bis morgen!"}, "Auf Wiedersehen": {"emoji": "👋 ", "sentence": "Auf Wiedersehen, bis bald."}, "Bis bald": {"emoji": "👋 ", "sentence": "Bis bald, wir sehen uns."}, "Bis später": {"emoji": "👋 ", "sentence": "Bis später, ich gehe jetzt."}, "Bis morgen": {"emoji": "👋 ", "sentence": "Bis morgen, schlaf gut!"}, "ich": {"emoji": "👤 ", "sentence": "Ich heiße Maria."}, "du": {"emoji": "👤 ", "sentence": "Du bist mein Freund."}, "Sie": {"emoji": "👤 ", "sentence": "Sie sind Herr Müller, oder?"}, "er": {"emoji": "👤 ", "sentence": "Er ist mein Bruder."}, "sie": {"emoji": "👤 ", "sentence": "Sie sind Herr Müller, oder?"}, "wir": {"emoji": "👤 ", "sentence": "Wir sind Studenten."}, "ihr": {"emoji": "👤 ", "sentence": "Ihr seid sehr nett."}, "heißen": {"emoji": "", "sentence": "Ich heiße Thomas."}, "wie": {"emoji": "", "sentence": "Wie heißen Sie?"}, "Name, der": {"emoji": "", "sentence": "Mein Name ist Meyer."}, "Vorname, der": {"emoji": "", "sentence": "Mein Vorname ist Peter."}, "Nachname, der": {"emoji": "", "sentence": "Mein Nachname ist Schmidt."}, "wer": {"emoji": "❓ ", "sentence": "Wer ist das?"}, "was": {"emoji": "❓ ", "sentence": "Was ist das?"}, "wo": {"emoji": "❓ ", "sentence": "Wo wohnst du?"}, "woher": {"emoji": "❓ ", "sentence": "Woher kommen Sie?"}, "wie alt": {"emoji": "❓ ", "sentence": "Wie alt bist du?"}, "wohin": {"emoji": "❓ ", "sentence": "Wohin gehen Sie?"}, "das Geburtsdatum": {"emoji": "📝 ", "sentence": "Mein Geburtsdatum ist der 1. Januar."}, "das Alter": {"emoji": "📝 ", "sentence": "Das Alter ist 30 Jahre."}, "die Adresse": {"emoji": "📝 ", "sentence": "Meine Adresse ist Hauptstraße 10."}, "der Wohnort": {"emoji": "📝 ", "sentence": "Mein Wohnort ist Berlin."}, "die Stadt": {"emoji": "📝 ", "sentence": "Berlin ist eine große Stadt."}, "das Land": {"emoji": "📝 ", "sentence": "Deutschland ist mein Land."}, "die Nationalität": {"emoji": "📝 ", "sentence": "Meine Nationalität ist deutsch."}, "die Muttersprache": {"emoji": "📝 ", "sentence": "Meine Muttersprache ist Deutsch."}, "die Straße": {"emoji": "🏠 ", "sentence": "Ich wohne in der Straße Bahnhof."}, "die Hausnummer": {"emoji": "🏠 ", "sentence": "Meine Hausnummer ist 20."}, "die Postleitzahl": {"emoji": "🏠 ", "sentence": "Die Postleitzahl ist 10115."}, "der Ort": {"emoji": "🏠 ", "sentence": "Der Ort ist Berlin."}, "geboren": {"emoji": "", "sentence": "Ich bin in Berlin geboren."}, "der Geburtstag": {"emoji": "", "sentence": "Heute ist mein Geburtstag."}, "alt": {"emoji": "", "sentence": "Ich bin 30 Jahre alt."}, "jung": {"emoji": "", "sentence": "Er ist noch jung."}, "der Monat": {"emoji": "", "sentence": "Der Monat ist Januar."}, "das Jahr": {"emoji": "", "sentence": "Das Jahr ist 2024."}, "verheiratet": {"emoji": "", "sentence": "Ich bin verheiratet."}, "ledig": {"emoji": "", "sentence": "Ich bin ledig."}, "geschieden": {"emoji": "", "sentence": "Sie ist geschieden."}, "die Ehe": {"emoji": "", "sentence": "Die Ehe ist gut."}, "der Partner": {"emoji": "", "sentence": "Mein Partner heißt Max."}, "die Partnerin": {"emoji": "", "sentence": "Meine Partnerin heißt Anna."}, "die Familie": {"emoji": "", "sentence": "Meine Familie ist groß."}, "das Kind": {"emoji": "", "sentence": "Ich habe ein Kind."}, "der Vater": {"emoji": "👨 ", "sentence": "Mein Vater ist 60 Jahre alt."}, "die Mutter": {"emoji": "👩 ", "sentence": "Meine Mutter ist Ärztin."}, "der Sohn": {"emoji": "👨‍👦 ", "sentence": "Mein Sohn ist 5 Jahre alt."}, "die Tochter": {"emoji": "👩‍👧 ", "sentence": "Meine Tochter lernt Deutsch."}, "der Bruder": {"emoji": "👨 ", "sentence": "Mein Bruder heißt Max."}, "die Schwester": {"emoji": "👩 ", "sentence": "Meine Schwester ist 20."}, "das Baby": {"emoji": "👶 ", "sentence": "Das Baby ist süß."}, "der Großvater": {"emoji": "👴 ", "sentence": "Mein Großvater ist 80."}, "die Großmutter": {"emoji": "👵 ", "sentence": "Meine Großmutter wohnt in Berlin."}, "der Opa": {"emoji": "👴 ", "sentence": "Mein Opa hat einen Hund."}, "die Oma": {"emoji": "👵 ", "sentence": "Meine Oma kocht gut."}, "der Onkel": {"emoji": "👨‍👦 ", "sentence": "Mein Onkel kommt aus Hamburg."}, "die Tante": {"emoji": "👩‍👧 ", "sentence": "Meine Tante ist 45."}, "der Neffe": {"emoji": "👦 ", "sentence": "Mein Neffe ist 8."}, "die Nichte": {"emoji": "👧 ", "sentence": "Meine Nichte ist 6."}, "der Cousin": {"emoji": "👨 ", "sentence": "Mein Cousin wohnt in München."}, "die Cousine": {"emoji": "👩 ", "sentence": "Meine Cousine studiert Medizin."}, "der Mann": {"emoji": "💑 ", "sentence": "Mein Mann heißt Peter."}, "die Frau": {"emoji": "💑 ", "sentence": "Meine Frau heißt Anna."}, "der Freund": {"emoji": "💕 ", "sentence": "Das ist mein Freund."}, "die Freundin": {"emoji": "💕 ", "sentence": "Das ist meine Freundin."}, "das Haus": {"emoji": "🏠 ", "sentence": "Das Haus ist groß."}, "die Wohnung": {"emoji": "🏢 ", "sentence": "Meine Wohnung ist klein."}, "das Zimmer": {"emoji": "🏘️ ", "sentence": "Das Zimmer ist hell."}, "das Schlafzimmer": {"emoji": "🏠 ", "sentence": "Das Schlafzimmer ist ruhig."}, "das Badezimmer": {"emoji": "🛁 ", "sentence": "Das Badezimmer ist neu."}, "die Küche": {"emoji": "🍳 ", "sentence": "Die Küche ist modern."}, "das Wohnzimmer": {"emoji": "🛋️ ", "sentence": "Das Wohnzimmer ist gemütlich."}, "der Flur": {"emoji": "🚪 ", "sentence": "Der Flur ist lang."}, "der Eingang": {"emoji": "🚪 ", "sentence": "Der Eingang ist links."}, "die Tür": {"emoji": "🚪 ", "sentence": "Die Tür ist geschlossen."}, "das Fenster": {"emoji": "🪟 ", "sentence": "Das Fenster ist offen."}, "das Dach": {"emoji": "🏠 ", "sentence": "Das Dach ist rot."}, "der Garten": {"emoji": "🏠 ", "sentence": "Der Garten ist schön."}, "der Balkon": {"emoji": "🏠 ", "sentence": "Der Balkon ist groß."}, "der Keller": {"emoji": "🏠 ", "sentence": "Der Keller ist dunkel."}, "der Dachboden": {"emoji": "🏠 ", "sentence": "Der Dachboden ist alt."}, "das Esszimmer": {"emoji": "🍽️ ", "sentence": "Das Esszimmer hat einen Tisch."}, "das Arbeitszimmer": {"emoji": "📚 ", "sentence": "Er arbeitet im Arbeitszimmer."}, "die Toilette": {"emoji": "🚽 ", "sentence": "Die Toilette ist im Flur."}, "das Bett": {"emoji": "🛏️ ", "sentence": "Das Bett ist gemütlich."}, "die Matratze": {"emoji": "🛏️ ", "sentence": "Die Matratze ist weich."}, "das Kopfkissen": {"emoji": "🛏️ ", "sentence": "Das Kopfkissen ist groß."}, "die Decke": {"emoji": "🛏️ ", "sentence": "Die Decke ist warm."}, "der Kleiderschrank": {"emoji": "🚪 ", "sentence": "Der Kleiderschrank ist voll."}, "der Stuhl": {"emoji": "🪑 ", "sentence": "Der Stuhl steht am Tisch."}, "der Sessel": {"emoji": "🪑 ", "sentence": "Der Sessel ist bequem."}, "der Spiegel": {"emoji": "🪞 ", "sentence": "Der Spiegel hängt an der Wand."}, "die Lampe": {"emoji": "💡 ", "sentence": "Die Lampe ist an."}, "das Licht": {"emoji": "🕯️ ", "sentence": "Das Licht ist hell."}, "der Wecker": {"emoji": "🕰️ ", "sentence": "Der Wecker klingelt um 7 Uhr."}, "das Handy": {"emoji": "📱 ", "sentence": "Das Handy ist auf dem Tisch."}, "das Buch": {"emoji": "📚 ", "sentence": "Das Buch liegt auf dem Bett."}, "der Vorhang": {"emoji": "🪟 ", "sentence": "Der Vorhang ist zu."}, "schlafen": {"emoji": "", "sentence": "Ich schlafe im Bett."}, "aufstehen": {"emoji": "", "sentence": "Ich stehe um 7 Uhr auf."}, "sich anziehen": {"emoji": "", "sentence": "Ich ziehe mich an."}, "ausziehen": {"emoji": "", "sentence": "Ich ziehe die Jacke aus."}, "liegen": {"emoji": "", "sentence": "Das Buch liegt auf dem Tisch."}, "stehen": {"emoji": "", "sentence": "Der Stuhl steht am Fenster."}, "hängen": {"emoji": "", "sentence": "Der Spiegel hängt an der Wand."}, "die Badewanne": {"emoji": "🛁 ", "sentence": "Die Badewanne ist groß."}, "die Dusche": {"emoji": "🚿 ", "sentence": "Ich dusche in der Dusche."}, "die Zahnbürste": {"emoji": "🪥 ", "sentence": "Die Zahnbürste ist neu."}, "die Zahnpasta": {"emoji": "🪥 ", "sentence": "Die Zahnpasta ist fast leer."}, "das Shampoo": {"emoji": "🧴 ", "sentence": "Das Shampoo riecht gut."}, "die Seife": {"emoji": "🧴 ", "sentence": "Die Seife ist weiß."}, "das Toilettenpapier": {"emoji": "🧻 ", "sentence": "Das Toilettenpapier ist alle."}, "das Waschbecken": {"emoji": "🪥 ", "sentence": "Das Waschbecken ist weiß."}, "der Duschvorhang": {"emoji": "🚿 ", "sentence": "Der Duschvorhang ist blau."}, "der Waschkorb": {"emoji": "🧺 ", "sentence": "Der Waschkorb ist voll."}, "der Rasierer": {"emoji": "🪥 ", "sentence": "Der Rasierer ist neu."}, "das Deodorant": {"emoji": "🧴 ", "sentence": "Das Deodorant ist fast leer."}, "die Creme": {"emoji": "🧴 ", "sentence": "Die Creme ist gut für die Haut."}, "duschen": {"emoji": "", "sentence": "Ich dusche jeden Morgen."}, "baden": {"emoji": "", "sentence": "Das Kind badet in der Badewanne."}, "sich waschen": {"emoji": "", "sentence": "Ich wasche mich mit Seife."}, "die Zähne putzen": {"emoji": "", "sentence": "Ich putze meine Zähne."}, "sich rasieren": {"emoji": "", "sentence": "Er rasiert sich jeden Tag."}, "sich abtrocknen": {"emoji": "", "sentence": "Ich trockne mich ab."}, "sich kämmen": {"emoji": "", "sentence": "Ich kämme meine Haare."}, "der Kühlschrank": {"emoji": "🧊 ", "sentence": "Der Kühlschrank ist voll."}, "das Gefrierfach": {"emoji": "🥶 ", "sentence": "Das Gefrierfach ist unten."}, "der Geschirrspüler": {"emoji": "🍽️ ", "sentence": "Der Geschirrspüler ist neu."}, "der Herd": {"emoji": "🍳 ", "sentence": "Der Herd ist heiß."}, "der Backofen": {"emoji": "🔥 ", "sentence": "Der Backofen ist an."}, "die Mikrowelle": {"emoji": "🍚 ", "sentence": "Die Mikrowelle ist schnell."}, "die Kaffeemaschine": {"emoji": "☕ ", "sentence": "Die Kaffeemaschine ist kaputt."}, "der Toaster": {"emoji": "🍞 ", "sentence": "Der Toaster ist neu."}, "der Tisch": {"emoji": "🍽️ ", "sentence": "Der Tisch ist gedeckt."}, "der Teller": {"emoji": "🍽️ ", "sentence": "Der Teller ist aus Porzellan."}, "der Löffel": {"emoji": "🥄 ", "sentence": "Der Löffel liegt auf dem Tisch."}, "das Messer": {"emoji": "🔪 ", "sentence": "Das Messer ist scharf."}, "die Gabel": {"emoji": "🍴 ", "sentence": "Die Gabel ist sauber."}, "das Glas": {"emoji": "🥛 ", "sentence": "Das Glas ist voll."}, "die Tasse": {"emoji": "🍶 ", "sentence": "Die Tasse ist warm."}, "der Becher": {"emoji": "🍶 ", "sentence": "Der Becher ist rot."}, "die Schüssel": {"emoji": "🍽️ ", "sentence": "Die Schüssel ist groß."}, "die Pfanne": {"emoji": "🍳 ", "sentence": "Die Pfanne ist heiß."}, "der Topf": {"emoji": "🍲 ", "sentence": "Der Topf ist auf dem Herd."}, "das Öl": {"emoji": "🧴 ", "sentence": "Das Öl ist für die Pfanne."}, "das Salz": {"emoji": "🧂 ", "sentence": "Das Salz ist auf dem Tisch."}, "der Pfeffer": {"emoji": "🌶️ ", "sentence": "Der Pfeffer ist scharf."}, "die Serviette": {"emoji": "🍽️ ", "sentence": "Die Serviette ist aus Papier."}, "kochen": {"emoji": "", "sentence": "Ich koche das Essen."}, "braten": {"emoji": "", "sentence": "Ich brate das Fleisch in der Pfanne."}, "backen": {"emoji": "", "sentence": "Ich backe einen Kuchen."}, "schneiden": {"emoji": "", "sentence": "Ich schneide das Gemüse."}, "waschen": {"emoji": "", "sentence": "Ich wasche das Geschirr."}, "spülen": {"emoji": "", "sentence": "Ich spüle die Teller."}, "abtrocknen": {"emoji": "", "sentence": "Ich trockne die Gläser ab."}, "aufräumen": {"emoji": "", "sentence": "Ich räume die Küche auf."}, "decken": {"emoji": "", "sentence": "Ich decke den Tisch."}, "abdecken": {"emoji": "", "sentence": "Ich decke den Tisch ab."}, "die Kartoffel": {"emoji": "🥔 ", "sentence": "Ich esse eine Kartoffel."}, "die Karotte / die Möhre": {"emoji": "🥕 ", "sentence": "Die Karotten sind orange."}, "die Tomate": {"emoji": "🍅 ", "sentence": "Die Tomate ist rot."}, "die Gurke": {"emoji": "🥒 ", "sentence": "Die Gurke ist grün."}, "der Salat": {"emoji": "🥬 ", "sentence": "Der Salat ist frisch."}, "die Zwiebel": {"emoji": "🧅 ", "sentence": "Die Zwiebel riecht stark."}, "der Knoblauch": {"emoji": "🧄 ", "sentence": "Der Knoblauch ist gesund."}, "der Paprika": {"emoji": "🌶️ ", "sentence": "Der Paprika ist rot."}, "der Brokkoli": {"emoji": "🥦 ", "sentence": "Der Brokkoli ist grün."}, "der Mais": {"emoji": "🌽 ", "sentence": "Der Mais ist gelb."}, "der Pilz": {"emoji": "🍄 ", "sentence": "Der Pilz ist braun."}, "der Blumenkohl": {"emoji": "🥗 ", "sentence": "Der Blumenkohl ist weiß."}, "die Erbse": {"emoji": "🌱 ", "sentence": "Die Erbsen sind grün."}, "der Spinat": {"emoji": "🥗 ", "sentence": "Der Spinat ist gesund."}, "der Apfel": {"emoji": "🍎 ", "sentence": "Der Apfel schmeckt gut."}, "die Banane": {"emoji": "🍌 ", "sentence": "Die Banane ist gelb."}, "die Orange": {"emoji": "🍊 ", "sentence": "Die Orange ist süß."}, "die Zitrone": {"emoji": "🍋 ", "sentence": "Die Zitrone ist sauer."}, "die Traube": {"emoji": "🍇 ", "sentence": "Die Trauben sind grün."}, "die Erdbeere": {"emoji": "🍓 ", "sentence": "Die Erdbeeren sind rot."}, "der Pfirsich": {"emoji": "🍑 ", "sentence": "Der Pfirsich ist weich."}, "die Birne": {"emoji": "🍐 ", "sentence": "Die Birne ist süß."}, "die Kirsche": {"emoji": "🍒 ", "sentence": "Die Kirschen sind rot."}, "die Wassermelone": {"emoji": "🍉 ", "sentence": "Die Wassermelone ist groß."}, "die Kiwi": {"emoji": "🥝 ", "sentence": "Die Kiwi ist grün."}, "die Ananas": {"emoji": "🍍 ", "sentence": "Die Ananas ist süß."}, "die Mango": {"emoji": "🥭 ", "sentence": "Die Mango ist gelb."}, "die Milch": {"emoji": "🥛 ", "sentence": "Ich trinke Milch."}, "der Käse": {"emoji": "🧀 ", "sentence": "Der Käse ist gelb."}, "die Butter": {"emoji": "🧈 ", "sentence": "Die Butter ist auf dem Brot."}, "das Ei": {"emoji": "🥚 ", "sentence": "Das Ei ist hart."}, "der Joghurt": {"emoji": "🥛 ", "sentence": "Der Joghurt ist lecker."}, "die Sahne": {"emoji": "🥛 ", "sentence": "Die Sahne ist süß."}, "das Fleisch": {"emoji": "🥩 ", "sentence": "Ich esse Fleisch."}, "das Rindfleisch": {"emoji": "🐄 ", "sentence": "Das Rindfleisch ist teuer."}, "das Schweinefleisch": {"emoji": "🐷 ", "sentence": "Das Schweinefleisch ist gut."}, "das Hühnchen": {"emoji": "🐔 ", "sentence": "Das Hühnchen ist lecker."}, "der Fisch": {"emoji": "🐟 ", "sentence": "Der Fisch ist frisch."}, "der Lachs": {"emoji": "🐟 ", "sentence": "Der Lachs ist rosa."}, "das Brot": {"emoji": "🍞 ", "sentence": "Das Brot ist frisch."}, "das Brötchen": {"emoji": "🥖 ", "sentence": "Das Brötchen ist warm."}, "die Brezel": {"emoji": "🥨 ", "sentence": "Die Brezel ist salzig."}, "der Kuchen": {"emoji": "🍰 ", "sentence": "Der Kuchen ist süß."}, "die Schokolade": {"emoji": "🍫 ", "sentence": "Ich liebe Schokolade."}, "das Eis": {"emoji": "🍦 ", "sentence": "Ich esse Eis im Sommer."}, "der Keks": {"emoji": "🍪 ", "sentence": "Der Keks ist knusprig."}, "der Honig": {"emoji": "🍯 ", "sentence": "Der Honig ist süß."}, "das Wasser": {"emoji": "💧 ", "sentence": "Ich trinke Wasser."}, "das Mineralwasser": {"emoji": "💧 ", "sentence": "Das Mineralwasser ist kalt."}, "der Saft": {"emoji": "🥤 ", "sentence": "Ich trinke Saft."}, "der Orangensaft": {"emoji": "🍊 ", "sentence": "Der Orangensaft ist frisch."}, "der Apfelsaft": {"emoji": "🍎 ", "sentence": "Der Apfelsaft ist süß."}, "der Kaffee": {"emoji": "☕ ", "sentence": "Ich trinke Kaffee am Morgen."}, "der Tee": {"emoji": "🍵 ", "sentence": "Der Tee ist heiß."}, "die Limonade": {"emoji": "🥤 ", "sentence": "Die Limonade ist süß."}, "das Bier": {"emoji": "🍺 ", "sentence": "Das Bier ist kalt."}, "der Wein": {"emoji": "🍷 ", "sentence": "Der Wein ist rot."}, "das Frühstück": {"emoji": "🍳 ", "sentence": "Ich esse Frühstück."}, "das Mittagessen": {"emoji": "🥪 ", "sentence": "Das Mittagessen ist um 12 Uhr."}, "das Abendessen": {"emoji": "🍽️ ", "sentence": "Das Abendessen ist um 19 Uhr."}, "das Gericht": {"emoji": "🍽️ ", "sentence": "Das Gericht ist italienisch."}, "lecker": {"emoji": "😋 ", "sentence": "Das Essen ist lecker."}, "süß": {"emoji": "🍬 ", "sentence": "Der Kuchen ist süß."}, "salzig": {"emoji": "🧂 ", "sentence": "Die Brezel ist salzig."}, "sauer": {"emoji": "🍋 ", "sentence": "Die Zitrone ist sauer."}, "scharf": {"emoji": "🌶️ ", "sentence": "Der Chili ist scharf."}, "kalt": {"emoji": "🥶 ", "sentence": "Das Eis ist kalt."}, "heiß": {"emoji": "🔥 ", "sentence": "Die Suppe ist heiß."}, "frisch": {"emoji": "😋 ", "sentence": "Das Brot ist frisch."}, "gesund": {"emoji": "😋 ", "sentence": "Das Obst ist gesund."}, "essen": {"emoji": "", "sentence": "Ich esse ein Brot."}, "trinken": {"emoji": "", "sentence": "Ich trinke Wasser."}, "schmecken": {"emoji": "", "sentence": "Das Essen schmeckt gut."}, "mögen": {"emoji": "", "sentence": "Ich mag Schokolade."}, "lieben": {"emoji": "", "sentence": "Ich liebe Pizza."}, "hassen": {"emoji": "", "sentence": "Ich hasse Zwiebeln."}, "brauchen": {"emoji": "", "sentence": "Ich brauche Salz."}, "kaufen": {"emoji": "", "sentence": "Ich kaufe Brot und Milch."}, "bezahlen": {"emoji": "", "sentence": "Ich bezahle 10 Euro."}, "die Kleidung": {"emoji": "👗 ", "sentence": "Meine Kleidung ist neu."}, "das Hemd": {"emoji": "👕 ", "sentence": "Das Hemd ist weiß."}, "die Bluse": {"emoji": "👚 ", "sentence": "Die Bluse ist rot."}, "das T-Shirt": {"emoji": "👕 ", "sentence": "Das T-Shirt ist grün."}, "die Krawatte": {"emoji": "👔 ", "sentence": "Die Krawatte ist blau."}, "die Hose": {"emoji": "👖 ", "sentence": "Die Hose ist schwarz."}, "das Kleid": {"emoji": "👗 ", "sentence": "Das Kleid ist schön."}, "der Rock": {"emoji": "👗 ", "sentence": "Der Rock ist kurz."}, "die Jacke": {"emoji": "🧥 ", "sentence": "Die Jacke ist warm."}, "der Mantel": {"emoji": "🧥 ", "sentence": "Der Mantel ist lang."}, "der Pullover": {"emoji": "🧶 ", "sentence": "Der Pullover ist kuschelig."}, "die Socke": {"emoji": "🧦 ", "sentence": "Die Socken sind weiß."}, "der Schuh": {"emoji": "👟 ", "sentence": "Der Schuh ist bequem."}, "die Schuhe": {"emoji": "👟 ", "sentence": "Meine Schuhe sind neu."}, "die Turnschuhe": {"emoji": "👟 ", "sentence": "Die Turnschuhe sind sportlich."}, "der Stiefel": {"emoji": "👠 ", "sentence": "Der Stiefel ist braun."}, "der Hut": {"emoji": "👒 ", "sentence": "Der Hut ist groß."}, "die Mütze": {"emoji": "🧢 ", "sentence": "Die Mütze ist warm."}, "der Schal": {"emoji": "🧣 ", "sentence": "Der Schal ist rot."}, "der Handschuh": {"emoji": "🧤 ", "sentence": "Der Handschuh ist aus Leder."}, "der Badeanzug": {"emoji": "👙 ", "sentence": "Der Badeanzug ist blau."}, "die Badehose": {"emoji": "🩳 ", "sentence": "Die Badehose ist grün."}, "der Bikini": {"emoji": "🩱 ", "sentence": "Der Bikini ist klein."}, "der Bademantel": {"emoji": "👘 ", "sentence": "Der Bademantel ist weich."}, "die Sandale": {"emoji": "🩴 ", "sentence": "Die Sandalen sind bequem."}, "anziehen": {"emoji": "", "sentence": "Ich ziehe die Jacke an."}, "tragen": {"emoji": "", "sentence": "Ich trage ein T-Shirt."}, "anprobieren": {"emoji": "", "sentence": "Ich probiere das Kleid an."}, "passen": {"emoji": "", "sentence": "Die Schuhe passen gut."}, "bügeln": {"emoji": "", "sentence": "Ich bügle das Hemd."}, "trocknen": {"emoji": "", "sentence": "Ich trockne die Wäsche."}, "neu": {"emoji": "", "sentence": "Das Kleid ist neu."}, "schön": {"emoji": "", "sentence": "Der Schal ist schön."}, "teuer": {"emoji": "", "sentence": "Die Jacke ist teuer."}, "billig": {"emoji": "", "sentence": "Die Socken sind billig."}, "groß": {"emoji": "", "sentence": "Der Pullover ist zu groß."}, "klein": {"emoji": "", "sentence": "Die Schuhe sind zu klein."}, "lang": {"emoji": "", "sentence": "Der Mantel ist lang."}, "kurz": {"emoji": "", "sentence": "Der Rock ist kurz."}, "bequem": {"emoji": "", "sentence": "Die Schuhe sind bequem."}, "warm": {"emoji": "", "sentence": "Die Mütze ist warm."}, "schwarz": {"emoji": "", "sentence": "Ich trage eine schwarze Hose."}, "weiß": {"emoji": "", "sentence": "Das Hemd ist weiß."}, "rot": {"emoji": "", "sentence": "Die Bluse ist rot."}, "blau": {"emoji": "", "sentence": "Die Jeans ist blau."}, "grün": {"emoji": "", "sentence": "Das T-Shirt ist grün."}, "gelb": {"emoji": "", "sentence": "Der Pullover ist gelb."}, "braun": {"emoji": "", "sentence": "Der Gürtel ist braun."}, "grau": {"emoji": "", "sentence": "Der Anzug ist grau."}, "orange": {"emoji": "🟧 ", "sentence": "Die Orange ist orange."}, "lila": {"emoji": "🟪 ", "sentence": "Die Blume ist lila."}, "violett": {"emoji": "🟣 ", "sentence": "Das Kleid ist violett."}, "rosa": {"emoji": "🩷 ", "sentence": "Der Pullover ist rosa."}, "beige": {"emoji": "🟤 ", "sentence": "Die Jacke ist beige."}, "golden": {"emoji": "🟡 ", "sentence": "Der Schmuck ist golden."}, "silber": {"emoji": "⚪ ", "sentence": "Die Kette ist silber."}, "die Schule": {"emoji": "🏫 ", "sentence": "Ich gehe in die Schule."}, "die Grundschule": {"emoji": "🏫 ", "sentence": "Die Grundschule ist nebenan."}, "die Hauptschule": {"emoji": "🏫 ", "sentence": "Die Hauptschule ist groß."}, "die Realschule": {"emoji": "🏫 ", "sentence": "Die Realschule ist hier."}, "das Gymnasium": {"emoji": "🏫 ", "sentence": "Das Gymnasium ist bekannt."}, "die Universität": {"emoji": "🏫 ", "sentence": "Die Universität ist alt."}, "die Hochschule": {"emoji": "🏫 ", "sentence": "Die Hochschule ist modern."}, "der Kindergarten": {"emoji": "🏫 ", "sentence": "Der Kindergarten ist bunt."}, "der Lehrer": {"emoji": "👨‍🏫 ", "sentence": "Der Lehrer ist nett."}, "die Lehrerin": {"emoji": "👩‍🏫 ", "sentence": "Die Lehrerin ist streng."}, "der Schüler": {"emoji": "👨‍🎓 ", "sentence": "Der Schüler lernt Deutsch."}, "die Schülerin": {"emoji": "👩‍🎓 ", "sentence": "Die Schülerin ist fleißig."}, "der Student": {"emoji": "👨‍🎓 ", "sentence": "Der Student studiert Medizin."}, "die Studentin": {"emoji": "👩‍🎓 ", "sentence": "Die Studentin ist 22."}, "der Kurs": {"emoji": "👨‍🎓 ", "sentence": "Der Kurs ist interessant."}, "der Deutschkurs": {"emoji": "👨‍🎓 ", "sentence": "Der Deutschkurs ist gut."}, "der Sprachkurs": {"emoji": "👨‍🎓 ", "sentence": "Der Sprachkurs ist teuer."}, "Deutsch": {"emoji": "📖 ", "sentence": "Ich lerne Deutsch."}, "Englisch": {"emoji": "📖 ", "sentence": "Ich lerne Englisch."}, "Französisch": {"emoji": "📖 ", "sentence": "Ich lerne Französisch."}, "Spanisch": {"emoji": "📖 ", "sentence": "Ich lerne Spanisch."}, "Mathematik / Mathe": {"emoji": "📖 ", "sentence": "Mathe ist schwer."}, "Biologie": {"emoji": "🔬 ", "sentence": "Biologie ist interessant."}, "Chemie": {"emoji": "🔬 ", "sentence": "Chemie ist nicht einfach."}, "Physik": {"emoji": "⚛️ ", "sentence": "Physik ist spannend."}, "Geschichte": {"emoji": "📖 ", "sentence": "Geschichte ist mein Lieblingsfach."}, "Erdkunde": {"emoji": "🌍 ", "sentence": "Erdkunde ist nützlich."}, "Kunst": {"emoji": "🎨 ", "sentence": "Kunst macht Spaß."}, "Musik": {"emoji": "🎵 ", "sentence": "Ich mag Musik."}, "Sport": {"emoji": "🏃 ", "sentence": "Sport ist gesund."}, "lernen": {"emoji": "", "sentence": "Ich lerne Deutsch."}, "studieren": {"emoji": "", "sentence": "Ich studiere Medizin."}, "lesen": {"emoji": "", "sentence": "Ich lese ein Buch."}, "schreiben": {"emoji": "", "sentence": "Ich schreibe einen Text."}, "rechnen": {"emoji": "", "sentence": "Ich rechne in Mathe."}, "hören": {"emoji": "", "sentence": "Ich höre dem Lehrer zu."}, "sprechen": {"emoji": "", "sentence": "Ich spreche Deutsch."}, "antworten": {"emoji": "", "sentence": "Ich antworte auf die Frage."}, "fragen": {"emoji": "", "sentence": "Ich frage den Lehrer."}, "verstehen": {"emoji": "", "sentence": "Ich verstehe die Lektion."}, "wiederholen": {"emoji": "", "sentence": "Ich wiederhole die Vokabeln."}, "üben": {"emoji": "", "sentence": "Ich übe Deutsch."}, "aufpassen": {"emoji": "", "sentence": "Ich passe im Unterricht auf."}, "das Lehrbuch": {"emoji": "📚 ", "sentence": "Das Lehrbuch ist neu."}, "das Wörterbuch": {"emoji": "📚 ", "sentence": "Das Wörterbuch ist nützlich."}, "die Vokabel": {"emoji": "📚 ", "sentence": "Ich lerne neue Vokabeln."}, "die Grammatik": {"emoji": "📚 ", "sentence": "Die Grammatik ist schwer."}, "die Aufgabe": {"emoji": "📝 ", "sentence": "Die Aufgabe ist schwer."}, "die Hausaufgabe": {"emoji": "📝 ", "sentence": "Ich habe viele Hausaufgaben."}, "der Test": {"emoji": "📝 ", "sentence": "Wir schreiben einen Test."}, "die Prüfung": {"emoji": "📝 ", "sentence": "Die Prüfung ist morgen."}, "die Note": {"emoji": "📝 ", "sentence": "Ich habe eine gute Note."}, "die Lektion": {"emoji": "📝 ", "sentence": "Die Lektion ist interessant."}, "der Unterricht": {"emoji": "📝 ", "sentence": "Der Unterricht beginnt um 9 Uhr."}, "die Pause": {"emoji": "📝 ", "sentence": "Wir haben Pause."}, "die Klasse": {"emoji": "🏫 ", "sentence": "Die Klasse ist groß."}, "der Stift": {"emoji": "✏️ ", "sentence": "Der Stift ist blau."}, "der Kugelschreiber": {"emoji": "✏️ ", "sentence": "Der Kugelschreiber ist neu."}, "der Bleistift": {"emoji": "✏️ ", "sentence": "Der Bleistift ist spitz."}, "das Papier": {"emoji": "📝 ", "sentence": "Das Papier ist weiß."}, "das Heft": {"emoji": "📓 ", "sentence": "Das Heft ist voll."}, "die Tafel": {"emoji": "📝 ", "sentence": "Die Tafel ist schwarz."}, "der Radiergummi": {"emoji": "✏️ ", "sentence": "Der Radiergummi ist klein."}, "der Spitzer": {"emoji": "✏️ ", "sentence": "Der Spitzer ist neu."}, "das Lineal": {"emoji": "📏 ", "sentence": "Das Lineal ist aus Kunststoff."}, "der Füller": {"emoji": "✏️ ", "sentence": "Der Füller ist teuer."}, "die Schere": {"emoji": "✂️ ", "sentence": "Die Schere ist scharf."}, "der Ordner": {"emoji": "📂 ", "sentence": "Der Ordner ist blau."}, "der Computer": {"emoji": "🖥️ ", "sentence": "Der Computer ist neu."}, "die Tastatur": {"emoji": "⌨️ ", "sentence": "Die Tastatur ist schwarz."}, "die Maus": {"emoji": "🖱️ ", "sentence": "Die Maus ist kabellos."}, "der Drucker": {"emoji": "🖨️ ", "sentence": "Der Drucker ist kaputt."}, "das Auto": {"emoji": "🚗 ", "sentence": "Das Auto ist rot."}, "der PKW": {"emoji": "🚗 ", "sentence": "Der PKW ist neu."}, "der Bus": {"emoji": "🚌 ", "sentence": "Der Bus kommt um 8 Uhr."}, "die Straßenbahn": {"emoji": "🚊 ", "sentence": "Die Straßenbahn ist lang."}, "der Zug": {"emoji": "🚆 ", "sentence": "Der Zug fährt nach Berlin."}, "der ICE": {"emoji": "🚆 ", "sentence": "Der ICE ist schnell."}, "die U-Bahn": {"emoji": "🚇 ", "sentence": "Die U-Bahn ist unterirdisch."}, "die S-Bahn": {"emoji": "🚇 ", "sentence": "Die S-Bahn fährt in die Stadt."}, "das Fahrrad": {"emoji": "🚲 ", "sentence": "Das Fahrrad ist neu."}, "der Roller": {"emoji": "🛴 ", "sentence": "Der Roller ist schnell."}, "das Motorrad": {"emoji": "🛵 ", "sentence": "Das Motorrad ist laut."}, "das Flugzeug": {"emoji": "✈️ ", "sentence": "Das Flugzeug fliegt nach London."}, "das Schiff": {"emoji": "🚢 ", "sentence": "Das Schiff ist groß."}, "das Boot": {"emoji": "🚤 ", "sentence": "Das Boot ist klein."}, "das Taxi": {"emoji": "🚕 ", "sentence": "Ich nehme ein Taxi."}, "fahren": {"emoji": "", "sentence": "Ich fahre mit dem Auto."}, "gehen": {"emoji": "", "sentence": "Ich gehe zu Fuß."}, "laufen": {"emoji": "", "sentence": "Ich laufe zur Schule."}, "fliegen": {"emoji": "", "sentence": "Ich fliege nach Spanien."}, "schwimmen": {"emoji": "", "sentence": "Ich schwimme im Meer."}, "reisen": {"emoji": "", "sentence": "Ich reise gern."}, "ankommen": {"emoji": "", "sentence": "Ich komme um 10 Uhr an."}, "abfahren": {"emoji": "", "sentence": "Der Zug fährt um 8 Uhr ab."}, "umsteigen": {"emoji": "", "sentence": "Ich steige in Berlin um."}, "einsteigen": {"emoji": "", "sentence": "Ich steige in den Bus ein."}, "aussteigen": {"emoji": "", "sentence": "Ich steige an der Haltestelle aus."}, "warten": {"emoji": "", "sentence": "Ich warte auf den Bus."}, "halten": {"emoji": "", "sentence": "Der Bus hält an der Haltestelle."}, "die Haltestelle": {"emoji": "🚏 ", "sentence": "Die Haltestelle ist hier."}, "der Bahnhof": {"emoji": "🚉 ", "sentence": "Der Bahnhof ist groß."}, "der Hauptbahnhof": {"emoji": "🚉 ", "sentence": "Der Hauptbahnhof ist zentral."}, "der Flughafen": {"emoji": "🚉 ", "sentence": "Der Flughafen ist weit."}, "der Busbahnhof": {"emoji": "🚉 ", "sentence": "Der Busbahnhof ist klein."}, "der Hafen": {"emoji": "🚉 ", "sentence": "Der Hafen ist alt."}, "der Parkplatz": {"emoji": "🅿️ ", "sentence": "Der Parkplatz ist voll."}, "die Garage": {"emoji": "🏠 ", "sentence": "Die Garage ist groß."}, "das Ticket": {"emoji": "🎫 ", "sentence": "Ich kaufe ein Ticket."}, "die Fahrkarte": {"emoji": "🎫 ", "sentence": "Ich brauche eine Fahrkarte."}, "das Flugticket": {"emoji": "🎫 ", "sentence": "Das Flugticket ist teuer."}, "das Zugticket": {"emoji": "🎫 ", "sentence": "Das Zugticket kostet 50 Euro."}, "die Monatskarte": {"emoji": "🎫 ", "sentence": "Die Monatskarte ist praktisch."}, "die Tageskarte": {"emoji": "🎫 ", "sentence": "Die Tageskarte ist günstig."}, "das Dorf": {"emoji": "🏘️ ", "sentence": "Das Dorf ist klein."}, "das Zentrum": {"emoji": "🏙️ ", "sentence": "Das Zentrum ist belebt."}, "die Innenstadt": {"emoji": "🏙️ ", "sentence": "Die Innenstadt ist schön."}, "der Stadtteil": {"emoji": "🏙️ ", "sentence": "Der Stadtteil ist ruhig."}, "der Platz": {"emoji": "🏙️ ", "sentence": "Der Platz ist groß."}, "die Ecke": {"emoji": "🏙️ ", "sentence": "Die Ecke ist links."}, "die Ampel": {"emoji": "🏙️ ", "sentence": "Die Ampel ist rot."}, "die Kreuzung": {"emoji": "🏙️ ", "sentence": "Die Kreuzung ist gefährlich."}, "der Bürgersteig": {"emoji": "🏙️ ", "sentence": "Der Bürgersteig ist schmal."}, "die Fußgängerzone": {"emoji": "🏙️ ", "sentence": "Die Fußgängerzone ist groß."}, "der Park": {"emoji": "🏙️ ", "sentence": "Der Park ist schön."}, "die Bank": {"emoji": "🏦 ", "sentence": "Die Bank ist geschlossen."}, "das Krankenhaus": {"emoji": "🏥 ", "sentence": "Das Krankenhaus ist groß."}, "der Supermarkt": {"emoji": "🛒 ", "sentence": "Ich gehe zum Supermarkt."}, "das Geschäft": {"emoji": "🏪 ", "sentence": "Das Geschäft ist neu."}, "das Büro": {"emoji": "🏢 ", "sentence": "Das Büro ist modern."}, "die Firma": {"emoji": "🏢 ", "sentence": "Die Firma ist groß."}, "die Bibliothek": {"emoji": "🏛️ ", "sentence": "Die Bibliothek ist ruhig."}, "das Museum": {"emoji": "🏛️ ", "sentence": "Das Museum ist interessant."}, "das Theater": {"emoji": "🏛️ ", "sentence": "Das Theater ist alt."}, "das Kino": {"emoji": "🏛️ ", "sentence": "Das Kino ist modern."}, "das Konzert": {"emoji": "🏛️ ", "sentence": "Das Konzert ist toll."}, "die Kirche": {"emoji": "🏛️ ", "sentence": "Die Kirche ist alt."}, "das Rathaus": {"emoji": "🏛️ ", "sentence": "Das Rathaus ist groß."}, "die Post": {"emoji": "🏛️ ", "sentence": "Die Post ist gegenüber."}, "der Briefkasten": {"emoji": "🏛️ ", "sentence": "Der Briefkasten ist rot."}, "die Apotheke": {"emoji": "🏪 ", "sentence": "Die Apotheke hat geöffnet."}, "die Drogerie": {"emoji": "🏪 ", "sentence": "Die Drogerie ist günstig."}, "die Bäckerei": {"emoji": "🏪 ", "sentence": "Die Bäckerei riecht gut."}, "die Metzgerei": {"emoji": "🏪 ", "sentence": "Die Metzgerei ist klein."}, "links": {"emoji": "🧭 ", "sentence": "Die Bank ist links."}, "rechts": {"emoji": "🧭 ", "sentence": "Die Apotheke ist rechts."}, "geradeaus": {"emoji": "🧭 ", "sentence": "Gehen Sie geradeaus."}, "hinter": {"emoji": "", "sentence": "Das Buch ist hinter dem Kissen."}, "neben": {"emoji": "", "sentence": "Der Stuhl steht neben dem Bett."}, "gegenüber": {"emoji": "🧭 ", "sentence": "Die Post ist gegenüber der Bank."}, "zwischen": {"emoji": "", "sentence": "Das Bett steht zwischen dem Schrank und dem Fenster."}, "am Ende": {"emoji": "🧭 ", "sentence": "Die Straße ist am Ende."}, "an der Ecke": {"emoji": "🧭 ", "sentence": "Das Geschäft ist an der Ecke."}, "um die Ecke": {"emoji": "🧭 ", "sentence": "Die Apotheke ist um die Ecke."}, "bis zur Ampel": {"emoji": "🧭 ", "sentence": "Gehen Sie bis zur Ampel."}, "dann": {"emoji": "", "sentence": "Dann schneide ich es."}, "danach": {"emoji": "", "sentence": "Danach koche ich es."}, "der Körper": {"emoji": "🧑 ", "sentence": "Der Körper ist gesund."}, "der Kopf": {"emoji": "🧑 ", "sentence": "Ich wasche meinen Kopf."}, "die Haare": {"emoji": "💇 ", "sentence": "Meine Haare sind lang."}, "das Auge": {"emoji": "👀 ", "sentence": "Meine Augen sind blau."}, "das Ohr": {"emoji": "👂 ", "sentence": "Ich wasche meine Ohren."}, "die Nase": {"emoji": "👃 ", "sentence": "Die Nase ist rot."}, "der Mund": {"emoji": "👄 ", "sentence": "Ich putze meine Zähne im Mund."}, "der Zahn": {"emoji": "🦷 ", "sentence": "Meine Zähne sind weiß."}, "die Hand": {"emoji": "🖐️ ", "sentence": "Ich wasche meine Hände."}, "der Fuß": {"emoji": "🦶 ", "sentence": "Meine Füße sind kalt."}, "das Bein": {"emoji": "🦵 ", "sentence": "Das Bein tut weh."}, "der Arm": {"emoji": "💪 ", "sentence": "Mein Arm ist stark."}, "das Herz": {"emoji": "🫀 ", "sentence": "Das Herz schlägt."}, "die Lunge": {"emoji": "🫁 ", "sentence": "Die Lunge ist gesund."}, "krank": {"emoji": "🤒 ", "sentence": "Ich bin krank."}, "die Erkältung": {"emoji": "🤧 ", "sentence": "Ich habe eine Erkältung."}, "das Fieber": {"emoji": "🤒 ", "sentence": "Ich habe Fieber."}, "der Husten": {"emoji": "🤧 ", "sentence": "Ich habe Husten."}, "der Schnupfen": {"emoji": "🤧 ", "sentence": "Ich habe Schnupfen."}, "die Grippe": {"emoji": "🤒 ", "sentence": "Ich habe die Grippe."}, "der Durchfall": {"emoji": "🤢 ", "sentence": "Ich habe Durchfall."}, "die Übelkeit": {"emoji": "🤢 ", "sentence": "Ich habe Übelkeit."}, "der Schmerz": {"emoji": "😖 ", "sentence": "Ich habe Schmerzen."}, "die Kopfschmerzen": {"emoji": "😖 ", "sentence": "Ich habe Kopfschmerzen."}, "die Zahnschmerzen": {"emoji": "😖 ", "sentence": "Ich habe Zahnschmerzen."}, "die Bauchschmerzen": {"emoji": "😖 ", "sentence": "Ich habe Bauchschmerzen."}, "die Halsschmerzen": {"emoji": "😖 ", "sentence": "Ich habe Halsschmerzen."}, "die Rückenschmerzen": {"emoji": "😖 ", "sentence": "Ich habe Rückenschmerzen."}, "schwindelig": {"emoji": "🤒 ", "sentence": "Mir ist schwindelig."}, "müde": {"emoji": "🤒 ", "sentence": "Ich bin sehr müde."}, "erschöpft": {"emoji": "🤒 ", "sentence": "Ich bin erschöpft."}, "der Arzt": {"emoji": "👨‍⚕️ ", "sentence": "Ich gehe zum Arzt."}, "die Ärztin": {"emoji": "👩‍⚕️ ", "sentence": "Die Ärztin ist nett."}, "die Praxis": {"emoji": "💊 ", "sentence": "Die Praxis ist hier."}, "die Sprechstunde": {"emoji": "💊 ", "sentence": "Die Sprechstunde ist 9-12."}, "der Termin": {"emoji": "💊 ", "sentence": "Ich habe einen Termin."}, "das Rezept": {"emoji": "💊 ", "sentence": "Der Arzt gibt ein Rezept."}, "die Medizin": {"emoji": "💊 ", "sentence": "Ich nehme die Medizin."}, "das Medikament": {"emoji": "💊 ", "sentence": "Das Medikament hilft."}, "die Tablette": {"emoji": "💊 ", "sentence": "Ich nehme eine Tablette."}, "das Pflaster": {"emoji": "💊 ", "sentence": "Das Pflaster ist auf der Wunde."}, "die Spritze": {"emoji": "💊 ", "sentence": "Die Spritze tut weh."}, "die Impfung": {"emoji": "💊 ", "sentence": "Die Impfung ist wichtig."}, "schmerzen": {"emoji": "", "sentence": "Mein Kopf schmerzt."}, "weh tun": {"emoji": "", "sentence": "Der Zahn tut weh."}, "krank sein": {"emoji": "", "sentence": "Ich bin krank."}, "sich erholen": {"emoji": "", "sentence": "Ich erhole mich im Urlaub."}, "heilen": {"emoji": "", "sentence": "Die Wunde heilt."}, "verschreiben": {"emoji": "", "sentence": "Der Arzt verschreibt ein Rezept."}, "nehmen": {"emoji": "", "sentence": "Ich nehme den Salat."}, "fühlen": {"emoji": "", "sentence": "Ich fühle mich gut / schlecht."}, "rufen": {"emoji": "", "sentence": "Ich rufe den Arzt."}, "der Arzt / die Ärztin": {"emoji": "👨‍⚕️ ", "sentence": "Mein Vater ist Arzt."}, "der Lehrer / die Lehrerin": {"emoji": "👨‍🏫 ", "sentence": "Meine Mutter ist Lehrerin."}, "der Student / die Studentin": {"emoji": "👨‍🎓 ", "sentence": "Ich bin Student."}, "der Schüler / die Schülerin": {"emoji": "👨‍🎓 ", "sentence": "Sie ist Schülerin."}, "der Angestellte / die Angestellte": {"emoji": "👨‍💼 ", "sentence": "Er ist Angestellter."}, "der Beamte / die Beamtin": {"emoji": "👨‍💼 ", "sentence": "Sie ist Beamtin."}, "der Programmierer / die Programmiererin": {"emoji": "👨‍💻 ", "sentence": "Er ist Programmierer."}, "der Koch / die Köchin": {"emoji": "👨‍🍳 ", "sentence": "Sie ist Köchin."}, "der Bäcker / die Bäckerin": {"emoji": "👩‍🍳 ", "sentence": "Er ist Bäcker."}, "der Mechaniker / die Mechanikerin": {"emoji": "👨‍🔧 ", "sentence": "Er ist Mechaniker."}, "der Handwerker / die Handwerkerin": {"emoji": "👨‍🔧 ", "sentence": "Er ist Handwerker."}, "der Anwalt / die Anwältin": {"emoji": "👨‍⚖️ ", "sentence": "Sie ist Anwältin."}, "der Pilot / die Pilotin": {"emoji": "👨‍✈️ ", "sentence": "Er ist Pilot."}, "die Stewardess": {"emoji": "👩‍✈️ ", "sentence": "Sie ist Stewardess."}, "der Manager / die Managerin": {"emoji": "👨‍💼 ", "sentence": "Er ist Manager."}, "der Wissenschaftler / die Wissenschaftlerin": {"emoji": "👨‍🔬 ", "sentence": "Sie ist Wissenschaftlerin."}, "der Künstler / die Künstlerin": {"emoji": "👨‍🎨 ", "sentence": "Er ist Künstler."}, "der Richter / die Richterin": {"emoji": "👨‍⚖️ ", "sentence": "Sie ist Richterin."}, "der Sekretär / die Sekretärin": {"emoji": "👨‍💼 ", "sentence": "Sie ist Sekretärin."}, "der Buchhalter / die Buchhalterin": {"emoji": "👨‍💼 ", "sentence": "Er ist Buchhalter."}, "der Feuerwehrmann": {"emoji": "👨‍🚒 ", "sentence": "Er ist Feuerwehrmann."}, "der Polizist / die Polizistin": {"emoji": "👮‍♂️ ", "sentence": "Sie ist Polizistin."}, "der Fahrer / die Fahrerin": {"emoji": "🚚 ", "sentence": "Er ist Busfahrer."}, "arbeiten": {"emoji": "", "sentence": "Ich arbeite in einer Firma."}, "verdienen": {"emoji": "", "sentence": "Ich verdiene 2000 Euro."}, "anfangen": {"emoji": "", "sentence": "Ich fange um 8 Uhr an."}, "aufhören": {"emoji": "", "sentence": "Ich höre um 17 Uhr auf."}, "pausieren": {"emoji": "", "sentence": "Ich pausiere um 12 Uhr."}, "telefonieren": {"emoji": "", "sentence": "Ich telefoniere mit Kunden."}, "die Fabrik": {"emoji": "🏭 ", "sentence": "Sie arbeitet in der Fabrik."}, "das Unternehmen": {"emoji": "🏢 ", "sentence": "Das Unternehmen ist international."}, "der Hund": {"emoji": "🐕 ", "sentence": "Der Hund ist braun."}, "die Katze": {"emoji": "🐈 ", "sentence": "Die Katze ist schwarz."}, "das Kaninchen": {"emoji": "🐇 ", "sentence": "Das Kaninchen ist weiß."}, "das Meerschweinchen": {"emoji": "🐹 ", "sentence": "Das Meerschweinchen ist süß."}, "der Hamster": {"emoji": "🐭 ", "sentence": "Der Hamster ist niedlich."}, "der Vogel": {"emoji": "🐦 ", "sentence": "Der Vogel singt."}, "das Pferd": {"emoji": "🐴 ", "sentence": "Das Pferd ist groß."}, "die Kuh": {"emoji": "🐄 ", "sentence": "Die Kuh gibt Milch."}, "das Schaf": {"emoji": "🐑 ", "sentence": "Das Schaf ist weiß."}, "das Schwein": {"emoji": "🐖 ", "sentence": "Das Schwein ist rosa."}, "das Huhn": {"emoji": "🐓 ", "sentence": "Das Huhn legt Eier."}, "die Ente": {"emoji": "🦆 ", "sentence": "Die Ente schwimmt."}, "der Schwan": {"emoji": "🦢 ", "sentence": "Der Schwan ist weiß."}, "die Ziege": {"emoji": "🐐 ", "sentence": "Die Ziege frisst Gras."}, "der Wolf": {"emoji": "🐺 ", "sentence": "Der Wolf heult."}, "der Fuchs": {"emoji": "🦊 ", "sentence": "Der Fuchs ist rot."}, "der Bär": {"emoji": "🐻 ", "sentence": "Der Bär ist groß."}, "der Löwe": {"emoji": "🦁 ", "sentence": "Der Löwe ist stark."}, "der Elefant": {"emoji": "🐘 ", "sentence": "Der Elefant ist grau."}, "die Giraffe": {"emoji": "🦒 ", "sentence": "Die Giraffe ist hoch."}, "der Affe": {"emoji": "🐒 ", "sentence": "Der Affe klettert."}, "haben": {"emoji": "", "sentence": "Ich habe einen Hund."}, "besitzen": {"emoji": "", "sentence": "Er besitzt eine Katze."}, "fressen": {"emoji": "", "sentence": "Der Hund frisst Fleisch."}, "springen": {"emoji": "", "sentence": "Der Hund springt hoch."}, "bellen": {"emoji": "", "sentence": "Der Hund bellt."}, "miauen": {"emoji": "", "sentence": "Die Katze miaut."}, "singen": {"emoji": "", "sentence": "Der Vogel singt."}, "der Baum": {"emoji": "🌳 ", "sentence": "Der Baum ist groß."}, "der Wald": {"emoji": "🌲 ", "sentence": "Der Wald ist grün."}, "die Blume": {"emoji": "🌸 ", "sentence": "Die Blume ist schön."}, "das Gras": {"emoji": "🌿 ", "sentence": "Das Gras ist grün."}, "die Pflanze": {"emoji": "🌱 ", "sentence": "Die Pflanze wächst."}, "der Berg": {"emoji": "🏔️ ", "sentence": "Der Berg ist hoch."}, "das Gebirge": {"emoji": "⛰️ ", "sentence": "Das Gebirge ist schön."}, "das Tal": {"emoji": "🏞️ ", "sentence": "Das Tal ist tief."}, "der Fluss": {"emoji": "🌊 ", "sentence": "Der Fluss fließt."}, "der See": {"emoji": "🌊 ", "sentence": "Der See ist blau."}, "das Meer": {"emoji": "🌊 ", "sentence": "Das Meer ist groß."}, "der Ozean": {"emoji": "🌊 ", "sentence": "Der Ozean ist tief."}, "die Insel": {"emoji": "🌊 ", "sentence": "Die Insel ist schön."}, "die Küste": {"emoji": "🌊 ", "sentence": "Die Küste ist lang."}, "der Vulkan": {"emoji": "🌋 ", "sentence": "Der Vulkan ist aktiv."}, "der Stein": {"emoji": "🪨 ", "sentence": "Der Stein ist schwer."}, "der Fels": {"emoji": "🪨 ", "sentence": "Der Fels ist hoch."}, "der Busch": {"emoji": "🌲 ", "sentence": "Der Busch ist grün."}, "wachsen": {"emoji": "", "sentence": "Die Pflanze wächst schnell."}, "blühen": {"emoji": "", "sentence": "Die Blume blüht."}, "fließen": {"emoji": "", "sentence": "Der Fluss fließt ins Meer."}, "scheinen": {"emoji": "", "sentence": "Die Sonne scheint."}, "regnen": {"emoji": "", "sentence": "Es regnet heute."}, "schneien": {"emoji": "", "sentence": "Es schneit im Winter."}, "stürmen": {"emoji": "", "sentence": "Es stürmt draußen."}, "gewittern": {"emoji": "", "sentence": "Es gewittert."}, "sonnig": {"emoji": "☀️ ", "sentence": "Es ist sonnig."}, "bewölkt": {"emoji": "☁️ ", "sentence": "Es ist bewölkt."}, "wolkig": {"emoji": "☁️ ", "sentence": "Der Himmel ist wolkig."}, "regnerisch": {"emoji": "🌧️ ", "sentence": "Es ist regnerisch."}, "schneit": {"emoji": "❄️ ", "sentence": "Es schneit."}, "windig": {"emoji": "🌬️ ", "sentence": "Es ist windig."}, "neblig": {"emoji": "🌫️ ", "sentence": "Es ist neblig."}, "stürmisch": {"emoji": "⛈️ ", "sentence": "Es ist stürmisch."}, "wechselhaft": {"emoji": "🌦️ ", "sentence": "Das Wetter ist wechselhaft."}, "klar": {"emoji": "☀️ ", "sentence": "Der Himmel ist klar."}, "die Temperatur": {"emoji": "🌡️ ", "sentence": "Die Temperatur ist 25 Grad."}, "der Grad": {"emoji": "🌡️ ", "sentence": "Es sind 20 Grad."}, "minus": {"emoji": "🌡️ ", "sentence": "Es ist minus 5 Grad."}, "plus": {"emoji": "🌡️ ", "sentence": "Es ist plus 10 Grad."}, "über Null": {"emoji": "🌡️ ", "sentence": "Es ist über Null."}, "unter Null": {"emoji": "🌡️ ", "sentence": "Es ist unter Null."}, "frieren": {"emoji": "", "sentence": "Ich friere."}, "schwitzen": {"emoji": "", "sentence": "Ich schwitze."}, "Wie spät ist es?": {"emoji": "", "sentence": "Wie spät ist es? - Es ist 10 Uhr."}, "die Uhr": {"emoji": "", "sentence": "Die Uhr zeigt 10 Uhr."}, "die Stunde": {"emoji": "", "sentence": "Eine Stunde hat 60 Minuten."}, "die Minute": {"emoji": "", "sentence": "Eine Minute hat 60 Sekunden."}, "die Sekunde": {"emoji": "", "sentence": "Eine Sekunde ist kurz."}, "die Uhrzeit": {"emoji": "", "sentence": "Die Uhrzeit ist 10:30."}, "um": {"emoji": "", "sentence": "Ich stehe um 7 Uhr auf."}, "am": {"emoji": "", "sentence": "Ich arbeite am Montag."}, "im": {"emoji": "", "sentence": "Ich reise im Sommer."}, "morgens": {"emoji": "", "sentence": "Ich lerne morgens."}, "mittags": {"emoji": "", "sentence": "Ich esse mittags."}, "abends": {"emoji": "", "sentence": "Ich lese abends."}, "nachts": {"emoji": "", "sentence": "Ich schlafe nachts."}, "der Morgen": {"emoji": "🌅 ", "sentence": "Ich stehe am Morgen auf."}, "der Vormittag": {"emoji": "☀️ ", "sentence": "Ich arbeite am Vormittag."}, "der Mittag": {"emoji": "☀️ ", "sentence": "Ich esse um 12 Uhr zu Mittag."}, "der Nachmittag": {"emoji": "☀️ ", "sentence": "Ich lerne am Nachmittag."}, "der Abend": {"emoji": "🌆 ", "sentence": "Ich esse am Abend zu Abend."}, "die Nacht": {"emoji": "🌙 ", "sentence": "Ich schlafe in der Nacht."}, "die Mitternacht": {"emoji": "🌙 ", "sentence": "Es ist Mitternacht."}, "der Montag": {"emoji": "📅 ", "sentence": "Am Montag beginnt die Schule."}, "der Dienstag": {"emoji": "📅 ", "sentence": "Der Dienstag ist ein Tag."}, "der Mittwoch": {"emoji": "📅 ", "sentence": "Am Mittwoch habe ich einen Termin."}, "der Donnerstag": {"emoji": "📅 ", "sentence": "Am Donnerstag gehe ich zum Arzt."}, "der Freitag": {"emoji": "📅 ", "sentence": "Am Freitag habe ich frei."}, "der Samstag": {"emoji": "📅 ", "sentence": "Am Samstag gehe ich einkaufen."}, "der Sonntag": {"emoji": "📅 ", "sentence": "Am Sonntag ruhe ich mich aus."}, "das Wochenende": {"emoji": "📅 ", "sentence": "Am Wochenende habe ich frei."}, "der Werktag": {"emoji": "📅 ", "sentence": "Der Werktag ist lang."}, "der Januar": {"emoji": "❄️ ", "sentence": "Der Januar ist kalt."}, "der Februar": {"emoji": "❄️ ", "sentence": "Der Februar hat 28 Tage."}, "der März": {"emoji": "🌸 ", "sentence": "Der März ist der Frühlingsanfang."}, "der April": {"emoji": "🌸 ", "sentence": "Der April ist manchmal kalt."}, "der Mai": {"emoji": "🌸 ", "sentence": "Der Mai ist warm."}, "der Juni": {"emoji": "☀️ ", "sentence": "Der Juni ist ein Sommermonat."}, "der Juli": {"emoji": "☀️ ", "sentence": "Der Juli ist der wärmste Monat."}, "der August": {"emoji": "☀️ ", "sentence": "Der August ist heiß."}, "der September": {"emoji": "🍂 ", "sentence": "Der September ist Herbst."}, "der Oktober": {"emoji": "🍂 ", "sentence": "Der Oktober ist bunt."}, "der November": {"emoji": "🍂 ", "sentence": "Der November ist kalt."}, "der Dezember": {"emoji": "❄️ ", "sentence": "Der Dezember ist der Weihnachtsmonat."}, "der Frühling": {"emoji": "🌸 ", "sentence": "Der Frühling ist schön."}, "der Sommer": {"emoji": "☀️ ", "sentence": "Der Sommer ist warm."}, "der Herbst": {"emoji": "🍂 ", "sentence": "Der Herbst ist bunt."}, "der Winter": {"emoji": "❄️ ", "sentence": "Der Winter ist kalt."}, "heute": {"emoji": "", "sentence": "Heute ist der 1. Januar."}, "morgen": {"emoji": "", "sentence": "Morgen gehe ich einkaufen."}, "übermorgen": {"emoji": "", "sentence": "Übermorgen fahre ich nach Berlin."}, "gestern": {"emoji": "", "sentence": "Gestern war ich krank."}, "vorgestern": {"emoji": "", "sentence": "Vorgestern habe ich gearbeitet."}, "jetzt": {"emoji": "", "sentence": "Jetzt ist es 10 Uhr."}, "bald": {"emoji": "", "sentence": "Ich komme bald."}, "später": {"emoji": "", "sentence": "Wir sehen uns später."}, "früh": {"emoji": "", "sentence": "Ich stehe früh auf."}, "spät": {"emoji": "", "sentence": "Ich bin spät dran."}, "immer": {"emoji": "", "sentence": "Ich immer komme pünktlich."}, "oft": {"emoji": "", "sentence": "Ich oft lese Bücher."}, "manchmal": {"emoji": "", "sentence": "Ich manchmal gehe ins Kino."}, "nie": {"emoji": "", "sentence": "Ich nie esse Fleisch."}, "jeden Tag": {"emoji": "", "sentence": "Ich jeden Tag lerne Deutsch."}, "jede Woche": {"emoji": "", "sentence": "Ich jede Woche gehe einkaufen."}, "jeden Monat": {"emoji": "", "sentence": "Ich jeden Monat zahle die Miete."}, "jedes Jahr": {"emoji": "", "sentence": "Ich jedes Jahr reise nach Spanien."}, "das Hobby": {"emoji": "🎮 ", "sentence": "Mein Hobby ist Lesen."}, "die Freizeit": {"emoji": "🎮 ", "sentence": "Ich lese in meiner Freizeit."}, "die Zeit": {"emoji": "🎮 ", "sentence": "Ich habe viel Zeit."}, "malen": {"emoji": "🎨 ", "sentence": "Ich male gern."}, "Musik hören": {"emoji": "🎵 ", "sentence": "Ich höre gern Musik."}, "fotografieren": {"emoji": "📷 ", "sentence": "Ich fotografiere gern."}, "spielen": {"emoji": "🎮 ", "sentence": "Ich spiele gern Fußball."}, "Computerspiele spielen": {"emoji": "🖥️ ", "sentence": "Ich spiele gern Computerspiele."}, "fernsehen": {"emoji": "📺 ", "sentence": "Ich sehe gern fern."}, "am Handy spielen": {"emoji": "📱 ", "sentence": "Ich spiele am Handy."}, "Klavier spielen": {"emoji": "🎹 ", "sentence": "Ich spiele Klavier."}, "Gitarre spielen": {"emoji": "🎸 ", "sentence": "Ich spiele Gitarre."}, "basteln": {"emoji": "✂️ ", "sentence": "Ich bastle gern."}, "nähen": {"emoji": "🧵 ", "sentence": "Ich nähe gern."}, "stricken": {"emoji": "🧶 ", "sentence": "Ich stricke gern."}, "gärtnern": {"emoji": "🌱 ", "sentence": "Ich gärtnere gern."}, "tanzen": {"emoji": "🎭 ", "sentence": "Ich tanze gern."}, "ins Kino gehen": {"emoji": "🎬 ", "sentence": "Ich gehe gern ins Kino."}, "ins Museum gehen": {"emoji": "🎨 ", "sentence": "Ich gehe gern ins Museum."}, "der Sport": {"emoji": "⚽ ", "sentence": "Sport ist gesund."}, "Fußball": {"emoji": "⚽ ", "sentence": "Ich spiele gern Fußball."}, "Basketball": {"emoji": "🏀 ", "sentence": "Ich spiele gern Basketball."}, "Volleyball": {"emoji": "🏐 ", "sentence": "Wir spielen Volleyball."}, "Tennis": {"emoji": "🎾 ", "sentence": "Ich spiele gern Tennis."}, "Badminton": {"emoji": "🏸 ", "sentence": "Wir spielen Badminton."}, "Tischtennis": {"emoji": "🏓 ", "sentence": "Ich spiele Tischtennis."}, "Golf": {"emoji": "⛳ ", "sentence": "Er spielt Golf."}, "Gymnastik": {"emoji": "🏋️ ", "sentence": "Ich mache Gymnastik."}, "Yoga": {"emoji": "🧘 ", "sentence": "Ich mache Yoga."}, "Laufen": {"emoji": "", "sentence": "Ich laufe zur Schule."}, "Schwimmen": {"emoji": "", "sentence": "Ich schwimme im Meer."}, "Radfahren": {"emoji": "🚴 ", "sentence": "Ich fahre gern Rad."}, "Skifahren": {"emoji": "⛷️ ", "sentence": "Ich fahre gern Ski."}, "Snowboarden": {"emoji": "🏂 ", "sentence": "Ich fahre gern Snowboard."}, "Fechten": {"emoji": "🤺 ", "sentence": "Er fechtet."}, "Schießen": {"emoji": "🏹 ", "sentence": "Er schießt."}, "Motorradfahren": {"emoji": "🏍️ ", "sentence": "Ich fahre Motorrad."}, "machen": {"emoji": "", "sentence": "Ich mache Sport."}, "gewinnen": {"emoji": "", "sentence": "Wir gewinnen das Spiel."}, "verlieren": {"emoji": "", "sentence": "Wir verlieren das Spiel."}, "trainieren": {"emoji": "", "sentence": "Ich trainiere jeden Tag."}, "der Laptop": {"emoji": "💻 ", "sentence": "Der Laptop ist leicht."}, "das Smartphone": {"emoji": "📱 ", "sentence": "Das Smartphone ist modern."}, "der Bildschirm": {"emoji": "🖥️ ", "sentence": "Der Bildschirm ist groß."}, "die Kamera": {"emoji": "📷 ", "sentence": "Die Kamera ist neu."}, "der Fotoapparat": {"emoji": "📷 ", "sentence": "Der Fotoapparat ist teuer."}, "der Camcorder": {"emoji": "📹 ", "sentence": "Der Camcorder ist klein."}, "die Kopfhörer": {"emoji": "🎧 ", "sentence": "Die Kopfhörer sind gut."}, "der Lautsprecher": {"emoji": "🔊 ", "sentence": "Der Lautsprecher ist laut."}, "das Ladekabel": {"emoji": "🔌 ", "sentence": "Das Ladekabel ist lang."}, "der Akku": {"emoji": "🔋 ", "sentence": "Der Akku ist leer."}, "die CD": {"emoji": "💿 ", "sentence": "Die CD ist neu."}, "die DVD": {"emoji": "💿 ", "sentence": "Die DVD ist interessant."}, "die Festplatte": {"emoji": "📀 ", "sentence": "Die Festplatte ist voll."}, "surfen": {"emoji": "", "sentence": "Ich surfe im Internet."}, "chatten": {"emoji": "", "sentence": "Ich chatte mit Freunden."}, "mailen": {"emoji": "", "sentence": "Ich maile meinem Freund."}, "skypen": {"emoji": "", "sentence": "Ich skype mit meiner Familie."}, "verkaufen": {"emoji": "", "sentence": "Ich verkaufe mein Handy."}, "laden": {"emoji": "", "sentence": "Ich lade mein Handy auf."}, "herunterladen": {"emoji": "", "sentence": "Ich lade das Programm herunter."}, "glücklich": {"emoji": "😊 ", "sentence": "Ich bin glücklich."}, "traurig": {"emoji": "😢 ", "sentence": "Ich bin traurig."}, "fröhlich": {"emoji": "😊 ", "sentence": "Sie ist fröhlich."}, "wütend": {"emoji": "😡 ", "sentence": "Er ist wütend."}, "ängstlich": {"emoji": "😨 ", "sentence": "Ich bin ängstlich."}, "nervös": {"emoji": "😰 ", "sentence": "Ich bin nervös."}, "ruhig": {"emoji": "😌 ", "sentence": "Ich bin ruhig."}, "zufrieden": {"emoji": "😊 ", "sentence": "Ich bin zufrieden."}, "optimistisch": {"emoji": "😊 ", "sentence": "Ich bin optimistisch."}, "pessimistisch": {"emoji": "😔 ", "sentence": "Ich bin pessimistisch."}, "stolz": {"emoji": "😊 ", "sentence": "Ich bin stolz."}, "einsam": {"emoji": "😔 ", "sentence": "Ich bin einsam."}, "lieb": {"emoji": "😊 ", "sentence": "Du bist sehr lieb."}, "hässlich": {"emoji": "", "sentence": "Das Hemd ist hässlich."}, "sich fühlen": {"emoji": "", "sentence": "Wie fühlen Sie sich?"}, "fürchten": {"emoji": "", "sentence": "Ich fürchte mich vor Hunden."}, "sich freuen": {"emoji": "", "sentence": "Ich freue mich auf das Fest."}, "sich ärgern": {"emoji": "", "sentence": "Ich ärgere mich über den Verkehr."}, "freundlich": {"emoji": "😊 ", "sentence": "Der Lehrer ist freundlich."}, "unfreundlich": {"emoji": "😠 ", "sentence": "Der Mann ist unfreundlich."}, "nett": {"emoji": "😊 ", "sentence": "Die Frau ist sehr nett."}, "gemein": {"emoji": "😠 ", "sentence": "Der Junge ist gemein."}, "hilfsbereit": {"emoji": "😊 ", "sentence": "Sie ist hilfsbereit."}, "egoistisch": {"emoji": "😠 ", "sentence": "Er ist egoistisch."}, "großzügig": {"emoji": "😊 ", "sentence": "Sie ist großzügig."}, "geizig": {"emoji": "😠 ", "sentence": "Er ist geizig."}, "pünktlich": {"emoji": "😊 ", "sentence": "Ich bin pünktlich."}, "unpünktlich": {"emoji": "😠 ", "sentence": "Er ist unpünktlich."}, "ordentlich": {"emoji": "😊 ", "sentence": "Sie ist ordentlich."}, "unordentlich": {"emoji": "😠 ", "sentence": "Er ist unordentlich."}, "sauber": {"emoji": "😊 ", "sentence": "Die Küche ist sauber."}, "schmutzig": {"emoji": "😠 ", "sentence": "Die Schuhe sind schmutzig."}, "klug": {"emoji": "😊 ", "sentence": "Der Schüler ist klug."}, "dumm": {"emoji": "😠 ", "sentence": "Das ist dumm."}, "lustig": {"emoji": "😊 ", "sentence": "Der Mann ist lustig."}, "ernst": {"emoji": "😠 ", "sentence": "Sie ist ernst."}, "interessant": {"emoji": "😊 ", "sentence": "Das Buch ist interessant."}, "langweilig": {"emoji": "😠 ", "sentence": "Der Film ist langweilig."}, "dick": {"emoji": "😊 ", "sentence": "Der Mann ist dick."}, "dünn": {"emoji": "😠 ", "sentence": "Die Frau ist dünn."}, "stark": {"emoji": "😊 ", "sentence": "Er ist stark."}, "schwach": {"emoji": "😠 ", "sentence": "Sie ist schwach."}, "der Einkauf": {"emoji": "🛒 ", "sentence": "Ich mache einen Einkauf."}, "der Markt": {"emoji": "🛒 ", "sentence": "Der Markt ist am Dienstag."}, "das Kaufhaus": {"emoji": "🛒 ", "sentence": "Das Kaufhaus ist groß."}, "die Boutique": {"emoji": "🛒 ", "sentence": "Die Boutique ist teuer."}, "der Preis": {"emoji": "🛒 ", "sentence": "Der Preis ist gut."}, "die Kasse": {"emoji": "💰 ", "sentence": "Ich stehe an der Kasse."}, "der Korb": {"emoji": "🛒 ", "sentence": "Der Korb ist leicht."}, "der Einkaufswagen": {"emoji": "🛒 ", "sentence": "Der Einkaufswagen ist voll."}, "die Tüte": {"emoji": "🛒 ", "sentence": "Die Tüte ist aus Plastik."}, "die Tasche": {"emoji": "🛒 ", "sentence": "Ich habe eine Tasche."}, "einkaufen": {"emoji": "", "sentence": "Ich kaufe im Supermarkt ein."}, "kosten": {"emoji": "", "sentence": "Das kostet 2 Euro."}, "suchen": {"emoji": "", "sentence": "Ich suche den Käse."}, "finden": {"emoji": "", "sentence": "Wo finde ich das Brot?"}, "das Postamt": {"emoji": "🏛️ ", "sentence": "Das Postamt ist geschlossen."}, "das Café": {"emoji": "🍽️ ", "sentence": "Das Café ist klein."}, "das Restaurant": {"emoji": "🍽️ ", "sentence": "Das Restaurant ist gut."}, "anrufen": {"emoji": "📞 ", "sentence": "Ich rufe meine Mutter an."}, "sagen": {"emoji": "💬 ", "sentence": "Ich sage \"Hallo\"."}, "sich unterhalten": {"emoji": "💬 ", "sentence": "Wir unterhalten uns."}, "die E-Mail": {"emoji": "📱 ", "sentence": "Ich schreibe eine E-Mail."}, "der Brief": {"emoji": "📱 ", "sentence": "Ich schreibe einen Brief."}, "die Nachricht": {"emoji": "📱 ", "sentence": "Ich schicke eine Nachricht."}, "der Anruf": {"emoji": "📱 ", "sentence": "Ich bekomme einen Anruf."}, "der Anrufbeantworter": {"emoji": "📱 ", "sentence": "Der Anrufbeantworter ist an."}, "das Geld": {"emoji": "💰 ", "sentence": "Ich brauche Geld."}, "der Euro": {"emoji": "💶 ", "sentence": "Das kostet 5 Euro."}, "der Cent": {"emoji": "💶 ", "sentence": "Das kostet 99 Cent."}, "die Banknote": {"emoji": "💶 ", "sentence": "Die Banknote ist 20 Euro."}, "die Münze": {"emoji": "💶 ", "sentence": "Die Münze ist 1 Euro."}, "die Kreditkarte": {"emoji": "💳 ", "sentence": "Ich bezahle mit Kreditkarte."}, "die EC-Karte": {"emoji": "💳 ", "sentence": "Ich bezahle mit EC-Karte."}, "das Bargeld": {"emoji": "💰 ", "sentence": "Ich bezahle mit Bargeld."}, "das Portmonee": {"emoji": "💰 ", "sentence": "Das Portmonee ist in der Tasche."}, "der Geldschein": {"emoji": "💰 ", "sentence": "Der Geldschein ist 50 Euro."}, "das Wechselgeld": {"emoji": "💰 ", "sentence": "Das Wechselgeld ist richtig."}, "das Trinkgeld": {"emoji": "💰 ", "sentence": "Ich gebe Trinkgeld."}, "die Rechnung": {"emoji": "💰 ", "sentence": "Die Rechnung bitte!"}, "die Quittung": {"emoji": "💰 ", "sentence": "Ich bekomme eine Quittung."}, "das Konto": {"emoji": "💰 ", "sentence": "Ich habe ein Konto."}, "das Sparbuch": {"emoji": "💰 ", "sentence": "Ich habe ein Sparbuch."}, "sparen": {"emoji": "", "sentence": "Ich spare für den Urlaub."}, "ausgeben": {"emoji": "", "sentence": "Ich gebe viel Geld aus."}, "leihen": {"emoji": "", "sentence": "Ich leihe meinem Freund Geld."}, "wechseln": {"emoji": "", "sentence": "Ich wechsle 100 Euro."}};
+
+        function vocabPresentation(word) {
+            if (VOCAB_PRESENTATION[word]) return VOCAB_PRESENTATION[word];
+            const base = String(word).replace(/\s*\([^)]*\)/g, '').trim();
+            if (VOCAB_PRESENTATION[base]) return VOCAB_PRESENTATION[base];
+            return {emoji:'', sentence:''};
+        }
+
+GRAMMAR_DATA = [
+  {
+    category:'📐 Grundlagen', title:'Präsens · Regelmäßige Verben',
+    content:'With regular verbs, the stem normally stays the same. Remove -en from the infinitive and add the correct ending. The ending depends on the subject pronoun.',
+    tables:[
+      {title:'Personalendungen', headers:['Pronomen','Endung','Beispiel: lernen'], rows:[
+        ['ich','-e','ich lerne'],['du','-st','du lernst'],['er / sie / es','-t','er lernt'],['wir','-en','wir lernen'],['ihr','-t','ihr lernt'],['sie / Sie','-en','sie / Sie lernen']
+      ]},
+      {title:'Weitere Beispiele', headers:['Verb','ich','du','er / sie / es'], rows:[
+        ['wohnen','wohne','wohnst','wohnt'],['kochen','koche','kochst','kocht'],['arbeiten','arbeite','arbeitest','arbeitet'],['machen','mache','machst','macht']
+      ]}
+    ], tip:'📝 Remember: ich → -e · du → -st · er/sie/es → -t · wir/sie/Sie → -en · ihr → -t.'
+  },
+  {
+    category:'📐 Grundlagen', title:'Präsens · Wichtige unregelmäßige Verben',
+    content:'Some very common verbs change their stem in the present tense or have special forms. These are essential A1 verbs, so learn their forms as fixed patterns rather than trying to derive them from the regular rule.',
+    tables:[
+      {title:'Konjugation', headers:['Verb','ich','du','er / sie / es','wir','ihr','sie / Sie'], rows:[
+        ['sein','bin','bist','ist','sind','seid','sind'],['haben','habe','hast','hat','haben','habt','haben'],['werden','werde','wirst','wird','werden','werdet','werden'],['gehen','gehe','gehst','geht','gehen','geht','gehen'],['fahren','fahre','fährst','fährt','fahren','fahrt','fahren'],['essen','esse','isst','isst','essen','esst','essen'],['nehmen','nehme','nimmst','nimmt','nehmen','nehmt','nehmen'],['sehen','sehe','siehst','sieht','sehen','seht','sehen'],['lesen','lese','liest','liest','lesen','lest','lesen'],['sprechen','spreche','sprichst','spricht','sprechen','sprecht','sprechen'],['schlafen','schlafe','schläfst','schläft','schlafen','schlaft','schlafen']
+      ]}
+    ], tip:'💡 Pay special attention to the changes with du and er/sie/es: fahren → fährst / fährt, lesen → liest / liest, sprechen → sprichst / spricht.'
+  },
+  {
+    category:'🎯 Modalverben', title:'Modalverben · können, müssen, dürfen, wollen, möchten, sollen',
+    content:'Modal verbs are usually used with a second verb. The modal verb is conjugated, while the main verb stays in the infinitive and moves to the end of the sentence. With möchten, a noun can also follow directly.',
+    tables:[
+      {title:'Konjugation', headers:['Verb','Bedeutung','ich','du','er / sie / es','wir','ihr','sie / Sie'], rows:[
+        ['können','can / Fähigkeit','kann','kannst','kann','können','könnt','können'],['müssen','must / Notwendigkeit','muss','musst','muss','müssen','müsst','müssen'],['dürfen','may / Erlaubnis','darf','darfst','darf','dürfen','dürft','dürfen'],['wollen','want','will','willst','will','wollen','wollt','wollen'],['möchten','would like','möchte','möchtest','möchte','möchten','möchtet','möchten'],['sollen','should / Auftrag','soll','sollst','soll','sollen','sollt','sollen']
+      ]},
+      {title:'Satzmuster', headers:['Funktion','Beispiel'], rows:[
+        ['Fähigkeit','Ich kann Deutsch sprechen.'],['Notwendigkeit','Ich muss heute arbeiten.'],['Erlaubnis','Darf ich hier sitzen?'],['Wunsch','Ich will nach Hause gehen.'],['Höflicher Wunsch','Ich möchte einen Kaffee.'],['Auftrag / Empfehlung','Du sollst mehr lernen.']
+      ]}
+    ]
+  },
+  {
+    category:'📝 Artikel & Fälle', title:'Artikel · Nominativ',
+    content:'The nominative normally marks the subject of the sentence. Ask Wer? (who?) or Was? (what?). The nominative clearly shows the four grammatical genders through their articles.',
+    tables:[
+      {title:'Bestimmter und unbestimmter Artikel', headers:['Genus','Bestimmt','Unbestimmt','Beispiel'], rows:[
+        ['Maskulin','der','ein','der Mann · ein Mann'],['Feminin','die','eine','die Frau · eine Frau'],['Neutrum','das','ein','das Kind · ein Kind'],['Plural','die','—','die Kinder']
+      ]}
+    ], tip:'🔎 Quick check: Wer ist das? – Der Mann. Was ist das? – Das Kind.'
+  },
+  {
+    category:'📝 Artikel & Fälle', title:'Artikel · Akkusativ',
+    content:'The accusative is often used for the direct object. The most important A1 change is masculine: der becomes den, and ein becomes einen.',
+    tables:[
+      {title:'Artikel im Akkusativ', headers:['Genus','Bestimmt','Unbestimmt','Beispiel'], rows:[
+        ['Maskulin','den','einen','Ich sehe den Mann. · Ich sehe einen Mann.'],['Feminin','die','eine','Ich sehe die Frau. · Ich sehe eine Frau.'],['Neutrum','das','ein','Ich sehe das Kind. · Ich sehe ein Kind.'],['Plural','die','—','Ich sehe die Kinder.']
+      ]},
+      {title:'Typische Auslöser', headers:['Verben','Präpositionen'], rows:[
+        ['haben · sehen · nehmen · kaufen · brauchen','für · durch · ohne · gegen · um']
+      ]}
+    ], tip:'🎯 A1 memory rule: In the accusative, the masculine article is the main visible change.'
+  },
+  {
+    category:'📝 Artikel & Fälle', title:'Artikel · Dativ',
+    content:'The dative is often used for the indirect object. It is also used after certain prepositions for location. In the plural, the noun often takes an additional -n after the article, when possible.',
+    tables:[
+      {title:'Artikel im Dativ', headers:['Genus','Bestimmt','Unbestimmt','Beispiel'], rows:[
+        ['Maskulin','dem','einem','Ich gebe dem Mann. · Ich gebe einem Mann.'],['Feminin','der','einer','Ich gebe der Frau. · Ich gebe einer Frau.'],['Neutrum','dem','einem','Ich gebe dem Kind. · Ich gebe einem Kind.'],['Plural','den + n','—','Ich gebe den Kindern.']
+      ]},
+      {title:'Typische Auslöser', headers:['Verben','Präpositionen'], rows:[
+        ['geben · helfen · danken · gehören','aus · bei · mit · nach · von · zu']
+      ]}
+    ], tip:'📌 A1 memory rule: der → dem · die → der · das → dem · die (plural) → den + -n.'
+  },
+  {
+    category:'🔤 Satzbau & Fragen', title:'Satzbau · Hauptsatz',
+    content:'In a normal German main clause, the conjugated verb is in position 2. Position 1 can be the subject, a time expression, or another piece of information; the verb still stays in position 2.',
+    tables:[
+      {title:'Grundmuster', headers:['Position 1','Position 2','Position 3+','Beispiel'], rows:[
+        ['Subjekt','Verb','Ergänzung','Ich lerne Deutsch.'],['Subjekt','Verb','Ort','Er wohnt in Berlin.'],['Subjekt','Verb','Zeit + Ergänzung','Wir gehen heute ins Kino.'],['Zeitangabe','Verb','Subjekt + Ergänzung','Heute gehe ich ins Kino.']
+      ]}
+    ], tip:'💡 Key rule: The conjugated verb stays in position 2 in a main clause.'
+  },
+  {
+    category:'🔤 Satzbau & Fragen', title:'Satzbau · Fragen',
+    content:'In W-questions, the question word comes first, followed by the conjugated verb. In yes/no questions, the conjugated verb comes first.',
+    tables:[
+      {title:'W-Fragen', headers:['Fragewort','Verb','Subjekt','Beispiel'], rows:[
+        ['Wie','heißt','du','Wie heißt du?'],['Wo','wohnen','Sie','Wo wohnen Sie?'],['Was','möchten','Sie','Was möchten Sie trinken?'],['Woher','kommen','Sie','Woher kommen Sie?'],['Wie alt','sind','Sie','Wie alt sind Sie?']
+      ]},
+      {title:'Ja-/Nein-Fragen', headers:['Verb','Subjekt','Ergänzung','Beispiel'], rows:[
+        ['Gehen','Sie','heute ins Kino','Gehen Sie heute ins Kino?'],['Haben','Sie','Geschwister','Haben Sie Geschwister?'],['Sprechen','Sie','Deutsch','Sprechen Sie Deutsch?']
+      ]}
+    ], tip:'❓ Key pattern: The question word comes first in W-questions. The verb comes first in yes/no questions.'
+  },
+  {
+    category:'📍 Präpositionen', title:'Präpositionen · Ort mit Dativ',
+    content:'For a location described with Wo? (where?), these prepositions take the dative. They tell you where a person or thing is located.',
+    tables:[
+      {title:'Ortspräpositionen', headers:['Präposition','Bedeutung','Beispiel'], rows:[
+        ['an','at / on (vertikal)','Die Bank ist an der Ecke.'],['auf','on','Das Buch ist auf dem Tisch.'],['in','in','Die Schule ist in der Stadt.'],['neben','next to','Das Kino ist neben dem Museum.'],['hinter','behind','Der Park ist hinter dem Rathaus.'],['vor','in front of','Die Apotheke ist vor dem Supermarkt.'],['zwischen','between','Das Café ist zwischen der Bank und der Post.'],['gegenüber','opposite','Die Post ist gegenüber dem Kino.']
+      ]}
+    ], tip:'📍 Key question: Wo? (where?) → location is expressed with the dative. Example: in der Stadt · neben dem Museum · gegenüber dem Kino.'
+  },
+  {
+    category:'🧩 Pronomen & Wortarten', title:'Personalpronomen',
+    content:'Personal pronouns replace people or things. The nominative forms are the basic forms you need to choose the correct verb ending.',
+    tables:[
+      {title:'Nominativ', headers:['Person','Singular','Plural','Englisch'], rows:[
+        ['1. Person','ich','wir','I / we'],['2. Person','du','ihr','you / you (plural)'],['3. Person','er / sie / es','sie','he / she / it / they'],['Höflich','Sie','Sie','you (formal)']
+      ]}
+    ], tip:'👤 The pronoun and verb form must match: ich bin · du bist · er ist · wir sind · ihr seid · sie sind.'
+  },
+  {
+    category:'🧩 Pronomen & Wortarten', title:'Possessivpronomen · Grundformen',
+    content:'Possessive pronouns show who something belongs to. At A1, the most important forms are mein/meine, dein/deine, sein/seine, ihr/ihre, unser/unsere and Ihr/Ihre.',
+    tables:[
+      {title:'Wichtige Formen', headers:['Person','Grundform','Beispiel'], rows:[
+        ['ich','mein / meine','mein Vater · meine Mutter'],['du','dein / deine','dein Bruder · deine Schwester'],['er','sein / seine','sein Sohn · seine Tochter'],['sie','ihr / ihre','ihr Vater · ihre Mutter'],['wir','unser / unsere','unser Haus · unsere Familie'],['sie','ihr / ihre','ihr Kind · ihre Kinder'],['Sie','Ihr / Ihre','Ihr Mann · Ihre Frau']
+      ]}
+    ], tip:'📎 In the nominative: mein/dein/sein/ihr/unser + masculine or neuter; meine/deine/seine/ihre/unsere + feminine or plural.'
+  }
+];
+
+        // ----- Speaking / Dialogue Data -----
+        const SPEAKING_DATA = [{
+            title: '👋 Meeting Someone',
+            lines: [
+                ['A: Guten Tag! Wie heißen Sie?', 'A: Good day! What\'s your name?'],
+                ['B: Guten Tag! Ich heiße Thomas.', 'B: Good day! My name is Thomas.'],
+                ['A: Freut mich! Ich bin Anna.', 'A: Nice to meet you! I\'m Anna.'],
+                ['B: Freut mich auch! Woher kommen Sie?', 'B: Nice to meet you too! Where are you from?'],
+                ['A: Ich komme aus Deutschland. Und Sie?', 'A: I\'m from Germany. And you?'],
+                ['B: Ich komme aus Österreich.', 'B: I\'m from Austria.'],
+                ['A: Sprechen Sie Englisch?', 'A: Do you speak English?'],
+                ['B: Ja, ein bisschen. Und Sie?', 'B: Yes, a little. And you?'],
+                ['A: Ich spreche Deutsch und Englisch.', 'A: I speak German and English.'],
+                ['B: Das ist gut!', 'B: That\'s good!'],
+            ]
+        }, {
+            title: '☕ At the Café',
+            lines: [
+                ['Kellner: Guten Tag! Was möchten Sie bestellen?', 'Waiter: Good day! What would you like to order?'],
+                ['Gast: Ich hätte gern einen Kaffee, bitte.', 'Guest: I\'d like a coffee, please.'],
+                ['Kellner: Möchten Sie auch ein Stück Kuchen?', 'Waiter: Would you also like a piece of cake?'],
+                ['Gast: Ja, gern. Was für Kuchen haben Sie?', 'Guest: Yes, please. What kind of cake do you have?'],
+                ['Kellner: Wir haben Schokoladenkuchen und Apfelkuchen.', 'Waiter: We have chocolate cake and apple cake.'],
+                ['Gast: Ich nehme den Apfelkuchen, bitte.', 'Guest: I\'ll take the apple cake, please.'],
+                ['Kellner: Und zu trinken?', 'Waiter: And to drink?'],
+                ['Gast: Ein Glas Mineralwasser, bitte.', 'Guest: A glass of mineral water, please.'],
+                ['Gast: Die Rechnung, bitte!', 'Guest: The bill, please!'],
+                ['Kellner: Das macht 8,50 Euro.', 'Waiter: That\'s 8.50 euros.'],
+                ['Gast: Hier ist das Geld. Stimmt so.', 'Guest: Here\'s the money. Keep the change.'],
+                ['Kellner: Danke schön! Auf Wiedersehen!', 'Waiter: Thank you very much! Goodbye!'],
+            ]
+        }, {
+            title: '🛒 Shopping',
+            lines: [
+                ['Kunde: Guten Tag! Ich möchte Brot kaufen.', 'Customer: Good day! I\'d like to buy bread.'],
+                ['Verkäufer: Hallo! Das Brot ist frisch. Möchten Sie ein ganzes Brot oder ein halbes?', 'Seller: Hello! The bread is fresh. Would you like a whole loaf or half?'],
+                ['Kunde: Ein halbes Brot, bitte. Und zwei Brötchen.', 'Customer: Half a loaf, please. And two bread rolls.'],
+                ['Verkäufer: Das macht 3 Euro.', 'Seller: That\'s 3 euros.'],
+                ['Kunde: Hier ist das Geld.', 'Customer: Here\'s the money.'],
+                ['Verkäufer: Danke! Auf Wiedersehen!', 'Seller: Thanks! Goodbye!'],
+            ]
+        }, {
+            title: '🗺️ Asking for Directions',
+            lines: [
+                ['A: Entschuldigung, wo ist die Apotheke?', 'A: Excuse me, where is the pharmacy?'],
+                ['B: Die Apotheke ist in der Hauptstraße.', 'B: The pharmacy is on Main Street.'],
+                ['A: Wie komme ich dorthin?', 'A: How do I get there?'],
+                ['B: Gehen Sie geradeaus bis zur Ampel.', 'B: Go straight ahead until the traffic light.'],
+                ['A: Ja, und dann?', 'A: Yes, and then?'],
+                ['B: Dann gehen Sie links. Die Apotheke ist rechts.', 'B: Then go left. The pharmacy is on the right.'],
+                ['A: Ist das weit?', 'A: Is that far?'],
+                ['B: Nein, das ist nicht weit. Nur 5 Minuten.', 'B: No, that\'s not far. Only 5 minutes.'],
+                ['A: Vielen Dank!', 'A: Thank you very much!'],
+                ['B: Bitte schön!', 'B: You\'re welcome!'],
+            ]
+        }, {
+            title: '🏥 At the Doctor',
+            lines: [
+                ['Arzt: Guten Tag! Was fehlt Ihnen?', 'Doctor: Good day! What\'s wrong?'],
+                ['Patient: Ich habe Kopfschmerzen und Fieber.', 'Patient: I have a headache and fever.'],
+                ['Arzt: Seit wann haben Sie das?', 'Doctor: Since when do you have that?'],
+                ['Patient: Seit gestern.', 'Patient: Since yesterday.'],
+                ['Arzt: Haben Sie auch Husten?', 'Doctor: Do you also have a cough?'],
+                ['Patient: Ja, ich habe Husten.', 'Patient: Yes, I have a cough.'],
+                ['Arzt: Ich gebe Ihnen ein Rezept. Nehmen Sie die Tabletten dreimal am Tag.', 'Doctor: I\'ll give you a prescription. Take the tablets three times a day.'],
+                ['Patient: Danke, Herr Doktor.', 'Patient: Thank you, doctor.'],
+            ]
+        }, {
+            title: '📝 Making Plans',
+            lines: [
+                ['A: Hallo! Wie geht es dir?', 'A: Hello! How are you?'],
+                ['B: Hallo! Mir geht es gut, danke. Und dir?', 'B: Hello! I\'m fine, thanks. And you?'],
+                ['A: Mir geht es auch gut. Hast du am Samstag Zeit?', 'A: I\'m fine too. Do you have time on Saturday?'],
+                ['B: Ja, am Samstag habe ich Zeit. Was möchtest du machen?', 'B: Yes, I have time on Saturday. What would you like to do?'],
+                ['A: Wir können ins Kino gehen.', 'A: We can go to the cinema.'],
+                ['B: Gute Idee! Um wie viel Uhr?', 'B: Good idea! At what time?'],
+                ['A: Um 15 Uhr.', 'A: At 3 o\'clock.'],
+                ['B: Super! Wir treffen uns am Kino.', 'B: Great! We\'ll meet at the cinema.'],
+                ['A: Bis Samstag!', 'A: See you Saturday!'],
+            ]
+        }, {
+            title: '👤 Personal Information',
+            lines: [
+                ['A: Wie heißt du?', 'A: What\'s your name?'],
+                ['B: Ich heiße Lara. Und du?', 'B: I\'m Lara. And you?'],
+                ['A: Ich bin Max. Woher kommst du?', 'A: I\'m Max. Where are you from?'],
+                ['B: Ich komme aus Berlin. Und du?', 'B: I\'m from Berlin. And you?'],
+                ['A: Ich komme aus München. Wie alt bist du?', 'A: I\'m from Munich. How old are you?'],
+                ['B: Ich bin 25 Jahre alt. Und du?', 'B: I\'m 25 years old. And you?'],
+                ['A: Ich bin 27. Was machst du beruflich?', 'A: I\'m 27. What do you do for work?'],
+                ['B: Ich bin Studentin. Und du?', 'B: I\'m a student. And you?'],
+                ['A: Ich bin Lehrer.', 'A: I\'m a teacher.'],
+                ['B: Das ist interessant!', 'B: That\'s interesting!'],
+            ]
+        }];
+
+
+        // ====================================================================
+        // RENDER LOGIC
+        // ====================================================================
+
+        let currentSection = 'vokabular';
+        let currentTopic = 0;
+
+        function $(sel) { return document.querySelector(sel); }
+
+        function esc(s) { return String(s).replace(/[&<>'"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;',
+                '"': '&quot;' }[c])); }
+
+        // ----- Speech -----
+        function speak(text) {
+            const txt = String(text || '').trim();
+            if (!txt) return;
+            const synth = window.speechSynthesis;
+            if (!synth || typeof window.SpeechSynthesisUtterance !== 'function') return;
+            try {
+                synth.cancel();
+                const u = new SpeechSynthesisUtterance(txt);
+                u.lang = 'de-DE';
+                u.rate = 0.88;
+                u.pitch = 1;
+                const voices = synth.getVoices ? synth.getVoices() : [];
+                const deVoice = voices.find(v => /^de(-|_)/i.test(v.lang)) || voices.find(v => /german|deutsch/i.test(v.name ||
+                    ''));
+                if (deVoice) u.voice = deVoice;
+                synth.speak(u);
+            } catch (err) { console.warn('Speech error:', err); }
+        }
+
+        function renderQuestionTable(rows){
+            return `
+                <div class="table-wrap">
+                    <table class="content-table vocab-table question-table" aria-label="Begrüßungsfragen">
+                        <thead><tr><th>Frage</th><th>Englisch</th><th>Beispielantwort</th></tr></thead>
+                        <tbody>
+                            ${rows.map(r => `<tr>
+                                <td class="col-primary click-sentence speakable" onclick='speak(${JSON.stringify(r[0])})'>${esc(r[0])}</td>
+                                <td class="col-secondary">${esc(r[1])}</td>
+                                <td class="col-tertiary click-sentence speakable" onclick='speak(${JSON.stringify(r[2])})'>${esc(r[2])}</td>
+                            </tr>`).join('')}
+                        </tbody>
+                    </table>
+                </div>`;
+        }
+
+        // ----- Render Vocabulary -----
+        const VOCAB_ADJECTIVES = new Set([
+            'alt','jung','verheiratet','ledig','geschieden','verwitwet','groß','klein','lang','kurz','bequem','warm','neu','schön','teuer','billig',
+            'schwarz','weiß','rot','blau','grün','gelb','braun','grau','orange','rosa','lila','sonnig','wolkig','bewölkt','windig','kalt','heiß',
+            'regnerisch','verschneit','trocken','lecker','köstlich','schlecht','süß','salzig','sauer','scharf','frisch','gesund','ungesund',
+            'glücklich','traurig','müde','zufrieden','unzufrieden','nervös','ruhig','laut','freundlich','unfreundlich','nett','hilfsbereit',
+            'sympathisch','unsympathisch','aktiv','faul','fleißig','geduldig','ungeduldig','sportlich','unsportlich','stark','schwach',
+            'krank','gesund','wichtig','interessant','langweilig','schwierig','einfach','richtig','falsch','frei','fertig','offen','geschlossen'
+        ]);
+
+        const VOCAB_OTHER_VERBS = new Set([
+            'sein','haben','gehen','kommen','machen','essen','trinken','wohnen','arbeiten','lernen','heißen','leben','verheiratet','sprechen','verstehen',
+            'schlafen','aufstehen','sich anziehen','ausziehen','liegen','stehen','hängen','duschen','baden','sich waschen','die zähne putzen','sich rasieren',
+            'sich abtrocknen','sich kämmen','kochen','braten','backen','schneiden','waschen','spülen','abtrocknen','aufräumen','decken','abdecken',
+            'schmecken','mögen','lieben','hassen','brauchen','kaufen','bezahlen','anziehen','tragen','anprobieren','passen','bügeln','trocknen',
+            'studieren','fahren','umsteigen','einsteigen','aussteigen','warten','halten','liegen','stehen','sich befinden','regnen','schneien','stürmen',
+            'gewittern','frieren','schwitzen','scheinen','spielen','laufen','schwimmen','radfahren','skifahren','snowboarden','fechten','schießen',
+            'gewinnen','verlieren','trainieren','schreiben','lesen','hören','treffen','reisen','rufen','fühlen','heilen','verschreiben','nehmen','schmerzen',
+            'weh tun','sich erholen','öffnen','schließen','wiederholen','wechseln','besuchen','kosten','bestellen','suchen','finden','verkaufen','zeigen',
+            'fragen','antworten','telefonieren','schicken','mailen','anrufen','sprechen','können','müssen','wollen','sollen','dürfen','möchten'
+        ]);
+
+        function cleanVocabTerm(raw){
+            let t=String(raw||'').trim();
+            t=t.replace(/^(der|die|das)\s+/i,'');
+            t=t.split(' / ')[0];
+            t=t.replace(/\s*,.*$/,'');
+            return t.trim();
+        }
+
+        const VOCAB_PRONOUNS = new Set([
+            'ich','du','er','sie','es','wir','ihr','sie','Sie','mich','dich','ihn','sie','uns','euch','ihnen','mir','dir','ihm','ihr','Ihnen','mein','meine','dein','deine','sein','seine','ihr','ihre','unser','unsere','euer','eure','Ihr','Ihre'
+        ]);
+
+        const VOCAB_QUESTION_WORDS = new Set([
+            'wer','was','wo','woher','wohin','wie','wann','warum','welcher','welche','welches','wie alt','wie viel','wie viele','wie lange','wie oft'
+        ]);
+
+        const VOCAB_NUMBERS = new Set([
+            'null','eins','zwei','drei','vier','fünf','sechs','sieben','acht','neun','zehn','elf','zwölf','dreizehn','vierzehn','fünfzehn','sechzehn','siebzehn','achtzehn','neunzehn','zwanzig','hundert','tausend'
+        ]);
+
+        function vocabType(raw){
+            const rawStr=String(raw||'').trim();
+            const lower=rawStr.toLowerCase();
+            if (VOCAB_QUESTION_WORDS.has(lower)) return 'Fragewörter';
+            if (VOCAB_PRONOUNS.has(rawStr) || VOCAB_PRONOUNS.has(lower)) return 'Pronomen';
+            if (VOCAB_NUMBERS.has(lower)) return 'Zahlen';
+            if (/^(der|die|das)\s+/i.test(rawStr) && !/(\bputzen\b|\bfahren\b|\bgehen\b|\bkommen\b|\bmachen\b|\bsein\b|\bhaben\b|\bschreiben\b|\blesen\b|\bsprechen\b|\btrinken\b|\bessen\b|\bspielen\b)$/i.test(rawStr)) return 'Nomen';
+            if (VOCAB_ADJECTIVES.has(lower)) return 'Adjektive';
+            if (VOCAB_OTHER_VERBS.has(lower)) return 'Verben';
+            if (/^(sich\s+)?[a-zäöüß]+(en|ern|eln)$/i.test(rawStr)) return 'Verben';
+            return 'Weitere Wörter';
+        }
+
+        function boldTarget(sentence, rawTerm){
+            const sentenceText = String(sentence || '');
+            const raw = String(rawTerm || '').trim();
+            if (!raw) return esc(sentenceText);
+            const variants = [];
+            const add = value => {
+                const v = String(value || '').trim();
+                if (v && !variants.includes(v)) variants.push(v);
+            };
+            add(raw);
+            raw.split(' / ').forEach(add);
+            raw.split('/').forEach(v => add(v));
+            const articleFree = raw.replace(/^(der|die|das)\s+/i, '').trim();
+            add(articleFree);
+            articleFree.split(' / ').forEach(add);
+            articleFree.split('/').forEach(v => add(v));
+            variants.sort((a,b) => b.length - a.length);
+            const escaped = variants.map(v => v.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|');
+            if (!escaped) return esc(sentenceText);
+            const re = new RegExp(`(${escaped})`,'giu');
+            let out='', last=0, m;
+            while ((m=re.exec(sentenceText))!==null){
+                out += esc(sentenceText.slice(last,m.index));
+                out += '<strong>' + esc(m[0]) + '</strong>';
+                last = m.index + m[0].length;
+            }
+            if (!out) return esc(sentenceText);
+            out += esc(sentenceText.slice(last));
+            return out;
+        }
+
+        function vocabEmoji(term, topic, english){
+            const raw = String(term || '').trim();
+            const t = raw.toLowerCase()
+                .replace(/^(der|die|das)\s+/,'')
+                .replace(/\s+/g,' ')
+                .trim();
+            const en = String(english || '').toLowerCase().trim();
+
+            // Deliberately curated: concrete, topic-appropriate icons only.
+            // Abstract words and most verbs stay clean rather than receiving random icons.
+            const exact = {
+                // greetings / people / question words
+                'hallo':'👋','guten morgen':'🌅','guten tag':'👋','guten abend':'🌆','gute nacht':'🌙',
+                'tschüss':'👋','auf wiedersehen':'👋','bis bald':'👋','bis später':'👋','bis morgen':'👋',
+                'ich':'🙋','du':'🫵','sie':'👤','er':'👨','wir':'👥','ihr':'👥',
+                'wer':'❓','was':'❓','wo':'📍','woher':'🧭','wohin':'➡️','wie':'❓','wie alt':'🎂','wann':'📅','warum':'❔',
+                'name':'🪪','vorname':'🪪','nachname':'🪪','geburtsdatum':'📅','alter':'🎂','adresse':'📍','wohnort':'🏠',
+                'stadt':'🏙️','land':'🌍','nationalität':'🌍','muttersprache':'🗣️','straße':'🛣️','hausnummer':'🔢','postleitzahl':'📮','ort':'📍','geburtstag':'🎂','monat':'🗓️','jahr':'📆','ehe':'💍','partner':'🧑','partnerin':'🧑','familie':'👨‍👩‍👧‍👦','kind':'🧒',
+                // family
+                'vater':'👨','mutter':'👩','sohn':'👦','tochter':'👧','bruder':'👦','schwester':'👧','baby':'👶','großvater':'👴','großmutter':'👵','opa':'👴','oma':'👵','onkel':'👨','tante':'👩','neffe':'👦','nichte':'👧','cousin':'👨','cousine':'👩','mann':'👨','frau':'👩','freund':'🧑','freundin':'🧑',
+                // home
+                'haus':'🏠','wohnung':'🏢','zimmer':'🚪','schlafzimmer':'🛏️','badezimmer':'🛁','küche':'🍳','wohnzimmer':'🛋️','flur':'🚪','eingang':'🚪','tür':'🚪','fenster':'🪟','dach':'🏠','garten':'🌳','balkon':'🌇','keller':'🧱','dachboden':'📦','esszimmer':'🍽️','arbeitszimmer':'🖥️','toilette':'🚽','bett':'🛏️','matratze':'🛏️','kopfkissen':'🛏️','decke':'🛌','kleiderschrank':'🚪','stuhl':'🪑','sessel':'🪑','spiegel':'🪞','lampe':'💡','licht':'💡','wecker':'⏰','handy':'📱','buch':'📖','vorhang':'🪟',
+                // bathroom
+                'badewanne':'🛁','dusche':'🚿','zahnbürste':'🪥','zahnpasta':'🪥','shampoo':'🧴','seife':'🧼','toilettenpapier':'🧻','waschbecken':'🚰','duschvorhang':'🚿','waschkorb':'🧺','rasierer':'🪒','deodorant':'🧴','creme':'🧴',
+                // kitchen / food
+                'kühlschrank':'🧊','gefrierfach':'🧊','geschirrspüler':'🍽️','herd':'🍳','backofen':'🔥','mikrowelle':'📡','kaffeemaschine':'☕','toaster':'🍞','tisch':'🪑','teller':'🍽️','löffel':'🥄','messer':'🔪','gabel':'🍴','glas':'🥛','tasse':'☕','becher':'🥤','schüssel':'🥣','pfanne':'🍳','topf':'🍲','öl':'🫒','salz':'🧂','pfeffer':'🌶️','serviette':'🧻',
+                'kartoffel':'🥔','karotte / die möhre':'🥕','karotte':'🥕','möhre':'🥕','tomate':'🍅','gurke':'🥒','salat':'🥗','zwiebel':'🧅','knoblauch':'🧄','paprika':'🫑','brokkoli':'🥦','mais':'🌽','pilz':'🍄','blumenkohl':'🥦','erbse':'🫛','spinat':'🥬',
+                'apfel':'🍎','banane':'🍌','orange':'🍊','zitrone':'🍋','traube':'🍇','erdbeere':'🍓','pfirsich':'🍑','birne':'🍐','kirsche':'🍒','wassermelone':'🍉','kiwi':'🥝','ananas':'🍍','mango':'🥭','milch':'🥛','käse':'🧀','butter':'🧈','ei':'🥚','joghurt':'🥣','sahne':'🥛','fleisch':'🥩','rindfleisch':'🥩','schweinefleisch':'🥓','hühnchen':'🍗','fisch':'🐟','lachs':'🐟','brot':'🍞','brötchen':'🥐','brezel':'🥨','kuchen':'🍰','schokolade':'🍫','eis':'🍦','keks':'🍪','honig':'🍯','wasser':'💧','mineralwasser':'💧','saft':'🧃','orangensaft':'🍊','apfelsaft':'🍎','kaffee':'☕','tee':'🍵','limonade':'🥤','bier':'🍺','wein':'🍷','frühstück':'🍳','mittagessen':'🍽️','abendessen':'🍽️','gericht':'🍽️',
+                // clothes
+                'kleidung':'👕','hemd':'👔','bluse':'👚','t-shirt':'👕','krawatte':'👔','hose':'👖','kleid':'👗','rock':'👗','jacke':'🧥','mantel':'🧥','pullover':'🧶','socke':'🧦','schuh':'👟','schuhe':'👟','turnschuhe':'👟','stiefel':'🥾','hut':'👒','mütze':'🧢','schal':'🧣','handschuh':'🧤','badeanzug':'🩱','badehose':'🩳','bikini':'👙','bademantel':'🥋','sandale':'🩴',
+                // colors — specific color symbols
+                'schwarz':'⚫','weiß':'⚪','rot':'🔴','blau':'🔵','grün':'🟢','gelb':'🟡','braun':'🟤','grau':'🩶','orange':'🟠','rosa':'🩷','pink':'🩷','lila':'🟣','violett':'🟣',
+                // school
+                'schule':'🏫','grundschule':'🏫','hauptschule':'🏫','realschule':'🏫','gymnasium':'🏫','universität':'🎓','hochschule':'🎓','kindergarten':'🧸','lehrer':'👨‍🏫','lehrerin':'👩‍🏫','schüler':'🧑‍🎓','schülerin':'🧑‍🎓','student':'🧑‍🎓','studentin':'🧑‍🎓','kurs':'📚','deutschkurs':'🇩🇪','sprachkurs':'🗣️','lehrbuch':'📘','wörterbuch':'📖','vokabel':'🔤','grammatik':'🧩','aufgabe':'📝','hausaufgabe':'📚','test':'📝','prüfung':'📋','note':'⭐','lektion':'📖','unterricht':'🧑‍🏫','pause':'☕','klasse':'🏫','stift':'🖊️','kugelschreiber':'🖊️','bleistift':'✏️','papier':'📄','heft':'📓','tafel':'⬛','radiergummi':'◻️','spitzer':'✏️','lineal':'📏','füller':'🖋️','schere':'✂️','ordner':'📁','computer':'💻','tastatur':'⌨️','maus':'🖱️','drucker':'🖨️',
+                // transport
+                'auto':'🚗','pkw':'🚗','bus':'🚌','straßenbahn':'🚋','zug':'🚆','ice':'🚄','u-bahn':'🚇','s-bahn':'🚈','fahrrad':'🚲','roller':'🛴','motorrad':'🏍️','flugzeug':'✈️','schiff':'🚢','boot':'🚤','taxi':'🚕','haltestelle':'🚏','bahnhof':'🚉','hauptbahnhof':'🚉','flughafen':'🛫','busbahnhof':'🚌','hafen':'⚓','parkplatz':'🅿️','garage':'🚗','ticket':'🎫','fahrkarte':'🎫','flugticket':'🎫','zugticket':'🎫','monatskarte':'🎫','tageskarte':'🎫','fahrplan':'🗓️',
+                // city / places
+                'dorf':'🏘️','zentrum':'📍','innenstadt':'🏙️','stadtteil':'🏘️','platz':'🟦','ecke':'📍','ampel':'🚦','kreuzung':'✚','bürgersteig':'🚶','fußgängerzone':'🚶','park':'🌳','bank':'🏦','supermarkt':'🛒','geschäft':'🏪','büro':'🏢','firma':'🏢','bibliothek':'📚','museum':'🏛️','theater':'🎭','kino':'🎬','konzert':'🎵','kirche':'⛪','rathaus':'🏛️','post':'📮','briefkasten':'📫','apotheke':'💊','drogerie':'🧴','bäckerei':'🥨','metzgerei':'🥩','postamt':'📮','café':'☕','restaurant':'🍽️',
+                // health
+                'körper':'🧍','kopf':'🧠','haare':'💇','auge':'👁️','ohr':'👂','nase':'👃','mund':'👄','zahn':'🦷','hand':'✋','fuß':'🦶','bein':'🦵','arm':'💪','herz':'❤️','lunge':'🫁','erkältung':'🤧','fieber':'🌡️','husten':'😷','schnupfen':'🤧','grippe':'🤒','durchfall':'🚽','übelkeit':'🤢','schmerz':'⚕️','kopfschmerzen':'🤕','zahnschmerzen':'🦷','bauchschmerzen':'🤕','halsschmerzen':'😷','rückenschmerzen':'🤕','arzt':'🩺','ärztin':'🩺','praxis':'🏥','sprechstunde':'🩺','termin':'📅','rezept':'📋','medizin':'💊','medikament':'💊','tablette':'💊','pflaster':'🩹','spritze':'💉','impfung':'💉',
+                // jobs
+                'angestellte':'🧑‍💼','angestellter':'🧑‍💼','beamte':'🧑‍💼','beamtin':'🧑‍💼','programmierer':'👨‍💻','programmiererin':'👩‍💻','koch':'👨‍🍳','köchin':'👩‍🍳','bäcker':'👨‍🍳','bäckerin':'👩‍🍳','mechaniker':'🔧','mechanikerin':'🔧','handwerker':'🔨','handwerkerin':'🔨','anwalt':'⚖️','anwältin':'⚖️','pilot':'👨‍✈️','pilotin':'👩‍✈️','stewardess':'🧑‍✈️','manager':'💼','managerin':'💼','wissenschaftler':'🔬','wissenschaftlerin':'🔬','künstler':'🎨','künstlerin':'🎨','richter':'⚖️','richterin':'⚖️','sekretär':'🧑‍💼','sekretärin':'🧑‍💼','buchhalter':'🧮','buchhalterin':'🧮','feuerwehrmann':'🚒','polizist':'👮','polizistin':'👮','fahrer':'🚗','fahrerin':'🚗','fabrik':'🏭','unternehmen':'🏢',
+                // animals
+                'hund':'🐕','katze':'🐈','kaninchen':'🐇','meerschweinchen':'🐹','maus':'🐭','hamster':'🐹','vogel':'🐦','fisch':'🐟','pferd':'🐎','kuh':'🐄','schaf':'🐑','schwein':'🐖','huhn':'🐔','ente':'🦆','schwan':'🦢','ziege':'🐐','wolf':'🐺','fuchs':'🦊','bär':'🐻','löwe':'🦁','elefant':'🐘','giraffe':'🦒','affe':'🐒','haustier':'🐾',
+                // nature / weather / time / calendar
+                'baum':'🌳','wald':'🌲','blume':'🌸','gras':'🌿','pflanze':'🌱','berg':'🏔️','gebirge':'⛰️','tal':'🏞️','fluss':'🏞️','see':'🏞️','meer':'🌊','ozean':'🌊','insel':'🏝️','küste':'🏖️','vulkan':'🌋','sand':'🏖️','stein':'🪨','fels':'🪨','busch':'🌳','sonne':'☀️','himmel':'🌤️','wetter':'🌦️','temperatur':'🌡️','grad':'🌡️','uhr':'⏰','stunde':'⏳','minute':'⏱️','sekunde':'⏱️','uhrzeit':'🕒','morgen':'🌅','vormittag':'🌤️','mittag':'☀️','nachmittag':'🌤️','abend':'🌆','nacht':'🌙','mitternacht':'🌙',
+                'montag':'📅','dienstag':'📅','mittwoch':'📅','donnerstag':'📅','freitag':'📅','samstag':'📅','sonntag':'📅','wochenende':'🗓️','werktag':'💼','januar':'🗓️','februar':'🗓️','märz':'🗓️','april':'🗓️','mai':'🗓️','juni':'🗓️','juli':'🗓️','august':'🗓️','september':'🗓️','oktober':'🗓️','november':'🗓️','dezember':'🗓️','frühling':'🌸','sommer':'☀️','herbst':'🍂','winter':'❄️',
+                // hobbies / sports
+                'hobby':'🎯','freizeit':'🎉','zeit':'⏰','sport':'🏅','fußball':'⚽','basketball':'🏀','volleyball':'🏐','tennis':'🎾','badminton':'🏸','tischtennis':'🏓','golf':'⛳','gymnastik':'🤸','yoga':'🧘','laufen':'🏃','schwimmen':'🏊','radfahren':'🚴','skifahren':'⛷️','snowboarden':'🏂','fechten':'🤺','schießen':'🏹','motorradfahren':'🏍️',
+                // technology
+                'laptop':'💻','smartphone':'📱','bildschirm':'🖥️','kamera':'📷','fotoapparat':'📷','camcorder':'📹','kopfhörer':'🎧','lautsprecher':'🔊','ladekabel':'🔌','akku':'🔋','cd':'💿','dvd':'💿','festplatte':'💽',
+                // feelings / personality
+                'glücklich':'😊','traurig':'😢','fröhlich':'😄','wütend':'😡','ängstlich':'😨','nervös':'😰','ruhig':'😌','zufrieden':'🙂','optimistisch':'🌞','pessimistisch':'🌧️','stolz':'🏆','einsam':'🥺','lieb':'❤️','freundlich':'😊','unfreundlich':'😒','nett':'😊','gemein':'😠','hilfsbereit':'🤝','egoistisch':'🙄','großzügig':'🤝','geizig':'💸','pünktlich':'⏰','unpünktlich':'⌛','ordentlich':'✨','unordentlich':'🌀','sauber':'🧼','schmutzig':'🧽','klug':'🧠','dumm':'🤦','lustig':'😂','ernst':'😐','interessant':'💡','langweilig':'😴','dick':'↔️','dünn':'↕️','stark':'💪','schwach':'🫳',
+                // shopping / communication / money
+                'einkauf':'🛒','markt':'🛒','kaufhaus':'🏬','boutique':'🛍️','preis':'🏷️','kasse':'🧾','korb':'🧺','einkaufswagen':'🛒','tüte':'🛍️','tasche':'👜','postamt':'📮','email':'📧','e-mail':'📧','brief':'✉️','nachricht':'💬','anruf':'📞','anrufbeantworter':'☎️','geld':'💶','euro':'💶','cent':'🪙','banknote':'💶','münze':'🪙','kreditkarte':'💳','ec-karte':'💳','bargeld':'💶','portmonee':'👛','geldschein':'💶','wechselgeld':'💶','trinkgeld':'💶','rechnung':'🧾','quittung':'🧾','konto':'🏦','sparbuch':'📒'
+            };
+
+            // Topic-specific overrides prevent ambiguous words from getting the wrong icon.
+            const topicExact = {
+                colors: {
+                    'schwarz':'⚫','weiß':'⚪','rot':'🔴','blau':'🔵','grün':'🟢','gelb':'🟡','braun':'🟤','grau':'🩶',
+                    'orange':'🟠','rosa':'🩷','pink':'🩷','lila':'🟣','violett':'🟣','farbe':'🎨'
+                },
+                food: { 'orange':'🍊','apfel':'🍎','zitrone':'🍋','saft':'🧃','orangensaft':'🍊','apfelsaft':'🍎' },
+                calendar: { 'frühling':'🌸','sommer':'☀️','herbst':'🍂','winter':'❄️' },
+                weather: { 'sonne':'☀️','himmel':'🌤️','wetter':'🌦️','temperatur':'🌡️','grad':'🌡️' }
+            };
+            if (topicExact[topic] && topicExact[topic][t]) return topicExact[topic][t];
+            if (exact[t]) return exact[t];
+
+            // A second, semantic layer uses the source translation only when the exact
+            // word is not in the curated dictionary.
+            const semantic = [
+                [/\b(red|red coloured?)\b/,'🔴'],[/\bblue\b/,'🔵'],[/\bgreen\b/,'🟢'],[/\byellow\b/,'🟡'],[/\bblack\b/,'⚫'],[/\bwhite\b/,'⚪'],[/\bbrown\b/,'🟤'],[/\bgrey|gray\b/,'🩶'],[/\borange\b/,'🟠'],[/\bpink\b/,'🩷'],[/\bpurple|violet\b/,'🟣'],
+                [/\b(classroom|school)\b/,'🏫'],[/\bteacher\b/,'👩‍🏫'],[/\bstudent\b|\bpupil\b/,'🧑‍🎓'],[/\bbook\b/,'📖'],[/\bpen\b|\bpencil\b/,'✏️'],
+                [/\bcar\b/,'🚗'],[/\bbus\b/,'🚌'],[/\btrain\b/,'🚆'],[/\bplane\b|\bflight\b/,'✈️'],[/\bship\b|\bboat\b/,'🚢'],[/\bbicycle\b/,'🚲'],
+                [/\bdoctor\b/,'🩺'],[/\bhospital\b/,'🏥'],[/\bmedicine\b|\btablet\b/,'💊'],[/\bpharmacy\b/,'💊'],
+                [/\bcompany\b|\boffice\b/,'🏢'],[/\bpolice\b/,'👮'],[/\bfirefighter\b/,'🚒'],
+                [/\bdog\b/,'🐕'],[/\bcat\b/,'🐈'],[/\bhorse\b/,'🐎'],[/\bcow\b/,'🐄'],[/\bbird\b/,'🐦'],[/\bfish\b/,'🐟'],
+                [/\btree\b|\bforest\b/,'🌳'],[/\bflower\b/,'🌸'],[/\bmountain\b/,'🏔️'],[/\briver\b|\blake\b|\bsea\b|\bocean\b/,'🌊'],
+                [/\btime\b|\bclock\b/,'⏰'],[/\bmonth\b|\byear\b|\bdate\b/,'📅'],
+                [/\bfootball\b/,'⚽'],[/\bbasketball\b/,'🏀'],[/\btennis\b/,'🎾'],[/\bswimming\b/,'🏊'],[/\brunning\b/,'🏃'],
+                [/\bcomputer\b|\blaptop\b/,'💻'],[/\bphone\b|\bsmartphone\b/,'📱'],[/\bcamera\b/,'📷'],
+                [/\bhappy\b/,'😊'],[/\bsad\b/,'😢'],[/\bangry\b/,'😡'],[/\bafraid|anxious\b/,'😨'],[/\bproud\b/,'🏆'],
+                [/\bshopping\b|\bshop\b|\bmarket\b/,'🛒'],[/\bprice\b/,'🏷️'],[/\bmoney\b|\bcash\b/,'💶'],[/\bcard\b/,'💳'],[/\btelephone|phone call\b/,'📞'],[/\bemail\b/,'📧']
+            ];
+            for(const [re, icon] of semantic){ if(re.test(en)) return icon; }
+
+            // For a noun with no exact icon, use a restrained topic-level symbol.
+            // This keeps the table coherent without inventing a misleading object.
+            if (/^(der|die|das)\s+/i.test(raw)) {
+                const topicFallback = {
+                    personal:'📝', family:'👥', home:'🏠', bathroom:'🧴', kitchen:'🍳', food:'🍽️', clothes:'👕',
+                    school:'📚', transport:'🚌', city:'🏙️', health:'🏥', jobs:'💼', animals:'🐾', nature:'🌿', weather:'🌦️',
+                    time:'⏰', calendar:'📅', hobbies:'🎯', sports:'🏅', technology:'💻', shopping:'🛒', public_places:'📍',
+                    communication:'💬', money:'💶', expressions:'💬'
+                };
+                return topicFallback[topic] || '';
+            }
+            return '';
+        }
+
+        function renderVocabTable(rows, label, catIdForVocab){
+            return `
+                <div class="table-wrap">
+                    <table class="content-table vocab-table" aria-label="${esc(label)}">
+                        <thead><tr><th>Deutsch</th><th>Englisch</th><th>Beispielsatz</th></tr></thead>
+                        <tbody>
+                            ${rows.map(w => {
+                                const p = vocabPresentation(w[0]);
+                                const shown = esc(w[0]);
+                                const sentence = p.sentence || '—';
+                                return `<tr>
+                                    <td class="col-primary vocab-term click-sentence speakable" onclick='speak(${JSON.stringify(w[0])})'>${vocabEmoji(w[0], catIdForVocab, w[1]) ? `<span class="vocab-inline-emoji" aria-hidden="true">${vocabEmoji(w[0], catIdForVocab, w[1])}</span> ` : ''}${shown}</td>
+                                    <td class="col-secondary">${esc(w[1])}</td>
+                                    <td class="col-tertiary vocab-sentence click-sentence speakable" onclick='speak(${JSON.stringify(sentence)})'>${boldTarget(sentence,w[0])}</td>
+                                </tr>`;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>`;
+        }
+
+        function renderQuestionTable(rows){
+            return `
+                <div class="table-wrap">
+                    <table class="content-table vocab-table question-table" aria-label="Begrüßungsfragen">
+                        <thead><tr><th>Frage</th><th>Englisch</th><th>Beispielantwort</th></tr></thead>
+                        <tbody>
+                            ${rows.map(r => `<tr>
+                                <td class="col-primary click-sentence speakable" onclick='speak(${JSON.stringify(r[0])})'>${esc(r[0])}</td>
+                                <td class="col-secondary">${esc(r[1])}</td>
+                                <td class="col-tertiary click-sentence speakable" onclick='speak(${JSON.stringify(r[2])})'>${esc(r[2])}</td>
+                            </tr>`).join('')}
+                        </tbody>
+                    </table>
+                </div>`;
+        }
+
+        // ----- Render Vocabulary -----
+        function renderVocabTopic(index) {
+            currentTopic = index;
+            const cat = VOCAB_DATA[index];
+            if (!cat) {
+                document.getElementById('detail').innerHTML = '<div class="empty">Kategorie nicht gefunden.</div>';
+                return;
+            }
+            renderTopicList();
+            const panel = document.getElementById('detail');
+            const words = cat.words || [];
+            const groups = { 'Nomen': [], 'Verben': [], 'Adjektive': [], 'Pronomen': [], 'Fragewörter': [], 'Zahlen': [], 'Weitere Wörter': [] };
+            words.forEach(w => groups[vocabType(w[0])].push(w));
+
+            const groupMeta = [
+                ['Nomen','Nomen','🧱'],
+                ['Verben','Verben','⚡'],
+                ['Adjektive','Adjektive','🎨'],
+                ['Pronomen','Pronomen','👤'],
+                ['Fragewörter','Fragewörter','❓'],
+                ['Zahlen','Zahlen','🔢'],
+                ['Weitere Wörter','Weitere Wörter','💬']
+            ];
+
+            panel.innerHTML = `
+                <button class="back" onclick="renderVocabTopic(${Math.max(0, index-1)})">←</button>
+                <h2>${esc(cat.label)}</h2>
+                <div class="content-caption">
+                    <span class="content-caption-title">Wortschatz</span>
+                    <span class="content-caption-note">Deutsch · Englisch · Beispielsatz</span>
+                </div>
+                ${groupMeta.map(([name,label,emoji]) => groups[name].length ? `
+                    <section class="vocab-category">
+                        <h3 class="vocab-category-title"><span aria-hidden="true">${emoji}</span> ${label}</h3>
+                        ${renderVocabTable(groups[name], `${cat.label} · ${name}`, cat.id)}
+                    </section>` : '').join('')}
+                ${cat.id === 'greetings' ? `
+                    <section class="vocab-category special-question-table">
+                        <h3 class="vocab-category-title">❓ Begrüßungsfragen</h3>
+                        ${renderQuestionTable([
+                            ['Wie heißen Sie?', 'What is your name?','Ich heiße Anna.'],
+                            ['Wie heißt du?', 'What is your name? (informal)','Ich heiße Lara.'],
+                            ['Woher kommen Sie?', 'Where are you from?','Ich komme aus Deutschland.'],
+                            ['Wo wohnst du?', 'Where do you live?','Ich wohne in Berlin.'],
+                            ['Wie geht es Ihnen?', 'How are you? (formal)','Danke, gut.'],
+                            ['Wie geht es dir?', 'How are you? (informal)','Danke, gut.']
+                        ])}
+                    </section>` : ''}
+            `;
+            window.scrollTo({ top: document.querySelector('.detail').offsetTop - 80, behavior: 'smooth' });
+        }
+
+        // ----- Render Grammar -----
+        function grammarWhy(title){
+            const t=String(title||'').toLowerCase();
+            if(t.includes('regelmäßige verben')) return 'This pattern covers a large number of everyday A1 verbs. Once you know the endings, you can conjugate many new regular verbs without memorising every form separately.';
+            if(t.includes('unregelmäßige verben')) return 'These verbs appear constantly in everyday German. Their forms are common enough that recognising them quickly is more useful than trying to force them into the regular pattern.';
+            if(t.includes('modalverben')) return 'Modal verbs are essential for saying what you can, must, may, want, should or would like to do. Their sentence structure is therefore one of the most useful A1 patterns.';
+            if(t.includes('nominativ')) return 'The nominative helps you identify the subject and choose the correct article. It is the starting point for building simple German sentences.';
+            if(t.includes('akkusativ')) return 'The accusative lets you identify the direct object. At A1, the visible masculine change is especially important: der → den and ein → einen.';
+            if(t.includes('dativ')) return 'The dative is important for indirect objects and many location expressions. Recognising the dative helps you understand both articles and common preposition patterns.';
+            if(t.includes('hauptsatz')) return 'Verb position is one of the key rules of German sentence building. Keeping the conjugated verb in position 2 makes your main clauses clear and natural.';
+            if(t.includes('fragen')) return 'Questions are essential for everyday communication. Learning the two basic patterns gives you a reliable structure for asking for information and checking facts.';
+            if(t.includes('präpositionen')) return 'Location prepositions make your meaning precise. At A1, learning them together with the dative pattern is much easier than memorising isolated words.';
+            if(t.includes('personalpronomen')) return 'Personal pronouns are the foundation of verb conjugation. Once you know who is doing the action, the correct verb form becomes much easier to choose.';
+            if(t.includes('possessivpronomen')) return 'Possessive pronouns are used constantly when talking about family, people and personal things. Learning the masculine/neuter versus feminine/plural pattern gives you a strong A1 base.';
+            return 'This pattern is part of the core A1 grammar you need to understand and produce simple German sentences with confidence.';
+        }
+
+        function renderGrammarTopic(index) {
+            currentTopic = index;
+            const g = GRAMMAR_DATA[index];
+            if (!g) {
+                document.getElementById('detail').innerHTML = '<div class="empty">Grammatikthema nicht gefunden.</div>';
+                return;
+            }
+            renderTopicList();
+            const panel = document.getElementById('detail');
+            const tables = Array.isArray(g.tables) ? g.tables : [];
+            panel.innerHTML = `
+                <button class="back" onclick="renderGrammarTopic(${Math.max(0, index-1)})">←</button>
+                <div class="grammar-category">${esc(g.category || '🧠 Grammatik')}</div>
+                <h2>${esc(g.title)}</h2>
+                <div class="grammar-explanation">
+                    <div class="grammar-explanation-label">Key point</div>
+                    <p>${esc(String(g.content || '').replace(/\*\*/g, '').trim())}</p>
+                    <div class="grammar-why-label">Why it matters</div>
+                    <p class="grammar-why">${esc(grammarWhy(g.title))}</p>
+                </div>
+                ${tables.map(t => `
+                    <section class="grammar-table-section">
+                        <h3 class="grammar-table-title">${esc(t.title || 'Tabelle')}</h3>
+                        <div class="table-wrap grammar-table-wrap">
+                            <table class="content-table grammar-table" aria-label="${esc(t.title || g.title)}">
+                                <thead><tr>${(t.headers || []).map(h => `<th>${esc(String(h).replace(/\*\*/g,''))}</th>`).join('')}</tr></thead>
+                                <tbody>${(t.rows || []).map(row => `<tr>${row.map((cell, ci) => `<td class="${ci===0 ? 'col-primary' : 'col-tertiary'} ${ci>0 ? 'grammar-example-cell click-sentence speakable' : ''}" ${ci>0 ? `onclick='speak(${JSON.stringify(String(cell))})'` : ''}>${esc(String(cell).replace(/\*\*/g,''))}</td>`).join('')}</tr>`).join('')}</tbody>
+                            </table>
+                        </div>
+                    </section>
+                `).join('')}
+                ${g.tip ? `<div class="grammar-tip">${esc(g.tip.replace(/\*\*/g,''))}</div>` : ''}
+            `;
+            window.scrollTo({ top: document.querySelector('.detail').offsetTop - 80, behavior: 'smooth' });
+        }
+
+        // ----- Render Speaking -----
+        function renderSpeakingTopic(index) {
+            currentTopic = index;
+            const d = SPEAKING_DATA[index];
+            if (!d) {
+                document.getElementById('detail').innerHTML = '<div class="empty">Dialog nicht gefunden.</div>';
+                return;
+            }
+            renderTopicList();
+            const panel = document.getElementById('detail');
+            const lines = d.lines || [];
+            const fullText = lines.map(l => l[0]).join(' ');
+            panel.innerHTML = `
+                <button class="back" onclick="renderSpeakingTopic(${Math.max(0, index-1)})">←</button>
+                <h2>${esc(d.title)}</h2>
+                <div class="content-caption">
+                    <span class="content-caption-title">Dialog</span>
+                    <span class="content-caption-note">Deutsch · Englisch</span>
+                </div>
+                <div class="table-wrap">
+                    <table class="content-table speaking-table" aria-label="${esc(d.title)}">
+                        <thead><tr><th>Deutsch</th><th>Englisch</th></tr></thead>
+                        <tbody>
+                            ${lines.map(line => `
+                                <tr>
+                                    <td class="de-line click-sentence speakable" onclick='speak(${JSON.stringify(line[0])})'>${esc(line[0])}</td>
+                                    <td class="en-line">${esc(line[1] || '')}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            window.scrollTo({ top: document.querySelector('.detail').offsetTop - 80, behavior: 'smooth' });
+        }
+
+        // ----- Render Topic List (Sidebar) -----
+        
+        function grammarGroupFor(grammar) {
+            return grammar.category || '🧩 Weitere Grammatik';
+        }
+
+        function renderTopicList() {
+            const container = document.getElementById('topicButtons');
+            const label = document.getElementById('topicLabel');
+            if (!container || !label) return;
+            if (currentSection === 'vokabular') {
+                label.textContent = 'Vokabular · Kategorien';
+                container.innerHTML = VOCAB_DATA.map((cat, i) =>
+                    `<button class="topic-btn ${i === currentTopic ? 'active' : ''}" onclick="renderVocabTopic(${i})">${esc(String(cat.label))}</button>`
+                ).join('');
+            } else if (currentSection === 'grammatik') {
+                label.textContent = 'Grammatik · Themen';
+                let out = '';
+                let lastGroup = '';
+                GRAMMAR_DATA.forEach((g, i) => {
+                    const group = grammarGroupFor(g);
+                    if (group !== lastGroup) {
+                        out += `<div class="topic-group-label">${esc(group)}</div>`;
+                        lastGroup = group;
+                    }
+                    out += `<button class="topic-btn ${i === currentTopic ? 'active' : ''}" onclick="renderGrammarTopic(${i})">${esc(g.title)}</button>`;
+                });
+                container.innerHTML = out;
+            } else if (currentSection === 'sprechen') {
+                label.textContent = 'Sprechen · Dialoge';
+                container.innerHTML = SPEAKING_DATA.map((d, i) =>
+                    `<button class="topic-btn ${i === currentTopic ? 'active' : ''}" onclick="renderSpeakingTopic(${i})">${esc(String(d.title))}</button>`
+                ).join('');
+            }
+        }
+
+        // ----- Set Section -----
+        function setSection(section) {
+            currentSection = section;
+            currentTopic = 0;
+            document.querySelectorAll('.pill').forEach(p => {
+                p.classList.toggle('active', p.dataset.section === section);
+                if (document.body.classList.contains('light')) {
+                    p.style.background = 'transparent';
+                    p.style.boxShadow = 'none';
+                    p.style.borderColor = 'transparent';
+                    p.style.color = p.classList.contains('active') ? '#1d1d1f' : 'rgba(29,29,31,.62)';
+                    p.style.fontWeight = p.classList.contains('active') ? '700' : '650';
+                }
+            });
+            renderTopicList();
+            if (section === 'vokabular') renderVocabTopic(0);
+            else if (section === 'grammatik') renderGrammarTopic(0);
+            else if (section === 'sprechen') renderSpeakingTopic(0);
+        }
+
+        // ====================================================================
+        // INIT
+        // ====================================================================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            function applyTheme(light) {
+                document.body.classList.toggle('light', light);
+                themeToggle.textContent = light ? '☾ Dunkel' : '☀︎ Hell';
+                document.querySelectorAll('.pill').forEach(p => {
+                    if (light) {
+                        p.style.background = 'transparent';
+                        p.style.boxShadow = 'none';
+                        p.style.borderColor = 'transparent';
+                        p.style.color = p.classList.contains('active') ? '#1d1d1f' : 'rgba(29,29,31,.62)';
+                        p.style.fontWeight = p.classList.contains('active') ? '700' : '650';
+                    } else {
+                        p.style.removeProperty('background');
+                        p.style.removeProperty('box-shadow');
+                        p.style.removeProperty('border-color');
+                        p.style.removeProperty('color');
+                        p.style.removeProperty('font-weight');
+                    }
+                });
+                try { localStorage.setItem('a1-revision-theme', light ? 'light' : 'dark'); } catch (_) {}
+            }
+            let savedTheme = null;
+            try { savedTheme = localStorage.getItem('a1-revision-theme'); } catch (_) {}
+            applyTheme(savedTheme === 'light');
+            themeToggle.addEventListener('click', () => applyTheme(!document.body.classList.contains('light')));
+
+            // Pills
+            document.querySelectorAll('.pill').forEach(p => {
+                p.addEventListener('click', () => setSection(p.dataset.section));
+            });
+
+            // Start
+            setSection('vokabular');
+
+            // Voice readiness
+            if ('speechSynthesis' in window) {
+                speechSynthesis.addEventListener('voiceschanged', () => {});
+            }
+
+            console.log('A1 Revision ready. 🎯');
+        });
+    </script>
+</body>
+</html>
